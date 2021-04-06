@@ -18,22 +18,58 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+library(tidyverse)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+encuesta <- read.csv("encuesta1.csv")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+glimpse(encuesta)
+```
+
+```{r}
+encuesta <- encuesta %>% 
+  mutate_if(is.character, as.factor)
+```
+
+```{r}
+glimpse(encuesta)
+```
+
+```{r}
+encuesta <- encuesta %>% 
+  mutate(Q02_FechaNac = as.Date(as.character(Q02_FechaNac), "%Y-%m-%d"))
+```
+
+```{r}
+summary(encuesta$Q02_FechaNac)
+```
+
+```{r}
+# Cálculo de la edad
+encuesta <- encuesta %>% 
+  mutate(Edad = as.numeric(as.Date("2021-06-30") - Q02_FechaNac)/365.25)
+```
+
+```{r}
+# Conversión a fecha-hora
+encuesta <- encuesta %>% 
+  mutate(fecha_entrega = 
+           as.POSIXct(strptime(Enviado.el., format = "%d/%m/%Y %H:%M:%S")),
+         tiempo_usado = as.integer(format(fecha_entrega, "%M")) +
+                        as.integer(format(fecha_entrega, "%S")) / 60  - 30)
+```
+
+```{r}
+#Correccion de nombres de pregrados
+encuesta %>% 
+  mutate(Q03_Carrera = as.character(Q03_Carrera),
+        Q03_Carrera = if_else(Q03_Carrera == " MatemÃ¡ticas ", "Matemáticas", Q03_Carrera),
+         Q03_Carrera = as.factor(Q03_Carrera))
+
+```
+
+
