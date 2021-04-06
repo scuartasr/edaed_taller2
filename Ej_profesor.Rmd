@@ -372,7 +372,9 @@ estudiantes de estadístca que tienen instalado solo el R, mientras que
 los que no lo han instalado los programas el desempeño académico tiene
 a se más bajo sin que haya diferencia significativa. 
 
-Hola mundo 
+Hola mundo
+
+Hola, Miguel, ¿cómo vas? :]
 
 
 
