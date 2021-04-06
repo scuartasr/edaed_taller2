@@ -63,13 +63,93 @@ encuesta <- encuesta %>%
                         as.integer(format(fecha_entrega, "%S")) / 60  - 30)
 ```
 
+
+
 ```{r}
-#Correccion de nombres de pregrados
-encuesta %>% 
-  mutate(Q03_Carrera = as.character(Q03_Carrera),
-        Q03_Carrera = if_else(Q03_Carrera == " MatemÃ¡ticas ", "Matemáticas", Q03_Carrera),
-         Q03_Carrera = as.factor(Q03_Carrera))
+#Cambio de nombre de los pregrados  
+encuesta$Q03_Carrera <- as.character(encuesta$Q03_Carrera)
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '1 : MatemÃ¡ticas'] <- '1 : Matemáticas'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '2 : IngenierÃ­a de sistemas e informÃ¡tica'] <- '2 : Ingenierías de sistemas e informática'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '3 : EstadÃ­stica'] <- '3 : Estadística'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '4 : IngenierÃ­a administrativa'] <- '4 : Ingeniería administrativa'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '5 : IngenierÃ­a fÃ­sica'] <- '5 : Ingeniería física'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '6 : IngenierÃ­a industrial'] <- '6 : Ingeniería industrial'
+encuesta$Q03_Carrera <- as.factor(encuesta$Q03_Carrera)
+levels(encuesta$Q03_Carrera)
+summary(encuesta$Q03_Carrera)
 
 ```
 
+```{r}
+encuesta <- encuesta %>%
+  mutate(V51_Avance_Semestre = Q04_Semestre * 10)
+```
+
+```{r}
+encuesta$Q05_Saber11[encuesta$Q05_Saber11 == 580 & !is.na(encuesta$Q05_Saber11)] <- NA
+```
+
+```{r}
+encuesta[6, 7] <- NA
+```
+
+```{r}
+encuesta %>% 
+  filter(Q06_PercentilSaber11 > 100)
+```
+
+```{r}
+encuesta$Q06_PercentilSaber11[encuesta$Q06_PercentilSaber11 == 230 & !is.na(encuesta$Q06_PercentilSaber11)] <- 100-230/10
+```
+
+```{r}
+encuesta[84, 8] <- NA
+```
+
+```{r}
+encuesta %>% 
+  filter(Q08_PAPA > 5)
+```
+
+```{r}
+encuesta$Q08_PAPA[encuesta$Q08_PAPA == 45 & !is.na(encuesta$Q08_PAPA)] <- 4.5
+```
+
+```{r}
+encuesta$Q07_FechaSaber11[encuesta$Q07_FechaSaber11 == ("2021-08-08") & !is.na(encuesta$Q07_FechaSaber11)] <- NA
+```
+
+```{r}
+encuesta$Q10_Estrato <- as.character(encuesta$Q10_Estrato)
+encuesta$Q10_Estrato[encuesta$Q10_Estrato == '2 : 1'] <- '1'
+encuesta$Q10_Estrato[encuesta$Q10_Estrato == '3 : 2'] <- '2'
+encuesta$Q10_Estrato[encuesta$Q10_Estrato == '4 : 3'] <- '3'
+encuesta$Q10_Estrato[encuesta$Q10_Estrato == '5 : 4'] <- '4'
+encuesta$Q10_Estrato[encuesta$Q10_Estrato == '6 : 5'] <- '5'
+encuesta$Q10_Estrato[encuesta$Q10_Estrato == '8 : No se conoce'] <- 'No se conoce'
+encuesta$Q10_Estrato <- as.factor(encuesta$Q10_Estrato)
+levels(encuesta$Q10_Estrato)
+summary(encuesta$Q10_Estrato)
+```
+
+```{r}
+encuesta$Q24_area <- as.character(encuesta$Q24_area)
+encuesta$Q24_area[encuesta$Q24_area == '1 : 7.5*pi'] <- '7.5*pi'
+encuesta$Q24_area[encuesta$Q24_area == '2 : 6*pi'] <- '6*pi'
+encuesta$Q24_area[encuesta$Q24_area == '3 : 4.5*pi'] <- '4.5*pi'
+encuesta$Q24_area[encuesta$Q24_area == '4 : 4*pi'] <- '4*pi'
+encuesta$Q24_area[encuesta$Q24_area == '5 : 3*pi'] <- '3*pi'
+encuesta$Q24_area[encuesta$Q24_area == '6 : Ninguna de las anteriores'] <- 'Ninguna de las anteriores'
+encuesta$Q24_area <- as.factor(encuesta$Q24_area)
+levels(encuesta$Q24_area)
+summary(encuesta$Q24_area)
+```
+
+```{r}
+encuesta$Edad <- round(encuesta$Edad, 2)
+```
+
+```{r}
+encuesta$tiempo_usado<- round(encuesta$tiempo_usado, 2)
+```
 
