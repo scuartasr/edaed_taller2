@@ -1,0 +1,379 @@
+---
+title: "Análisis exploratorio de la encuesta inicial"
+author: "Kenneth Roy Cabrera Torres"
+date: "Viernes, 26 de marzo de 2021"
+output: 
+  html_document: 
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+```{r}
+## Paquetes usados en el análisis.
+library(tidyverse)
+```
+
+## Lectura de la base de datos.
+
+```{r}
+## Lectura de una base de datos tipo ".csv"
+encuesta <- read.csv("encuesta1.csv")
+```
+
+## Depuración y adecuación de la base de datos.
+
+```{r}
+# Visualizar la estructura de la base de datos.
+str(encuesta)
+```
+
+```{r}
+glimpse(encuesta)
+```
+
+```{r}
+summary(encuesta)
+```
+
+```{r}
+encuesta <- encuesta %>% 
+  mutate_if(is.character, as.factor)
+```
+
+```{r}
+glimpse(encuesta)
+```
+
+```{r}
+summary(encuesta)
+```
+
+```{r}
+encuesta <- encuesta %>% 
+  mutate(Q02_FechaNac = as.Date(as.character(Q02_FechaNac), "%Y-%m-%d"))
+```
+
+```{r}
+summary(encuesta$Q02_FechaNac)
+```
+
+```{r}
+# Cálculo de la edad
+encuesta <- encuesta %>% 
+  mutate(Edad = as.numeric(as.Date("2021-06-30") - Q02_FechaNac)/365.25)
+```
+
+```{r}
+# Conversión a fecha-hora
+encuesta <- encuesta %>% 
+  mutate(fecha_entrega = 
+           as.POSIXct(strptime(Enviado.el., format = "%d/%m/%Y %H:%M:%S")),
+         tiempo_usado = as.integer(format(fecha_entrega, "%M")) +
+                        as.integer(format(fecha_entrega, "%S")) / 60  - 30)
+```
+
+```{r}
+dotchart(encuesta$Q08_PAPA)
+```
+
+```{r}
+encuesta %>% 
+  filter(Q08_PAPA > 5)
+```
+
+```{r}
+encuesta$Q08_PAPA[encuesta$Q08_PAPA == 45 & !is.na(encuesta$Q08_PAPA)] <- 4.5
+```
+
+
+```{r}
+encuesta <- encuesta %>% 
+  mutate(puntaje_pregunta2 = 
+  apply(encuesta %>% select(Q26_Divisor..f.es.divisor.de.g.2.,
+                            Q26_Divisor..f.es.divisor.de.gh.,
+                            Q26_Divisor..f.es.divisor.de.h.g),
+        1, sum))
+t_p2 <- table(encuesta$puntaje_pregunta2)
+t_p2
+pt_p2 <- t_p2 / sum(t_p2) * 100
+pt_p2
+```
+
+
+
+
+
+```{r}
+# Se construye una nueva variable que indica si se ha instalado el 
+# R solamente, el Rstudio solamente o ambos o ninguno:
+# 0: No ha instalado ninguno.
+# 1: Ha instalado solo el R.
+# 2: Ha instalado solo el RStudio.
+# 3: Ha instalado tanto el R como el RStudio.
+
+# También se crea una nueva variable categoŕica que tenga las combinaciones
+# de la carrera y la instalación de los programas. 
+encuesta <-  encuesta %>% 
+  mutate(instala_prog = Q11_R + Q12_RStudio * 2,
+         Carrera_instala  = factor(paste(Q03_Carrera, instala_prog)))
+```
+
+
+
+## Análisis univariado.
+
+### Género.
+
+```{r}
+t_gen <- table(encuesta$Q01_Genero)
+t_gen
+```
+```{r}
+t_gen_p <- t_gen / sum(t_gen) * 100
+t_gen_p
+```
+
+```{r}
+bp1 <- barplot(t_gen_p, las = 1, ylim = c(0, 100), col = "lightgreen")
+text(bp1, t_gen_p + 10, paste(round(t_gen_p, 1), "%"))
+```
+
+```{r}
+m_gen_p <- as.matrix(t_gen_p)
+bp2 <- barplot(m_gen_p, beside = FALSE, xlim = c(0, 4),
+               ylim = c(0, 110),
+               col = c("blue", "red", "green3"))
+text(1.3, cumsum(m_gen_p) - m_gen_p/2, 
+     paste(rownames(m_gen_p), round((m_gen_p), 1), "%"),
+     adj = 0)
+```
+
+
+```{r}
+pie(t_gen_p, labels = paste(names(t_gen_p), round(t_gen_p, 1), "%"),
+    col = c("blue", "red", "green3"))
+```
+
+
+
+
+### Edad.
+
+```{r}
+summary(encuesta$Edad)
+```
+
+```{r}
+hist(encuesta$Edad)
+```
+
+```{r}
+hist(encuesta$Edad, nclass = 20)
+```
+
+```{r}
+paramAnt <- par(no.readonly = TRUE)
+hist(encuesta$Edad, freq = FALSE, nclass = 20, col = "#a0c39f",
+     las = 1, 
+     main = "Distribución de la edad",
+     xlab = "Edad (años)",
+     ylab = "Densidad",
+     ylim = c(0, 0.20),
+     xlim = c(15, 40))
+lines(density(encuesta$Edad), col = "orange", lwd = 3)
+rug(encuesta$Edad)
+par(paramAnt)
+```
+
+```{r}
+
+```
+
+
+
+```{r}
+promedioEdad <- mean(encuesta$Edad)
+medianaEdad <- median(encuesta$Edad)
+desv_Est_Edad <- sd(encuesta$Edad)
+
+boxplot(encuesta$Edad, horizontal = TRUE,
+        main = "Boxplot para edad", 
+        col = "lightblue",
+        pch = 19, notch = TRUE)
+points(promedioEdad, 
+       1, 
+       pch = 19, 
+       col = c("red", "purple"))
+legend("topright", 
+       title = "Convención",
+       legend = c("Promedio", "Error estandard"), 
+       col = "red", 
+       pch = c(19, NA),
+       lty = c(NA, 1))
+arrows(promedioEdad -  desv_Est_Edad / sqrt(nrow(encuesta)), 1,
+         promedioEdad + desv_Est_Edad / sqrt(nrow(encuesta)), 1,
+         angle = 90,
+         length = 0.1, 
+         code = 3,
+         col = "red")
+```
+
+
+
+
+## Análisis bivariado.
+
+
+
+```{r}
+with(encuesta, plot(Q10_Estrato, Q08_PAPA, notch = TRUE))
+```
+
+
+```{r}
+encuesta_Estrato1 <- encuesta %>% 
+  filter(Q10_Estrato == "2 : 1")
+dotchart(encuesta_Estrato1$Q08_PAPA)
+summary(encuesta_Estrato1$Q08_PAPA)
+```
+
+
+```{r}
+with(encuesta, plot(Q01_Genero, Q08_PAPA, notch = TRUE))
+```
+
+
+```{r}
+with(encuesta, scatter.smooth(tiempo_usado, Q08_PAPA))
+```
+
+
+```{r}
+with(encuesta, plot(Q27_PorcentDivisor))
+lines(1:nrow(encuesta), rep(pt_p2[3], nrow(encuesta)), 
+      col = "red")
+```
+
+```{r}
+enc_acert_p2 <- encuesta %>% 
+  filter(puntaje_pregunta2 == 3)
+enc_no_acert_p2 <- encuesta %>% 
+  filter(puntaje_pregunta2 != 3)
+op <- par(no.readonly = TRUE)
+par(mfrow = c(1, 2))
+prom_Q27 <- mean(enc_acert_p2$Q27)
+with(enc_acert_p2, plot(Q27_PorcentDivisor, ylim = c(0, 100)))
+lines(1:nrow(enc_acert_p2), rep(prom_Q27, nrow(enc_acert_p2)), 
+      col = "red")
+prom_Q27_na <- mean(enc_no_acert_p2$Q27, na.rm = TRUE, ylim = c(0, 100))
+with(enc_no_acert_p2, plot(Q27_PorcentDivisor))
+lines(1:nrow(enc_no_acert_p2), rep(prom_Q27_na, nrow(enc_no_acert_p2)), 
+      col = "red")
+par(op)
+```
+
+## Análisis multivariado.
+
+Se considera que existe diferencia entre las carreras de
+sistemas y estadística en cuanto 
+a los que tienen instalado tanto el R como el RStudio y que también
+al interior de cada carrera hay diferencias en los PAPA si se tiene
+en cuenta si ya tienen instalados o no el R y el RStudio.
+
+Se piensa que los que tienen instalados ambos programas tienen un
+mejor desempeño académico en comparación con los que no lo hicieron.
+
+También se cree que los estudiantes de estadística son los que en
+su mayoría han instalado el R y el RStudio. 
+
+
+### Resumen numérico
+```{r}
+encuesta_sist_estad <- encuesta %>% 
+  filter(Q03_Carrera %in% c("2 : Ingeniería de sistemas e informática",
+                            "3 : Estadística")) %>% 
+  droplevels()
+
+encuesta_sist_estad_resumen <- encuesta_sist_estad %>%
+  group_by(Q03_Carrera) %>% 
+  mutate(num_estud_carrera = n()) %>% 
+  group_by(Carrera_instala, num_estud_carrera) %>% 
+  summarise(num_estud_noNA = sum(!is.na(Q08_PAPA)),
+            prom_PAPA = mean(Q08_PAPA, na.rm = TRUE),
+            desv_PAPA = sd(Q08_PAPA, na.rm = TRUE)) %>% 
+  mutate(porcent_x_carrera = num_estud_noNA / num_estud_carrera * 100)
+encuesta_sist_estad_resumen %>% data.frame()
+```
+
+### Gráfica exploratoria.
+```{r, fig.height=8, fig.width=8}
+op <- par(no.readonly = TRUE)
+par(mar = op$mar + c(15, 0, 0, 0))
+with(encuesta_sist_estad, 
+     plot(Carrera_instala, Q08_PAPA, notch = TRUE,
+          las = 2, width = sqrt(encuesta_sist_estad_resumen$porcent_x_carrera),
+          col = "lightblue",
+          main = "PAPA vs carrera e instalación de softwares R y RStudio",
+          ylab = "Promedio Académico Ponderado Acumulado",
+          xlab = "",
+          pch = 19))
+with(encuesta_sist_estad_resumen, 
+     points(Carrera_instala, prom_PAPA, 
+           col = "red", pch = 19))
+legend("topleft", legend = c("0 No instaló ni R ni RStudio",
+                             "1 Solo instaló R",
+                             "2 Solo instaló RStudio",
+                             "3 Instaló ambos"))
+legend(0.5, 3.4, legend = c("Promedio"),
+       pch = 19, col = "red")
+text(0.5, 3.1, "El ancho de las cajas es proporcional a la raíz cuadrada del porcentaje de los estudiantes en cada carrera",
+     cex = 0.8, pos = 4)
+par(op)
+```
+
+### Análisis.
+
+Se observa que si consideramos a los estudiantes de Sistemas la mayoría
+han instalado el R y el RStudio (el 92.3%). Mientras que los de 
+estadística solo el 72.2% lo han hecho. Esto es contrario a lo que 
+se esperaba.
+
+Se observa que el promedio y la mediana más alta en PAPA lo tienen
+los estudiantes de estadística que solo han instalado el R. Mientras
+que los promedios más bajos lo tienen los estudiantes de Sistemas
+que no han instalado el R o solo el RStudio.
+
+Es importante anotar que en Sistemas solo uno no ha instalado los
+dos programas y solo uno ha instalado solo el RStudio. También es
+curioso que el de sistemas solo haya instalado el RStudio sin instalar
+el R. 
+
+Aparentemente los de estadística que solo han instalado el R tienen
+un buen desempeño académico.
+
+Cabo anotar que no hay diferencia significativa en la medianas de los grupos
+porque los intervalos de confianza se superponen. Por lo tanto no se
+puede inferir que este comportamiento es generalizado.
+
+Sorprende la tendencia del promedio y la mediana del grupo de estadística
+que han istalado los dos programas relativamente bajo, contrario a lo
+que se esperaba. Esto indica que posiblemente hayan otros factores que
+puedan estar asociado al desempeño académico y no solo el hecho de
+estar al día con la clase en cuanto a la instalación del software. 
+
+Se puede concluir que aunque no haya diferencia significativa entre los
+grupos si hay una tendencia a tener mejor desempeño en el el PAPA los
+estudiantes de estadístca que tienen instalado solo el R, mientras que
+los que no lo han instalado los programas el desempeño académico tiene
+a se más bajo sin que haya diferencia significativa. 
+
+
+
+
+
+
