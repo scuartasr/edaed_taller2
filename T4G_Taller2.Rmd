@@ -18,43 +18,73 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, include=FALSE}
 library(tidyverse)
 ```
 
-```{r}
+```{r, include=FALSE}
 encuesta <- read.csv("encuesta1.csv")
 ```
 
-```{r}
+```{r, include=FALSE}
 glimpse(encuesta)
 ```
 
-```{r}
+```{r, include=FALSE}
 encuesta <- encuesta %>% 
   mutate_if(is.character, as.factor)
 ```
 
-```{r}
+```{r, include=FALSE}
 glimpse(encuesta)
 ```
+## Introducción
 
-```{r}
+La estadística es una herramienta bastante útil y con una creciente demanda, pues estamos constantemente rodeados por millones de datos que pueden ser traducidos a información importante si son tratados de la manera adecuada, y para ello es imprescindible comenzar con una fase exploratoria y descriptiva en la cual se comienzan a manipular los datos, entenderlos, realizar procesos de depuración de ser necesario y generar resúmenes estadísticos y gráficos, entre otros, con la finalidad de comprenderlos mejor y poder realizar de forma más adecuada otras actividades como las inferenciales y las predictivas.
+
+Así, lenguajes de programación como R, con sus múltiples librerías, se convierten en una gran opción con la cual se puede realizar de forma ágil y elegante la exploración y descripción de los datos. Es por ello que en este trabajo se pondrá en práctica los conceptos, metodologías y las funciones y tips de R aprendidas en el curso de **Estadística Descriptiva y Análisis Exploratorio de Datos** (en adelante EDAED) a partir de una encuesta realizada a los estudiantes de esta materia.
+
+## Depuración y ajuste de la base de datos
+
+Para este proceso se tomó cada una de las variables de la base de datos y se estudió si los valores incluidos tenían sentido en su propio contexto. Además, **se crearon algunas variables adicionales** con el fin de analizar interrogantes que no podrían resolverse directamente con las variables existentes o para facilitar la comprensión de algunas otras. Es importante anotar que solo se hará mención de aquellas variables en las que se realizó alguna depuración o que fueron introducidas. También se mencionarán algunos cambios en la presentación de algunas variables categóricas de cara a la presentación al lector.
+
+Es importante aclarar que en este trabajo no se le asignaron valores a los diferentes *NA* que se hayaron y se optó más bien por realizar los procesos descriptivos con aquellos valores definidos; esto con la finalidad de no alterar la información que se pudiese obtener a partir de ellas y no introducir posibles errores mediante una depuración equívoca.
+
+### Primera sección de la encuesta: preguntas de caracterización
+
+```{r, , include=FALSE}
+# Para GÉNERO
+summary(encuesta$Q01_Genero)
+# ¡Okay!
+```
+
+```{r, include=FALSE}
+# Modificación del formato de la variable FECHA DE NACIMIENTO
 encuesta <- encuesta %>% 
   mutate(Q02_FechaNac = as.Date(as.character(Q02_FechaNac), "%Y-%m-%d"))
 ```
 
-```{r}
+```{r, include=FALSE}
 summary(encuesta$Q02_FechaNac)
 ```
 
-```{r}
-# Cálculo de la edad
+#### Edad
+
+Se crea la variable ***edad***, pues resulta más sencillo hacer análisis etarios con el valor de la edad en comparación con la fecha de nacimiento. Es importante notar que para el cálculo de esta se tomó la edad de los estudiantes del curso de EDAED al momento de realizar la encuesta, que fue el 26 de febrero de 2021.
+
+```{r, include = FALSE}
+# Creación de la variable EDAD
+# Cálculo de la edad al 2021-FEB-26
 encuesta <- encuesta %>% 
-  mutate(Edad = as.numeric(as.Date("2021-06-30") - Q02_FechaNac)/365.25)
+  mutate(Edad = as.numeric(as.Date("2021-02-26") - Q02_FechaNac)/365.25)
+encuesta$Edad <- round(encuesta$Edad, 2)
 ```
 
-```{r}
+#### Tiempo empleado para la realización de la encuesta
+
+Otra variable interesante, en especial para el análisis de las preguntas de la tercera sección de preguntas (áreas y propiedades de los reales) está relacionada con el tiempo empleado, en minutos, para la realización de la encuesta. 
+```{r, include = FALSE}
+# Creación de la variable TIEMPO EMPLEADO
 # Conversión a fecha-hora
 encuesta <- encuesta %>% 
   mutate(fecha_entrega = 
@@ -63,63 +93,136 @@ encuesta <- encuesta %>%
                         as.integer(format(fecha_entrega, "%S")) / 60  - 30)
 ```
 
+#### Carrera
 
+Dado el formato que toman los diferentes ordenadores, es posible que existan caracteres especiales que no son vistos de forma adecuada, por lo que se realiza la conversión de los nombres de las carreras que se observaban con carácteres extraños para que se vean legibles. También se eliminó el número asociado a cada una de las respuestas, pues este no está dando información adicional o relevante, considerando especialmente que se trata de variables categóricas. Así, por ejemplo, se cambio ***'1 : MatemÃ¡ticas'*** por ***'Matemáticas'***.
 
-```{r}
+```{r, include = FALSE}
 #Cambio de nombre de los pregrados  
 encuesta$Q03_Carrera <- as.character(encuesta$Q03_Carrera)
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '1 : MatemÃ¡ticas'] <- '1 : Matemáticas'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '2 : IngenierÃ­a de sistemas e informÃ¡tica'] <- '2 : Ingenierías de sistemas e informática'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '3 : EstadÃ­stica'] <- '3 : Estadística'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '4 : IngenierÃ­a administrativa'] <- '4 : Ingeniería administrativa'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '5 : IngenierÃ­a fÃ­sica'] <- '5 : Ingeniería física'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '6 : IngenierÃ­a industrial'] <- '6 : Ingeniería industrial'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '1 : MatemÃ¡ticas'] <- 'Matemáticas'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '2 : IngenierÃ­a de sistemas e informÃ¡tica'] <- 'Ingenierías de sistemas e informática'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '3 : EstadÃ­stica'] <- 'Estadística'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '4 : IngenierÃ­a administrativa'] <- 'Ingeniería administrativa'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '5 : IngenierÃ­a fÃ­sica'] <- 'Ingeniería física'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '6 : IngenierÃ­a industrial'] <- 'Ingeniería industrial'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '7 : Otra'] <- 'Otra'
 encuesta$Q03_Carrera <- as.factor(encuesta$Q03_Carrera)
 levels(encuesta$Q03_Carrera)
 summary(encuesta$Q03_Carrera)
 
 ```
 
-```{r}
+#### Avance
+
+```{r, include = FALSE}
+summary(encuesta$Q04_Semestre)
+```
+
+
+Entre los estudiantes es común hacer una diferencia entre los conceptos de **semestre** y **avance**, siendo el primero una referencia del número de matrículas que tiene un estudiante en la universidad y el segundo el porcentaje de créditos aprobados sobre la cantidad de créditos que deben aprobarse para egresar. En este sentido, se creó la varible ***avance*** que representa este valor de una forma más comprensible.
+
+```{r, include = FALSE}
 encuesta <- encuesta %>%
   mutate(V51_Avance_Semestre = Q04_Semestre * 10)
 ```
 
-```{r}
-encuesta$Q05_Saber11[encuesta$Q05_Saber11 == 580 & !is.na(encuesta$Q05_Saber11)] <- NA
+#### Puntaje en las pruebas Saber 11
+
+Para entender esta variable es útil tener presente que a lo largo de la historia de esta prueba, el valor más bajo posible ha sido cero, mientras que el más alto ha sido quinientos. De este modo, se puede observar en el siguiente gráfico de dispersión que existe una entrada que superó el puntaje máximo (con número de respuesta 2493) y otros dos que tienen justo el puntaje mínimo (con números de respuesta 2505 y 2487).
+
+```{r, include = FALSE}
+summary(encuesta$Q05_Saber11)
 ```
 
-```{r}
+
+```{r echo = FALSE}
+dotchart(encuesta$Q05_Saber11, xlab="Puntaje Saber 11", ylab="Número de encuesta")
+title(main = "Gráfico dos.
+Puntajes en las pruebas Saber 11 (antes de depuración)")
+lines(rep(500,nrow(encuesta)),1:nrow(encuesta),col = "red")
+lines(rep(0,nrow(encuesta)),1:nrow(encuesta),col = "blue")
+```
+
+```{r, echo = FALSE, include = FALSE}
+encuesta %>% 
+  filter(encuesta$Q05_Saber11 == 0 | encuesta$Q05_Saber11 > 500)
+```
+
+En este, claramente no tiene sentido obtener un puntaje de 580, máxime en el año 2009 (en el cual la persona que dice tener tal puntaje presentó el examen) cuando el puntaje máximo correspondía a 400 puntos), y como no existe ningún valor coherente posible para imputar de forma directa este valor, entonces se opta por descartarlo de la base de datos y convertirlo en un *NA*. 
+
+En el caso de los ceros, se presentan dos casos diferentes: en el primero (con código de respuesta 2505) se tiene que la persona presentó el examen de Estado en el año 1999, en el cual el puntaje mínimo era de cien puntos, por lo que se le imputará un *NA* a este cero; sin embargo, para el cero asociado a la respuesta número 2487, como esta persona rindió el test en el 2019, cuando sí era posible obtener un puntaje nulo, entonces el valor se mantendrá.
+
+```{r, include = FALSE}
+# Imputaciones
+encuesta$Q05_Saber11[encuesta$Q05_Saber11 == 580 & !is.na(encuesta$Q05_Saber11)] <- NA
 encuesta[6, 7] <- NA
 ```
 
-```{r}
+#### Percentil en las pruebas Saber 11
+
+Al estar hablando de percentiles, se tiene que sus posibles valores deben pertenecer al intervalo [0, 100]. Entonces, como podemos ver en el gráfico de dispersión expuesto a continuación, existen dos valores que carecen de sentido, los cuales están relacionados con las respuestas 2432 (percentil 286) y 2476 (percentil 274).
+
+```{r, echo = FALSE}
+dotchart(encuesta$Q06_PercentilSaber11, xlab="Percentil Saber 11", ylab="Número de encuesta")
+title(main = "Gráfico dos
+Puntajes en las pruebas Saber 11 (antes de depuración)")
+lines(rep(100,nrow(encuesta)),1:nrow(encuesta),col = "red")
+lines(rep(0,nrow(encuesta)),1:nrow(encuesta),col = "blue")
+```
+
+
+```{r, include = FALSE}
 encuesta %>% 
   filter(Q06_PercentilSaber11 > 100)
 ```
 
-```{r}
-encuesta$Q06_PercentilSaber11[encuesta$Q06_PercentilSaber11 == 230 & !is.na(encuesta$Q06_PercentilSaber11)] <- 100-230/10
-```
+Entonces, para su depuración,es necesario considerar el año en el que se presentó la prueba, pues en el pasado la clasificación del ICFES estaba dada por un puesto del uno a mil, donde uno es el mejor, por lo que se hará una conversión a percentil dividiéndoles por diez y restándole el resultado a 100 a la persona con percentil 286, pues la prueba la rindió en el 2015. No obstante, la persona que dice estar en el percentil 274 presentó el examen en el 2019, cuando este valor era expresado de forma explícita, y dado su puntaje, no tiene sentido pensar que se ubicó, por ejemplo, en el percentil 26 de ese año, por lo que será imputado como un *NA*.
 
-```{r}
+```{r, include = FALSE}
+encuesta$Q06_PercentilSaber11[encuesta$Q06_PercentilSaber11 == 230 & !is.na(encuesta$Q06_PercentilSaber11)] <- 100-230/10
 encuesta[84, 8] <- NA
 ```
 
-```{r}
+#### Fecha de presentación de la prueba Saber 11
+
+Observando la información resumen asociada a esta variable, se identificó una entrada en la que se propone la fecha de presentación el 8 de agosto de 2021, la cual aún no sucede, por lo que será tomada como un *NA*, considerando que otros posibles valores como 2020-08-08 no pueden ser asumidos, teniendo en cuenta que en el 2020 el ICFES fue en el mes de noviembre y que no existe ningún otro error tipográfico asociado al 2021 (pues el 2020 como ya vimos se descarta y los siguientes años aún no suceden).
+
+```{r, include = F}
+encuesta$Q07_FechaSaber11[encuesta$Q07_FechaSaber11 == ("2021-08-08") & !is.na(encuesta$Q07_FechaSaber11)] <- NA
+```
+
+
+#### PAPA
+
+En el caso del PAPA, es bien sabido que los valores posibles están en el intervalo [0, 5] con una cifra decimal de precisión; pero al realizar un diagrama de puntos para esta variable se puede identificar rápidamente una respuesta no acorde, pues da un valor de 45 (respuesta 2494). Así, para este caso, tiene sentido pensar que la persona olvidó incluir el punto decimal en su respuesta, por lo que se le da un PAPA de 4.5.
+
+```{r, echo = FALSE}
+dotchart(encuesta$Q08_PAPA, xlab = "PAPA", ylab = "Número de encuesta")
+title(main = "Gráfico tres
+PAPA (antes de depuración)")
+lines(rep(5,nrow(encuesta)),1:nrow(encuesta),col = "red")
+```
+
+```{r, include = F}
 encuesta %>% 
   filter(Q08_PAPA > 5)
 ```
 
-```{r}
+```{r, include = FALSE}
 encuesta$Q08_PAPA[encuesta$Q08_PAPA == 45 & !is.na(encuesta$Q08_PAPA)] <- 4.5
 ```
 
-```{r}
-encuesta$Q07_FechaSaber11[encuesta$Q07_FechaSaber11 == ("2021-08-08") & !is.na(encuesta$Q07_FechaSaber11)] <- NA
+```{r, include = FALSE}
+# Vivienda en el ÁREA METROPOLITANA
+summary(encuesta$Q09_EnAreaMetropolitana)
 ```
 
-```{r}
+#### Estrato
+
+Para esta variable simplemente se realizó un cambio en el nombre de las categorías con la finalidad de hacerlo más legible para el lector. Así, por ejemplo, se cambió *2 : 1* por *1*.
+
+```{r, include = FALSE}
 encuesta$Q10_Estrato <- as.character(encuesta$Q10_Estrato)
 encuesta$Q10_Estrato[encuesta$Q10_Estrato == '2 : 1'] <- '1'
 encuesta$Q10_Estrato[encuesta$Q10_Estrato == '3 : 2'] <- '2'
@@ -132,7 +235,137 @@ levels(encuesta$Q10_Estrato)
 summary(encuesta$Q10_Estrato)
 ```
 
-```{r}
+```{r, include = FALSE}
+# Instalación de R
+summary(encuesta$Q11_R)
+```
+
+```{r, include = FALSE}
+# Instalación de R Studio
+summary(encuesta$Q12_RStudio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q13_NoRoRStudio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
+is.na(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
+is.na(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+is.na(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
+is.na(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
+is.na(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
+is.na(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
+is.na(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
+is.na(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
+is.na(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
+is.na(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
+is.na(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
+```
+
+```{r, include = FALSE}
+summary(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
+is.na(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
+```
+
+### Segunda sección: conspiraciones
+
+En esta sección se tienen variables dicotómicas que no requieren ninguna depuración conforme al proceso de chequeo realizado.
+
+```{r, include = FALSE}
+summary(encuesta$Q15_Alunizaje)
+is.na(encuesta$Q15_Alunizaje)
+```
+
+
+```{r, include = F}
+summary(encuesta$Q16_EspionajeInternet)
+is.na(encuesta$Q16_EspionajeInternet)
+```
+
+```{r, include = F}
+summary(encuesta$Q17_Experimentos)
+is.na(encuesta$Q17_Experimentos)
+```
+
+```{r, include = F}
+summary(encuesta$Q18_Vacunas)
+is.na(encuesta$Q18_Vacunas)
+```
+
+```{r, include = F}
+summary(encuesta$Q19_EvidenciaFalsa)
+is.na(encuesta$Q19_EvidenciaFalsa)
+```
+
+```{r, include = F}
+summary(encuesta$Q20_RafagasSolares)
+is.na(encuesta$Q20_RafagasSolares)
+```
+
+```{r, include = F}
+summary(encuesta$Q21_TierraHueca)
+is.na(encuesta$Q21_TierraHueca)
+```
+
+```{r, include = F}
+summary(encuesta$Q22_alienigenas)
+is.na(encuesta$Q22_alienigenas)
+```
+
+```{r, include = F}
+summary(encuesta$Q23_CambioClimatico)
+is.na(encuesta$Q23_CambioClimatico)
+```
+
+### Tercera sección: álgebra y percepción grupal
+
+#### Área sombreada
+
+En esta pregunta se realizó una nueva reformulación de las diferentes categorías para lograr hacerlas más legibles. Así, por ejemplo, se cambio ***1 : 7.5\*pi*** por un ***7.5\*pi***
+
+```{r, include = FALSE}
 encuesta$Q24_area <- as.character(encuesta$Q24_area)
 encuesta$Q24_area[encuesta$Q24_area == '1 : 7.5*pi'] <- '7.5*pi'
 encuesta$Q24_area[encuesta$Q24_area == '2 : 6*pi'] <- '6*pi'
@@ -145,11 +378,36 @@ levels(encuesta$Q24_area)
 summary(encuesta$Q24_area)
 ```
 
-```{r}
-encuesta$Edad <- round(encuesta$Edad, 2)
+#### Porcentaje de estudiantes que se cree que respondieron bien la pregunta del área
+
+Para esta pregunta, se asume que el valor que debio haber sido ingresado era un número del cero al cien que representaba un porcentaje. En este sentido, si bien un valor menor a uno tendría a cero (pues está dentro del rango permitido de valores), este no tiene mucho sentido considerando el tamaño del grupo. Así, se puede pensar que la persona con respuesta 2461 que introdujo como respuesta en realidad quería plantear que un diez por ciento (10 %) de los estudiantes del EDAED contestarían bien tal pregunta.
+
+```{r, include = FALSE}
+summary(encuesta$Q25_PorcentArea)
 ```
 
-```{r}
-encuesta$tiempo_usado<- round(encuesta$tiempo_usado, 2)
+```{r, include = FALSE}
+encuesta %>%
+  filter(encuesta$Q25_PorcentArea < 1)
 ```
 
+```{r, include = FALSE}
+encuesta$Q25_PorcentArea[encuesta$Q25_PorcentArea < 1 & !is.na(encuesta$Q25_PorcentArea)] <- 10
+```
+
+#### Porcentaje de estudiantes que se cree que respondieron bien la pregunta de álgebra
+
+Nuevamente, para el encuestado con respuesta 2461, se va a imputar su valor con una lógica semejante a la anterior, cambiando el 0.50 por un 50.
+
+```{r, include = F}
+summary(encuesta$Q27_PorcentDivisor)
+```
+
+```{r, include = F}
+encuesta %>%
+  filter(encuesta$Q27 < 1)
+```
+
+```{r, include = FALSE}
+encuesta$Q27_PorcentDivisor[encuesta$Q27_PorcentDivisor < 1 & !is.na(encuesta$Q27_PorcentDivisor)] <- 50
+```
