@@ -40,9 +40,11 @@ glimpse(encuesta)
 ```
 ## Introducción
 
-La estadística es una herramienta bastante útil y con una creciente demanda, pues estamos constantemente rodeados por millones de datos que pueden ser traducidos a información importante si son tratados de la manera adecuada, y para ello es imprescindible comenzar con una fase exploratoria y descriptiva en la cual se comienzan a manipular los datos, entenderlos, realizar procesos de depuración de ser necesario y generar resúmenes estadísticos y gráficos, entre otros, con la finalidad de comprenderlos mejor y poder realizar de forma más adecuada otras actividades como las inferenciales y las predictivas.
+La estadística es una herramienta bastante útil y con una creciente demanda, pues estamos constantemente rodeados por millones de datos que pueden ser traducidos a información importante si son tratados de la manera adecuada, y para ello es imprescindible comenzar con una fase exploratoria y descriptiva en la cual se comienzan a manipular los datos, entenderlos, realizar procesos de depuración de ser necesario y generar resúmenes estadísticos y gráficos, entre otros, con la finalidad de comprenderlos mejor y poder realizar de forma más adecuada otras actividades como las inferenciales y las p#8b1700ictivas.
 
 Así, lenguajes de programación como R, con sus múltiples librerías, se convierten en una gran opción con la cual se puede realizar de forma ágil y elegante la exploración y descripción de los datos. Es por ello que en este trabajo se pondrá en práctica los conceptos, metodologías y las funciones y tips de R aprendidas en el curso de **Estadística Descriptiva y Análisis Exploratorio de Datos** (en adelante EDAED) a partir de una encuesta realizada a los estudiantes de esta materia.
+
+Es importante aclarar que este trabajo ha sido planteado para que pueda ser leído por cualquier tipo de público, de modo que es explícito en cada uno de los procedimientos y conclusiones que se sacan, en el sentido que se explica todo con el mayor detalle posible y se trata de presentar la información de la manera más expedita posible.
 
 ## Depuración y ajuste de la base de datos
 
@@ -51,6 +53,26 @@ Para este proceso se tomó cada una de las variables de la base de datos y se es
 Es importante aclarar que en este trabajo no se le asignaron valores a los diferentes *NA* que se hayaron y se optó más bien por realizar los procesos descriptivos con aquellos valores definidos; esto con la finalidad de no alterar la información que se pudiese obtener a partir de ellas y no introducir posibles errores mediante una depuración equívoca.
 
 ### Primera sección de la encuesta: preguntas de caracterización
+
+##### Género
+
+En este caso se va a realizar un renombramiento de las categorías que conforman esta variable de modo que su lectura se facilite para el lector.
+
+```{r, include = FALSE}
+levels(encuesta$Q01_Genero)
+```
+
+```{r, include = FALSE}
+# Cambio de nombre para el género
+encuesta$Q01_Genero <- as.character(encuesta$Q01_Genero)
+encuesta$Q01_Genero[encuesta$Q01_Genero == '1 : Masculino'] <- 'Masculino'
+encuesta$Q01_Genero[encuesta$Q01_Genero == '2 : Femenino'] <- 'Femenino'
+encuesta$Q01_Genero[encuesta$Q01_Genero == '3 : Otro'] <- 'Otro'
+encuesta$Q01_Genero <- as.factor(encuesta$Q01_Genero)
+levels(encuesta$Q01_Genero)
+summary(encuesta$Q01_Genero)
+```
+
 
 ```{r, , include=FALSE}
 # Para GÉNERO
@@ -91,7 +113,9 @@ encuesta <- encuesta %>%
            as.POSIXct(strptime(Enviado.el., format = "%d/%m/%Y %H:%M:%S")),
          tiempo_usado = as.integer(format(fecha_entrega, "%M")) +
                         as.integer(format(fecha_entrega, "%S")) / 60  - 30)
+encuesta$tiempo_usado <- round(encuesta$tiempo_usado, 2)
 ```
+
 
 ##### Carrera
 
@@ -120,11 +144,11 @@ summary(encuesta$Q04_Semestre)
 ```
 
 
-Entre los estudiantes es común hacer una diferencia entre los conceptos de **semestre** y **avance**, siendo el primero una referencia del número de matrículas que tiene un estudiante en la universidad y el segundo el porcentaje de créditos aprobados sobre la cantidad de créditos que deben aprobarse para egresar. En este sentido, se creó la varible ***avance*** que representa este valor de una forma más comprensible.
+Entre los estudiantes es común hacer una diferencia entre los conceptos de **semestre** y **avance**, siendo el primero una referencia del número de matrículas que tiene un estudiante en la universidad y el segundo el porcentaje de créditos aprobados sobre la cantidad de créditos que deben aprobarse para egresar. En este sentido, se creó la varible ***avance*** que representa este valor de una forma más comprensible, con una ligera transformación en su definición, y es que entenderá como el cociente de la suma estima de los créditos aprobados de momento y matriculados en el semestre 2021-1S entre la cantidad total de créditos de la carrera.
 
 ```{r, include = FALSE}
 encuesta <- encuesta %>%
-  mutate(V51_Avance_Semestre = Q04_Semestre * 10)
+  mutate(V51_Avance = Q04_Semestre * 10)
 ```
 
 ##### Puntaje en las pruebas Saber 11
@@ -140,8 +164,8 @@ summary(encuesta$Q05_Saber11)
 dotchart(encuesta$Q05_Saber11, xlab="Puntaje Saber 11", ylab="Número de encuesta")
 title(main = "Gráfico dos.
 Puntajes en las pruebas Saber 11 (antes de depuración)")
-lines(rep(500,nrow(encuesta)),1:nrow(encuesta),col = "red")
-lines(rep(0,nrow(encuesta)),1:nrow(encuesta),col = "blue")
+lines(rep(500,nrow(encuesta)),1:nrow(encuesta),col = "#8b1700")
+lines(rep(0,nrow(encuesta)),1:nrow(encuesta),col = "#002e8b")
 ```
 
 ```{r, echo = FALSE, include = FALSE}
@@ -167,8 +191,8 @@ Al estar hablando de percentiles, se tiene que sus posibles valores deben perten
 dotchart(encuesta$Q06_PercentilSaber11, xlab="Percentil Saber 11", ylab="Número de encuesta")
 title(main = "Gráfico dos
 Puntajes en las pruebas Saber 11 (antes de depuración)")
-lines(rep(100,nrow(encuesta)),1:nrow(encuesta),col = "red")
-lines(rep(0,nrow(encuesta)),1:nrow(encuesta),col = "blue")
+lines(rep(100,nrow(encuesta)),1:nrow(encuesta),col = "#8b1700")
+lines(rep(0,nrow(encuesta)),1:nrow(encuesta),col = "#002e8b")
 ```
 
 
@@ -201,7 +225,7 @@ En el caso del PAPA, es bien sabido que los valores posibles están en el interv
 dotchart(encuesta$Q08_PAPA, xlab = "PAPA", ylab = "Número de encuesta")
 title(main = "Gráfico tres
 PAPA (antes de depuración)")
-lines(rep(5,nrow(encuesta)),1:nrow(encuesta),col = "red")
+lines(rep(5,nrow(encuesta)),1:nrow(encuesta),col = "#8b1700")
 ```
 
 ```{r, include = F}
@@ -411,3 +435,111 @@ encuesta %>%
 ```{r, include = FALSE}
 encuesta$Q27_PorcentDivisor[encuesta$Q27_PorcentDivisor < 1 & !is.na(encuesta$Q27_PorcentDivisor)] <- 50
 ```
+
+## Análisis descriptivo
+
+#### 1. Género.
+
+La variable **género** se constituye como una variable categórica con un orden de medición nominal, donde las posibles categorías son ***masculino***, ***femenino*** y ***otro*** (notar que la pregunta es por la identidad de género y no por el sexo). Así, a partir de la tabla y el gráfico expuestos a continuación, es posible observar que el curso está compuesto por hombres en un poco más de sus tres cuartas partes (75.86 % del total), mientras que las mujeres solo conforman un 22.99%, lo que permite establecer una relación aproximada de tres hombres por cada mujer. Además, entre los estudiantes del curso, existe una persona (que se hace con el 1.15 % del total) que se autopercibe como una persona no binaria, pues no es del género femenino ni masculino.
+
+```{r, echo = FALSE}
+# Tabla para el género
+tbl_gen <- table(encuesta$Q01_Genero)
+tbl_genP <- tbl_gen * 100 / sum(tbl_gen)
+tbl_genP <- round(sort(tbl_genP, decreasing = TRUE), 2)
+tbl_genP
+```
+
+```{r, echo = FALSE}
+# Gráfico para el género
+gr_gen <- barplot(tbl_genP, las = 1, ylim = c(0, 100), col = "#002e8b")
+text(gr_gen, tbl_genP + 5, paste(round(tbl_genP, 2), "%"))
+title(main = "Género de los estudiantes de EDAED",
+      xlab = "Género", ylab = "Porcentaje (%)")
+```
+
+#### 2. Edad.
+
+Para analizar la fecha de nacimiento, se va a apelar a la variable auxiliar ***edad*** que se creó con el objeto de facilitar el análisis de esta variable. Así, como se puede ver a continuación, la edad promedio de los estudiantes de EDAED al 26 de febrero de 2021 era de 21.55 años y tiene su mediana en 20.86 años. Además, el estudiante más joven del curso tiene 17.53 años, mientras que el mayor cuenta con 38.61 años. Además, como se puede observar en el histograma, hay un carácter bimodal en la distribución, pues existen un par de edades que se repiten con mucha frecuencia: una un poco antes de los veinte años y otra hacia los 22.5 años.
+
+```{r, echo = FALSE}
+# Resúmenes numéricos para EDAD
+summary(encuesta$Edad)
+```
+
+```{r, echo = FALSE}
+clases_ed <- ceiling(1+3.33*log(length(encuesta$Edad), base = 10))
+paramAnt <- par(no.readonly = TRUE)
+hist(encuesta$Edad, freq = FALSE, nclass = 20, col = "#002e8b",
+     las = 1, 
+     main = "Distribución de la edad",
+     xlab = "Edad (años)",
+     ylab = "Densidad",
+     ylim = c(0, 0.20),
+     xlim = c(15, 40))
+lines(density(encuesta$Edad), col = "#748b00", lwd = 3)
+rug(encuesta$Edad)
+par(paramAnt)
+```
+
+### 3. Carrera.
+
+```{r, echo = FALSE}
+# Tabla para la carrera
+tbl_carr <- table(encuesta$Q03_Carrera)
+tbl_carrP <- tbl_carr * 100 / sum(tbl_carr)
+tbl_carrP <- round(sort(tbl_carrP, decreasing = TRUE), 2)
+tbl_carrP
+```
+
+```{r, echo = FALSE}
+# Gráfico para la carrera
+paramAnt <- par(no.readonly = TRUE)
+par(mar = paramAnt$mar + c(5, 0, 0, 0))
+gr_carr <- barplot(tbl_carrP, las = 2, ylim = c(0, 100), col = "#002e8b")
+text(gr_carr, tbl_carrP + 5, paste(round(tbl_carrP, 2), "%"))
+title(main = "Carrera de los estudiantes de EDAED",
+      xlab = "Carrera", ylab = "Porcentaje (%)")
+```
+
+### 4. Avance
+
+Como ya se explicó anterior, para el análisis de la variable ***semestre***, se va a apelar a la conversión ***avance***, la cual es una variable continua con un nivel de medición de razón, y como se puede notar a continuación, el estudiante que presenta un menor avance lleva un 15% de créditos aprobados, mientras que el estudiante con más avance alcanza el 80%. Además, es curioso notar que al menos el 75 % de los estudiantes de EDAED presentan un avance igual o menor al 50 %. Por otro lado, en el histograma se puede observar que esta es una variable unimodal, siendo claro que la mayor parte de los estudiantes de este curso apenas están comenzando con sus carreras universitarias.
+
+Es importante destacar que para la definición de la cantidad de clases de este histograma (siete) se empleó la metodología de Sturges.
+
+```{r, echo = FALSE}
+# Resúmenes numéricos para EDAD
+aux_avance = na.omit(encuesta$V51_Avance)
+summary(aux_avance)
+```
+
+
+```{r, echo = FALSE}
+clases_av <- ceiling(1+3.33*log(length(encuesta$Q04_Semestre) - 1, base = 10))
+paramAnt <- par(no.readonly = TRUE)
+hist(encuesta$V51_Avance, freq = FALSE, nclass = clases_av, col = "#002e8b",
+     las = 1, 
+     main = "Distribución del avance",
+     xlab = "Avance (%)",
+     ylab = "Densidad",
+     ylim = c(0, 0.20),
+     xlim = c(0, 80))
+lines(density(encuesta$Edad), col = "#748b00", lwd = 3)
+par(paramAnt)
+```
+
+### 5. Puntaje en las pruebas Saber 11
+
+Como se puede observar a continuación, los estudiantes del curso de EDAED tienen puntajes que toman todo el rango el posibles resultados para esta prueba, es decir, desde cero hasta quinientos, siendo interesantes apuntar que la calificación promedio es de 322.7 puntos y que al menos el 50 % de los estudiantes del curso han obtenido un puntaje de 322.7 o menos. También se puede observar a partir del gráfico adjunto que esta es una distribución unimodal y que es sesgada hacia la derecha, es decir, que hay una mayor concentración de valores hacia los puntajes medios-altos, especialmente entre 250 y los 400 puntos.
+
+```{r, echo = FALSE}
+summary(na.omit(encuesta$Q05_Saber11))
+```
+
+```{r, echo = FALSE}
+hist(encuesta$Q05_Saber11, breaks="Sturges", col="#002e8b",
+     main = "Resultados de la prueba Saber 11",
+     ylab = "Frecuencia", xlab = "Puntaje")
+```
+
