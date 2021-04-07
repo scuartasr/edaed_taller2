@@ -83,13 +83,15 @@ summary(encuesta$Q01_Genero)
 ```
 
 ```{r, include=FALSE}
-# Modificación del formato de la variable FECHA DE NACIMIENTO
+# Modificación del formato de la variable FECHA DE NACIMIENTO y de la variable FECHA SABER 11
 encuesta <- encuesta %>% 
-  mutate(Q02_FechaNac = as.Date(as.character(Q02_FechaNac), "%Y-%m-%d"))
+  mutate(Q02_FechaNac = as.Date(as.character(Q02_FechaNac), "%Y-%m-%d"), 
+         Q07_FechaSaber11 = as.Date(as.character(Q07_FechaSaber11), "%Y-%m-%d"))
 ```
 
 ```{r, include=FALSE}
 summary(encuesta$Q02_FechaNac)
+summary(encuesta$Q07_FechaSaber11)
 ```
 
 ##### **Edad:**
@@ -106,7 +108,7 @@ encuesta$Edad <- round(encuesta$Edad, 2)
 
 ##### **Tiempo empleado para la realización de la encuesta:**
 
-Otra variable interesante, en especial para el análisis de las preguntas de la tercera sección de preguntas (áreas y propiedades de los reales) está relacionada con el tiempo empleado, en minutos, para la realización de la encuesta. 
+Otra variable interesante, en especial para el análisis de las preguntas de la tercera sección de preguntas (áreas y propiedades de los reales) está relacionada con el tiempo empleado, en minutos, para la realización de la encuesta, por lo que se crea esta variable ***tiempo usado*** de acuerdo a la fecha de envío de la encuesta.
 ```{r, include = FALSE}
 # Creación de la variable TIEMPO EMPLEADO
 # Conversión a fecha-hora
@@ -214,8 +216,8 @@ encuesta[84, 8] <- NA
 
 Observando la información resumen asociada a esta variable, se identificó una entrada en la que se propone la fecha de presentación el 8 de agosto de 2021, la cual aún no sucede, por lo que será tomada como un *NA*, considerando que otros posibles valores como 2020-08-08 no pueden ser asumidos, teniendo en cuenta que en el 2020 el ICFES fue en el mes de noviembre y que no existe ningún otro error tipográfico asociado al 2021 (pues el 2020 como ya vimos se descarta y los siguientes años aún no suceden).
 
-```{r, include = F}
-encuesta$Q07_FechaSaber11[encuesta$Q07_FechaSaber11 == ("2021-08-08") & !is.na(encuesta$Q07_FechaSaber11)] <- NA
+```{r, include = FALSE}
+encuesta$Q07_FechaSaber11[encuesta$Q07_FechaSaber11 == as.Date("2021-08-08") & !is.na(encuesta$Q07_FechaSaber11)] <- NA
 ```
 
 
@@ -440,7 +442,21 @@ encuesta$Q27_PorcentDivisor[encuesta$Q27_PorcentDivisor < 1 & !is.na(encuesta$Q2
 
 ## Análisis descriptivo
 
-### 1. Género
+### 1. Tiempo empleado en responder la encuesta
+
+Como anteriormente se había dicho, para analizar la fecha de envío de la encuesta se usará una nueva variable correspondiente al tiempo usado en minutos para responder la encuesta. Se ve que en promedio los estudiantes del curso respondieron la encuesta en 16.24 minutos, donde el que la envió de primero usó un tiempo de 5.03 minutos y el que la envió de último usó un tiempo de 28.93 minutos. En la gráfica también se puede ver que la mayoría de estudiantes usaron entre 10 y 20 minutos para responder la encuesta.
+
+```{r, echo = FALSE}
+summary(na.omit(encuesta$tiempo_usado))
+```
+
+```{r, echo = FALSE}
+hist(encuesta$tiempo_usado, breaks="Sturges", col="#002e8b",
+     main = "Tiempo usado para responder la encuesta",
+     ylab = "Frecuencia", xlab = "Tiempo(Minutos)")
+```
+
+### 2. Género
 
 La variable **género** se constituye como una variable categórica con un orden de medición nominal, donde las posibles categorías son ***masculino***, ***femenino*** y ***otro*** (notar que la pregunta es por la identidad de género y no por el sexo). Así, a partir de la tabla y el gráfico expuestos a continuación, es posible observar que el curso está compuesto por hombres en un poco más de sus tres cuartas partes (75.86 % del total), mientras que las mujeres solo conforman un 22.99%, lo que permite establecer una relación aproximada de tres hombres por cada mujer. Además, entre los estudiantes del curso, existe una persona (que se hace con el 1.15 % del total) que se autopercibe como una persona no binaria, pues no es del género femenino ni masculino.
 
@@ -460,7 +476,7 @@ title(main = "Género de los estudiantes de EDAED",
       xlab = "Género", ylab = "Porcentaje (%)")
 ```
 
-### 2. Edad
+### 3. Edad
 
 Para analizar la fecha de nacimiento, se va a apelar a la variable auxiliar ***edad*** que se creó con el objeto de facilitar el análisis de esta variable. Así, como se puede ver a continuación, la edad promedio de los estudiantes de EDAED al 26 de febrero de 2021 era de 21.55 años y tiene su mediana en 20.86 años. Además, el estudiante más joven del curso tiene 17.53 años, mientras que el mayor cuenta con 38.61 años. Además, como se puede observar en el histograma, hay un carácter bimodal en la distribución, pues existen un par de edades que se repiten con mucha frecuencia: una un poco antes de los veinte años y otra hacia los 22.5 años.
 
@@ -484,14 +500,13 @@ rug(encuesta$Edad)
 par(paramAnt)
 ```
 
-### 3. Carrera
+### 4. Carrera
 
 ```{r, echo = FALSE}
 # Tabla para la carrera
 tbl_carr <- table(encuesta$Q03_Carrera)
 tbl_carrP <- tbl_carr * 100 / sum(tbl_carr)
 tbl_carrP <- round(sort(tbl_carrP, decreasing = TRUE), 2)
-tbl_carrP
 ```
 
 ```{r, echo = FALSE}
@@ -503,7 +518,7 @@ title(main = "Carrera de los estudiantes de EDAED",
       ylab = "Porcentaje (%)")
 ```
 
-### 4. Avance
+### 5. Avance en la carrera
 
 Como ya se explicó anteriormente, para el análisis de la variable ***semestre*** se va a apelar a la conversión ***avance***, la cual es una variable continua con un nivel de medición de razón, y como se puede notar a continuación, el estudiante que presenta un menor avance lleva un 15% de créditos aprobados, mientras que el estudiante con más avance alcanza el 80%. Además, es curioso notar que al menos el 75 % de los estudiantes de EDAED presentan un avance igual o menor al 50 %. Por otro lado, en el histograma se puede observar que esta es una variable unimodal, siendo claro que la mayor parte de los estudiantes de este curso apenas están comenzando con sus carreras universitarias.
 
@@ -514,7 +529,6 @@ Es importante destacar que para la definición de la cantidad de clases de este 
 aux_avance = na.omit(encuesta$V51_Avance)
 summary(aux_avance)
 ```
-
 
 ```{r, echo = FALSE}
 clases_av <- ceiling(1+3.33*log(length(encuesta$Q04_Semestre) - 1, base = 10))
@@ -530,7 +544,7 @@ lines(density(encuesta$Edad), col = "#748b00", lwd = 3)
 par(paramAnt)
 ```
 
-### 5. Puntaje en las pruebas Saber 11
+### 6. Puntaje en las pruebas Saber 11
 
 Como se puede observar a continuación, los estudiantes del curso de EDAED tienen puntajes que toman todo el rango de posibles resultados para esta prueba, es decir, desde cero hasta quinientos, siendo de interés que la calificación promedio es de 322.7 puntos y que al menos el 50 % de los estudiantes del curso han obtenido un puntaje de 322.7 o menos. También se puede observar a partir del gráfico adjunto que esta es una distribución unimodal y que es sesgada hacia la derecha, es decir, que hay una mayor concentración de valores hacia los puntajes medios-altos, especialmente entre 250 y los 400 puntos.
 
@@ -544,3 +558,62 @@ hist(encuesta$Q05_Saber11, breaks="Sturges", col="#002e8b",
      ylab = "Frecuencia", xlab = "Puntaje")
 ```
 
+### 7. Percentil en las pruebas Saber 11
+
+Como se ve a continuación, los estudiantes del curso tienen percentiles que toman todo el rango de posibles percentiles para esta prueba, es decir, desde cero hasta cien, e interesa que el percentil promedio es del 78.94 y que por lo menos el 50 % de los estudiantes del curso han obtenido un percentil de 88 o menos. También se puede observar a partir del gráfico que esta es una distribución bastante sesgada hacia la derecha, es decir, que hay una mayor frecuencia de estudiantes en los percentiles altos.
+
+```{r, echo = FALSE}
+summary(na.omit(encuesta$Q06_PercentilSaber11))
+```
+
+```{r, echo = FALSE}
+hist(encuesta$Q06_PercentilSaber11, breaks="Sturges", col="#002e8b",
+     main = "Percentiles de la prueba Saber 11",
+     ylab = "Frecuencia", xlab = "Percentil")
+```
+
+### 8. Fecha de presentación de las pruebas Saber 11
+
+Se puede ver que gran parte de los estudiantes del curso presentaron las pruebas Saber 11 no hace mucho tiempo, pues el año promedio de presentación corresponde al 2016, y porque a lo menos el 25% de los estudiantes del curso presentaron su prueba antes del 2015. Esto se puede verificar al observar el gráfico, pues es una distribución sesgada hacia la derecha, pues hay una mayor frecuencia de presentación de la prueba hacia los años más recientes, más que todo entre el 2014 y el 2020.
+
+```{r, echo = FALSE}
+summary(na.omit(as.numeric(format(encuesta$Q07_FechaSaber11, "%Y"))))
+```
+
+```{r, echo = FALSE}
+hist(as.numeric(format(encuesta$Q07_FechaSaber11, "%Y")), breaks="Sturges", col="#002e8b",
+     main = "Fecha de presentación de la prueba Saber 11",
+     ylab = "Frecuencia", xlab = "Año")
+```
+
+### 9. PAPA
+
+Corresponde al Promedio Aritmético Ponderado Acumulado de los estudiantes del curso, y vemos que en promedio estos tienen un PAPA de 4.042, donde el mayor PAPA es de 4.7 y el menor es de 3. Además, en la gráfica vemos que la mayoría de los estudiantes del curso tienen un PAPA entre 3.6 y 4.6.
+
+```{r, echo = FALSE}
+summary(na.omit(encuesta$Q08_PAPA))
+```
+
+```{r, echo = FALSE}
+hist(encuesta$Q08_PAPA, breaks="Sturges", col="#002e8b",
+     main = "Promedio Aritmético Ponderado Acumulado\n de los estudiantes del curso EDAED",
+     ylab = "Frecuencia", xlab = "PAPA")
+```
+
+### 10. Presencia en el Área Metropolitana del Valle de Aburrá
+
+```{r, echo = FALSE}
+# Tabla para la variable EnAreaMetropolitana
+tbl_area <- table(encuesta$Q09_EnAreaMetropolitana)
+tbl_areaP <- tbl_area * 100 / sum(tbl_area)
+tbl_areaP <- round(sort(tbl_areaP, decreasing = FALSE), 2)
+```
+
+```{r, echo = FALSE}
+# Gráfico para la variable EnAreaMetropolitana
+Categorias = c("No Presente","Presente")
+gr_area <- barplot(tbl_areaP, las = 1, names.arg = Categorias, ylim = c(0, 100), col = "#002e8b")
+text(gr_area, tbl_areaP + 6, paste(round(tbl_areaP, 2), "%"))
+title(main = "Presencia de los estudiantes de EDAED en\n el Área Metropolitana del Valle de Aburrá",
+      ylab = "Porcentaje (%)")
+```
