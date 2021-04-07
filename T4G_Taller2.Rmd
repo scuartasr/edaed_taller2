@@ -558,7 +558,7 @@ hist(encuesta$Q05_Saber11, breaks="Sturges", col="#002e8b",
      ylab = "Frecuencia", xlab = "Puntaje")
 ```
 
-<<<<<<< Updated upstream
+
 ### 7. Percentil en las pruebas Saber 11
 
 Como se ve a continuación, los estudiantes del curso tienen percentiles que toman todo el rango de posibles percentiles para esta prueba, es decir, desde cero hasta cien, e interesa que el percentil promedio es del 78.94 y que por lo menos el 50 % de los estudiantes del curso han obtenido un percentil de 88 o menos. También se puede observar a partir del gráfico que esta es una distribución bastante sesgada hacia la derecha, es decir, que hay una mayor frecuencia de estudiantes en los percentiles altos.
@@ -618,7 +618,7 @@ text(gr_area, tbl_areaP + 6, paste(round(tbl_areaP, 2), "%"))
 title(main = "Presencia de los estudiantes de EDAED en\n el Área Metropolitana del Valle de Aburrá",
       ylab = "Porcentaje (%)")
 ```
-=======
+======
 ```{r, echo = FALSE}
 # Creación de una variable auxiliar con los rangos de PUNTAJE SABER 11
 clases_sbr11 <- nclass.Sturges(encuesta$Q05_Saber11)
@@ -639,4 +639,3 @@ tbl_v6P
 barplot(tbl_v6P)
 ```
 
->>>>>>> Stashed changes
