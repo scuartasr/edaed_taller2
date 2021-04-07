@@ -15,7 +15,9 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
 ```
 
 ```{r, include=FALSE}
@@ -54,7 +56,7 @@ Es importante aclarar que en este trabajo no se le asignaron valores a los difer
 
 ### Primera sección de la encuesta: preguntas de caracterización
 
-##### Género
+##### **Género:**
 
 En este caso se va a realizar un renombramiento de las categorías que conforman esta variable de modo que su lectura se facilite para el lector.
 
@@ -90,7 +92,7 @@ encuesta <- encuesta %>%
 summary(encuesta$Q02_FechaNac)
 ```
 
-##### Edad
+##### **Edad:**
 
 Se crea la variable ***edad***, pues resulta más sencillo hacer análisis etarios con el valor de la edad en comparación con la fecha de nacimiento. Es importante notar que para el cálculo de esta se tomó la edad de los estudiantes del curso de EDAED al momento de realizar la encuesta, que fue el 26 de febrero de 2021.
 
@@ -102,7 +104,7 @@ encuesta <- encuesta %>%
 encuesta$Edad <- round(encuesta$Edad, 2)
 ```
 
-##### Tiempo empleado para la realización de la encuesta
+##### **Tiempo empleado para la realización de la encuesta:**
 
 Otra variable interesante, en especial para el análisis de las preguntas de la tercera sección de preguntas (áreas y propiedades de los reales) está relacionada con el tiempo empleado, en minutos, para la realización de la encuesta. 
 ```{r, include = FALSE}
@@ -117,7 +119,7 @@ encuesta$tiempo_usado <- round(encuesta$tiempo_usado, 2)
 ```
 
 
-##### Carrera
+##### **Carrera:**
 
 Dado el formato que toman los diferentes ordenadores, es posible que existan caracteres especiales que no son vistos de forma adecuada, por lo que se realiza la conversión de los nombres de las carreras que se observaban con carácteres extraños para que se vean legibles. También se eliminó el número asociado a cada una de las respuestas, pues este no está dando información adicional o relevante, considerando especialmente que se trata de variables categóricas. Así, por ejemplo, se cambio ***'1 : MatemÃ¡ticas'*** por ***'Matemáticas'***.
 
@@ -125,7 +127,7 @@ Dado el formato que toman los diferentes ordenadores, es posible que existan car
 #Cambio de nombre de los pregrados  
 encuesta$Q03_Carrera <- as.character(encuesta$Q03_Carrera)
 encuesta$Q03_Carrera[encuesta$Q03_Carrera == '1 : MatemÃ¡ticas'] <- 'Matemáticas'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '2 : IngenierÃ­a de sistemas e informÃ¡tica'] <- 'Ingenierías de sistemas e informática'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '2 : IngenierÃ­a de sistemas e informÃ¡tica'] <- 'Ingeniería de sistemas e informática'
 encuesta$Q03_Carrera[encuesta$Q03_Carrera == '3 : EstadÃ­stica'] <- 'Estadística'
 encuesta$Q03_Carrera[encuesta$Q03_Carrera == '4 : IngenierÃ­a administrativa'] <- 'Ingeniería administrativa'
 encuesta$Q03_Carrera[encuesta$Q03_Carrera == '5 : IngenierÃ­a fÃ­sica'] <- 'Ingeniería física'
@@ -137,7 +139,7 @@ summary(encuesta$Q03_Carrera)
 
 ```
 
-##### Avance
+##### **Avance:**
 
 ```{r, include = FALSE}
 summary(encuesta$Q04_Semestre)
@@ -151,7 +153,7 @@ encuesta <- encuesta %>%
   mutate(V51_Avance = Q04_Semestre * 10)
 ```
 
-##### Puntaje en las pruebas Saber 11
+##### **Puntaje en las pruebas Saber 11:**
 
 Para entender esta variable es útil tener presente que a lo largo de la historia de esta prueba, el valor más bajo posible ha sido cero, mientras que el más alto ha sido quinientos. De este modo, se puede observar en el siguiente gráfico de dispersión que existe una entrada que superó el puntaje máximo (con número de respuesta 2493) y otros dos que tienen justo el puntaje mínimo (con números de respuesta 2505 y 2487).
 
@@ -183,7 +185,7 @@ encuesta$Q05_Saber11[encuesta$Q05_Saber11 == 580 & !is.na(encuesta$Q05_Saber11)]
 encuesta[6, 7] <- NA
 ```
 
-##### Percentil en las pruebas Saber 11
+##### **Percentil en las pruebas Saber 11:**
 
 Al estar hablando de percentiles, se tiene que sus posibles valores deben pertenecer al intervalo [0, 100]. Entonces, como podemos ver en el gráfico de dispersión expuesto a continuación, existen dos valores que carecen de sentido, los cuales están relacionados con las respuestas 2432 (percentil 286) y 2476 (percentil 274).
 
@@ -208,7 +210,7 @@ encuesta$Q06_PercentilSaber11[encuesta$Q06_PercentilSaber11 == 230 & !is.na(encu
 encuesta[84, 8] <- NA
 ```
 
-##### Fecha de presentación de la prueba Saber 11
+##### **Fecha de presentación de la prueba Saber 11:**
 
 Observando la información resumen asociada a esta variable, se identificó una entrada en la que se propone la fecha de presentación el 8 de agosto de 2021, la cual aún no sucede, por lo que será tomada como un *NA*, considerando que otros posibles valores como 2020-08-08 no pueden ser asumidos, teniendo en cuenta que en el 2020 el ICFES fue en el mes de noviembre y que no existe ningún otro error tipográfico asociado al 2021 (pues el 2020 como ya vimos se descarta y los siguientes años aún no suceden).
 
@@ -217,7 +219,7 @@ encuesta$Q07_FechaSaber11[encuesta$Q07_FechaSaber11 == ("2021-08-08") & !is.na(e
 ```
 
 
-##### PAPA
+##### **PAPA:**
 
 En el caso del PAPA, es bien sabido que los valores posibles están en el intervalo [0, 5] con una cifra decimal de precisión; pero al realizar un diagrama de puntos para esta variable se puede identificar rápidamente una respuesta no acorde, pues da un valor de 45 (respuesta 2494). Así, para este caso, tiene sentido pensar que la persona olvidó incluir el punto decimal en su respuesta, por lo que se le da un PAPA de 4.5.
 
@@ -242,7 +244,7 @@ encuesta$Q08_PAPA[encuesta$Q08_PAPA == 45 & !is.na(encuesta$Q08_PAPA)] <- 4.5
 summary(encuesta$Q09_EnAreaMetropolitana)
 ```
 
-##### Estrato
+##### **Estrato:**
 
 Para esta variable simplemente se realizó un cambio en el nombre de las categorías con la finalidad de hacerlo más legible para el lector. Así, por ejemplo, se cambió *2 : 1* por *1*.
 
@@ -385,7 +387,7 @@ is.na(encuesta$Q23_CambioClimatico)
 
 ### Tercera sección: álgebra y percepción grupal
 
-##### Área sombreada
+##### **Área sombreada:**
 
 En esta pregunta se realizó una nueva reformulación de las diferentes categorías para lograr hacerlas más legibles. Así, por ejemplo, se cambio ***1 : 7.5\*pi*** por un ***7.5\*pi***
 
@@ -402,7 +404,7 @@ levels(encuesta$Q24_area)
 summary(encuesta$Q24_area)
 ```
 
-##### Porcentaje de estudiantes que se cree que respondieron bien la pregunta del área
+##### **Porcentaje de estudiantes que se cree que respondieron bien la pregunta del área:**
 
 Para esta pregunta, se asume que el valor que debio haber sido ingresado era un número del cero al cien que representaba un porcentaje. En este sentido, si bien un valor menor a uno tendría a cero (pues está dentro del rango permitido de valores), este no tiene mucho sentido considerando el tamaño del grupo. Así, se puede pensar que la persona con respuesta 2461 que introdujo como respuesta en realidad quería plantear que un diez por ciento (10 %) de los estudiantes del EDAED contestarían bien tal pregunta.
 
@@ -419,7 +421,7 @@ encuesta %>%
 encuesta$Q25_PorcentArea[encuesta$Q25_PorcentArea < 1 & !is.na(encuesta$Q25_PorcentArea)] <- 10
 ```
 
-##### Porcentaje de estudiantes que se cree que respondieron bien la pregunta de álgebra
+##### **Porcentaje de estudiantes que se cree que respondieron bien la pregunta de álgebra:**
 
 Nuevamente, para el encuestado con respuesta 2461, se va a imputar su valor con una lógica semejante a la anterior, cambiando el 0.50 por un 50.
 
@@ -438,7 +440,7 @@ encuesta$Q27_PorcentDivisor[encuesta$Q27_PorcentDivisor < 1 & !is.na(encuesta$Q2
 
 ## Análisis descriptivo
 
-#### 1. Género.
+### 1. Género
 
 La variable **género** se constituye como una variable categórica con un orden de medición nominal, donde las posibles categorías son ***masculino***, ***femenino*** y ***otro*** (notar que la pregunta es por la identidad de género y no por el sexo). Así, a partir de la tabla y el gráfico expuestos a continuación, es posible observar que el curso está compuesto por hombres en un poco más de sus tres cuartas partes (75.86 % del total), mientras que las mujeres solo conforman un 22.99%, lo que permite establecer una relación aproximada de tres hombres por cada mujer. Además, entre los estudiantes del curso, existe una persona (que se hace con el 1.15 % del total) que se autopercibe como una persona no binaria, pues no es del género femenino ni masculino.
 
@@ -458,7 +460,7 @@ title(main = "Género de los estudiantes de EDAED",
       xlab = "Género", ylab = "Porcentaje (%)")
 ```
 
-#### 2. Edad.
+### 2. Edad
 
 Para analizar la fecha de nacimiento, se va a apelar a la variable auxiliar ***edad*** que se creó con el objeto de facilitar el análisis de esta variable. Así, como se puede ver a continuación, la edad promedio de los estudiantes de EDAED al 26 de febrero de 2021 era de 21.55 años y tiene su mediana en 20.86 años. Además, el estudiante más joven del curso tiene 17.53 años, mientras que el mayor cuenta con 38.61 años. Además, como se puede observar en el histograma, hay un carácter bimodal en la distribución, pues existen un par de edades que se repiten con mucha frecuencia: una un poco antes de los veinte años y otra hacia los 22.5 años.
 
@@ -482,7 +484,7 @@ rug(encuesta$Edad)
 par(paramAnt)
 ```
 
-### 3. Carrera.
+### 3. Carrera
 
 ```{r, echo = FALSE}
 # Tabla para la carrera
@@ -494,17 +496,16 @@ tbl_carrP
 
 ```{r, echo = FALSE}
 # Gráfico para la carrera
-paramAnt <- par(no.readonly = TRUE)
-par(mar = paramAnt$mar + c(5, 0, 0, 0))
-gr_carr <- barplot(tbl_carrP, las = 2, ylim = c(0, 100), col = "#002e8b")
+Nombres_Carreras = c("Estadística","Ingeniería de\n sistemas e\n informática","Ingeniería\n industrial","Matemáticas","Ingeniería\n administrativa","Ingeniería\n física","Otra")
+gr_carr <- barplot(tbl_carrP, las = 1, names.arg = Nombres_Carreras, ylim = c(0, 100), col = "#002e8b", cex.names = 0.6)
 text(gr_carr, tbl_carrP + 5, paste(round(tbl_carrP, 2), "%"))
 title(main = "Carrera de los estudiantes de EDAED",
-      xlab = "Carrera", ylab = "Porcentaje (%)")
+      ylab = "Porcentaje (%)")
 ```
 
 ### 4. Avance
 
-Como ya se explicó anterior, para el análisis de la variable ***semestre***, se va a apelar a la conversión ***avance***, la cual es una variable continua con un nivel de medición de razón, y como se puede notar a continuación, el estudiante que presenta un menor avance lleva un 15% de créditos aprobados, mientras que el estudiante con más avance alcanza el 80%. Además, es curioso notar que al menos el 75 % de los estudiantes de EDAED presentan un avance igual o menor al 50 %. Por otro lado, en el histograma se puede observar que esta es una variable unimodal, siendo claro que la mayor parte de los estudiantes de este curso apenas están comenzando con sus carreras universitarias.
+Como ya se explicó anteriormente, para el análisis de la variable ***semestre*** se va a apelar a la conversión ***avance***, la cual es una variable continua con un nivel de medición de razón, y como se puede notar a continuación, el estudiante que presenta un menor avance lleva un 15% de créditos aprobados, mientras que el estudiante con más avance alcanza el 80%. Además, es curioso notar que al menos el 75 % de los estudiantes de EDAED presentan un avance igual o menor al 50 %. Por otro lado, en el histograma se puede observar que esta es una variable unimodal, siendo claro que la mayor parte de los estudiantes de este curso apenas están comenzando con sus carreras universitarias.
 
 Es importante destacar que para la definición de la cantidad de clases de este histograma (siete) se empleó la metodología de Sturges.
 
@@ -531,7 +532,7 @@ par(paramAnt)
 
 ### 5. Puntaje en las pruebas Saber 11
 
-Como se puede observar a continuación, los estudiantes del curso de EDAED tienen puntajes que toman todo el rango el posibles resultados para esta prueba, es decir, desde cero hasta quinientos, siendo interesantes apuntar que la calificación promedio es de 322.7 puntos y que al menos el 50 % de los estudiantes del curso han obtenido un puntaje de 322.7 o menos. También se puede observar a partir del gráfico adjunto que esta es una distribución unimodal y que es sesgada hacia la derecha, es decir, que hay una mayor concentración de valores hacia los puntajes medios-altos, especialmente entre 250 y los 400 puntos.
+Como se puede observar a continuación, los estudiantes del curso de EDAED tienen puntajes que toman todo el rango de posibles resultados para esta prueba, es decir, desde cero hasta quinientos, siendo de interés que la calificación promedio es de 322.7 puntos y que al menos el 50 % de los estudiantes del curso han obtenido un puntaje de 322.7 o menos. También se puede observar a partir del gráfico adjunto que esta es una distribución unimodal y que es sesgada hacia la derecha, es decir, que hay una mayor concentración de valores hacia los puntajes medios-altos, especialmente entre 250 y los 400 puntos.
 
 ```{r, echo = FALSE}
 summary(na.omit(encuesta$Q05_Saber11))
