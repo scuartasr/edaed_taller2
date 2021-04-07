@@ -68,7 +68,7 @@ encuesta <- encuesta %>%
 summary(encuesta$Q02_FechaNac)
 ```
 
-#### Edad
+##### Edad
 
 Se crea la variable ***edad***, pues resulta más sencillo hacer análisis etarios con el valor de la edad en comparación con la fecha de nacimiento. Es importante notar que para el cálculo de esta se tomó la edad de los estudiantes del curso de EDAED al momento de realizar la encuesta, que fue el 26 de febrero de 2021.
 
@@ -80,7 +80,7 @@ encuesta <- encuesta %>%
 encuesta$Edad <- round(encuesta$Edad, 2)
 ```
 
-#### Tiempo empleado para la realización de la encuesta
+##### Tiempo empleado para la realización de la encuesta
 
 Otra variable interesante, en especial para el análisis de las preguntas de la tercera sección de preguntas (áreas y propiedades de los reales) está relacionada con el tiempo empleado, en minutos, para la realización de la encuesta. 
 ```{r, include = FALSE}
@@ -93,7 +93,7 @@ encuesta <- encuesta %>%
                         as.integer(format(fecha_entrega, "%S")) / 60  - 30)
 ```
 
-#### Carrera
+##### Carrera
 
 Dado el formato que toman los diferentes ordenadores, es posible que existan caracteres especiales que no son vistos de forma adecuada, por lo que se realiza la conversión de los nombres de las carreras que se observaban con carácteres extraños para que se vean legibles. También se eliminó el número asociado a cada una de las respuestas, pues este no está dando información adicional o relevante, considerando especialmente que se trata de variables categóricas. Así, por ejemplo, se cambio ***'1 : MatemÃ¡ticas'*** por ***'Matemáticas'***.
 
@@ -113,7 +113,7 @@ summary(encuesta$Q03_Carrera)
 
 ```
 
-#### Avance
+##### Avance
 
 ```{r, include = FALSE}
 summary(encuesta$Q04_Semestre)
@@ -127,7 +127,7 @@ encuesta <- encuesta %>%
   mutate(V51_Avance_Semestre = Q04_Semestre * 10)
 ```
 
-#### Puntaje en las pruebas Saber 11
+##### Puntaje en las pruebas Saber 11
 
 Para entender esta variable es útil tener presente que a lo largo de la historia de esta prueba, el valor más bajo posible ha sido cero, mientras que el más alto ha sido quinientos. De este modo, se puede observar en el siguiente gráfico de dispersión que existe una entrada que superó el puntaje máximo (con número de respuesta 2493) y otros dos que tienen justo el puntaje mínimo (con números de respuesta 2505 y 2487).
 
@@ -159,7 +159,7 @@ encuesta$Q05_Saber11[encuesta$Q05_Saber11 == 580 & !is.na(encuesta$Q05_Saber11)]
 encuesta[6, 7] <- NA
 ```
 
-#### Percentil en las pruebas Saber 11
+##### Percentil en las pruebas Saber 11
 
 Al estar hablando de percentiles, se tiene que sus posibles valores deben pertenecer al intervalo [0, 100]. Entonces, como podemos ver en el gráfico de dispersión expuesto a continuación, existen dos valores que carecen de sentido, los cuales están relacionados con las respuestas 2432 (percentil 286) y 2476 (percentil 274).
 
@@ -184,7 +184,7 @@ encuesta$Q06_PercentilSaber11[encuesta$Q06_PercentilSaber11 == 230 & !is.na(encu
 encuesta[84, 8] <- NA
 ```
 
-#### Fecha de presentación de la prueba Saber 11
+##### Fecha de presentación de la prueba Saber 11
 
 Observando la información resumen asociada a esta variable, se identificó una entrada en la que se propone la fecha de presentación el 8 de agosto de 2021, la cual aún no sucede, por lo que será tomada como un *NA*, considerando que otros posibles valores como 2020-08-08 no pueden ser asumidos, teniendo en cuenta que en el 2020 el ICFES fue en el mes de noviembre y que no existe ningún otro error tipográfico asociado al 2021 (pues el 2020 como ya vimos se descarta y los siguientes años aún no suceden).
 
@@ -193,7 +193,7 @@ encuesta$Q07_FechaSaber11[encuesta$Q07_FechaSaber11 == ("2021-08-08") & !is.na(e
 ```
 
 
-#### PAPA
+##### PAPA
 
 En el caso del PAPA, es bien sabido que los valores posibles están en el intervalo [0, 5] con una cifra decimal de precisión; pero al realizar un diagrama de puntos para esta variable se puede identificar rápidamente una respuesta no acorde, pues da un valor de 45 (respuesta 2494). Así, para este caso, tiene sentido pensar que la persona olvidó incluir el punto decimal en su respuesta, por lo que se le da un PAPA de 4.5.
 
@@ -218,7 +218,7 @@ encuesta$Q08_PAPA[encuesta$Q08_PAPA == 45 & !is.na(encuesta$Q08_PAPA)] <- 4.5
 summary(encuesta$Q09_EnAreaMetropolitana)
 ```
 
-#### Estrato
+##### Estrato
 
 Para esta variable simplemente se realizó un cambio en el nombre de las categorías con la finalidad de hacerlo más legible para el lector. Así, por ejemplo, se cambió *2 : 1* por *1*.
 
@@ -361,7 +361,7 @@ is.na(encuesta$Q23_CambioClimatico)
 
 ### Tercera sección: álgebra y percepción grupal
 
-#### Área sombreada
+##### Área sombreada
 
 En esta pregunta se realizó una nueva reformulación de las diferentes categorías para lograr hacerlas más legibles. Así, por ejemplo, se cambio ***1 : 7.5\*pi*** por un ***7.5\*pi***
 
@@ -378,7 +378,7 @@ levels(encuesta$Q24_area)
 summary(encuesta$Q24_area)
 ```
 
-#### Porcentaje de estudiantes que se cree que respondieron bien la pregunta del área
+##### Porcentaje de estudiantes que se cree que respondieron bien la pregunta del área
 
 Para esta pregunta, se asume que el valor que debio haber sido ingresado era un número del cero al cien que representaba un porcentaje. En este sentido, si bien un valor menor a uno tendría a cero (pues está dentro del rango permitido de valores), este no tiene mucho sentido considerando el tamaño del grupo. Así, se puede pensar que la persona con respuesta 2461 que introdujo como respuesta en realidad quería plantear que un diez por ciento (10 %) de los estudiantes del EDAED contestarían bien tal pregunta.
 
@@ -395,7 +395,7 @@ encuesta %>%
 encuesta$Q25_PorcentArea[encuesta$Q25_PorcentArea < 1 & !is.na(encuesta$Q25_PorcentArea)] <- 10
 ```
 
-#### Porcentaje de estudiantes que se cree que respondieron bien la pregunta de álgebra
+##### Porcentaje de estudiantes que se cree que respondieron bien la pregunta de álgebra
 
 Nuevamente, para el encuestado con respuesta 2461, se va a imputar su valor con una lógica semejante a la anterior, cambiando el 0.50 por un 50.
 
