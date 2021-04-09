@@ -265,11 +265,21 @@ summary(encuesta$Q10_Estrato)
 
 ```{r, include = FALSE}
 # Instalación de R
+encuesta$Q11_R <- as.character(encuesta$Q11_R)
+encuesta$Q11_R[encuesta$Q11_R == '1'] <- 'Si'
+encuesta$Q11_R[encuesta$Q11_R == '0'] <- 'No'
+encuesta$Q11_R <- as.factor(encuesta$Q11_R)
+levels(encuesta$Q11_R)
 summary(encuesta$Q11_R)
 ```
 
 ```{r, include = FALSE}
 # Instalación de R Studio
+encuesta$Q12_RStudio <- as.character(encuesta$Q12_RStudio)
+encuesta$Q12_RStudio[encuesta$Q12_RStudio == '1'] <- 'Si'
+encuesta$Q12_RStudio[encuesta$Q12_RStudio == '0'] <- 'No'
+encuesta$Q12_RStudio <- as.factor(encuesta$Q12_RStudio)
+levels(encuesta$Q11_R)
 summary(encuesta$Q12_RStudio)
 ```
 
@@ -278,63 +288,127 @@ summary(encuesta$Q13_NoRoRStudio)
 ```
 
 ```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio <- as.character(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio[encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio[encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio <- as.factor(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
+levels(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
 summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
-is.na(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
 ```
 
 ```{r, include = FALSE}
-summary(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
-is.na(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
-```
-
-```{r, include = FALSE}
-summary(encuesta$Q14_RecursosInformaticos..Wifi.propio)
-is.na(encuesta$Q14_RecursosInformaticos..Wifi.propio)
-```
-
-```{r, include = FALSE}
-summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
-is.na(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
-```
-
-```{r, include = FALSE}
-summary(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
-is.na(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
-```
-
-```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio <- as.character(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio[encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio[encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio <- as.factor(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
+levels(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
 summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
-is.na(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
 ```
 
 ```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Wifi.propio <- as.character(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+encuesta$Q14_RecursosInformaticos..Wifi.propio[encuesta$Q14_RecursosInformaticos..Wifi.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Wifi.propio[encuesta$Q14_RecursosInformaticos..Wifi.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Wifi.propio <- as.factor(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+levels(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+summary(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+```
+
+```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Wifi.no.propio <- as.character(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
+encuesta$Q14_RecursosInformaticos..Wifi.no.propio[encuesta$Q14_RecursosInformaticos..Wifi.no.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Wifi.no.propio[encuesta$Q14_RecursosInformaticos..Wifi.no.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Wifi.no.propio <- as.factor(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
+levels(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
 summary(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
-is.na(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
+```
+
+
+```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Celular.sin.datos <- as.character(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
+encuesta$Q14_RecursosInformaticos..Celular.sin.datos[encuesta$Q14_RecursosInformaticos..Celular.sin.datos == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Celular.sin.datos[encuesta$Q14_RecursosInformaticos..Celular.sin.datos == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Celular.sin.datos <- as.factor(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
+levels(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
+summary(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
 ```
 
 ```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Celular.con.datos <- as.character(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
+encuesta$Q14_RecursosInformaticos..Celular.con.datos[encuesta$Q14_RecursosInformaticos..Celular.con.datos == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Celular.con.datos[encuesta$Q14_RecursosInformaticos..Celular.con.datos == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Celular.con.datos <- as.factor(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
+summary(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
+```
+
+
+```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..PortÃ.til.propio <- as.character(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
+encuesta$Q14_RecursosInformaticos..PortÃ.til.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..PortÃ.til.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..PortÃ.til.propio <- as.factor(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
 summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
-is.na(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
 ```
 
+
 ```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio <- as.character(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
+encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio <- as.factor(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
 summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
-is.na(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
 ```
 
+
 ```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo <- as.character(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo <- as.factor(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
 summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
-is.na(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
 ```
 
 ```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo <- as.character(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo <- as.factor(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
 summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
-is.na(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
 ```
 
 ```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo <- as.character(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
+encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo <- as.factor(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
 summary(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
-is.na(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
+```
+
+
+```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo <- as.character(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo[encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo <- as.factor(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
+summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
+```
+
+
+```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Tablet.sin.datos <- as.character(encuesta$Q14_RecursosInformaticos..Tablet.sin.datos)
+encuesta$Q14_RecursosInformaticos..Tablet.sin.datos[encuesta$Q14_RecursosInformaticos..Tablet.sin.datos == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Tablet.sin.datos[encuesta$Q14_RecursosInformaticos..Tablet.sin.datos == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Tablet.sin.datos <- as.factor(encuesta$Q14_RecursosInformaticos..Tablet.sin.datos)
+summary(encuesta$Q14_RecursosInformaticos..Tablet.sin.datos)
+```
+
+
+```{r, include = FALSE}
+encuesta$Q14_RecursosInformaticos..Tablet.con.datos. <- as.character(encuesta$Q14_RecursosInformaticos..Tablet.con.datos.)
+encuesta$Q14_RecursosInformaticos..Tablet.con.datos.[encuesta$Q14_RecursosInformaticos..Tablet.con.datos. == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Tablet.con.datos.[encuesta$Q14_RecursosInformaticos..Tablet.con.datos. == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Tablet.con.datos. <- as.factor(encuesta$Q14_RecursosInformaticos..Tablet.con.datos.)
+summary(encuesta$Q14_RecursosInformaticos..Tablet.con.datos.)
 ```
 
 ### Segunda sección: conspiraciones
@@ -342,49 +416,76 @@ is.na(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
 En esta sección se tienen variables dicotómicas que no requieren ninguna depuración conforme al proceso de chequeo realizado.
 
 ```{r, include = FALSE}
+encuesta$Q15_Alunizaje <- as.character(encuesta$Q15_Alunizaje)
+encuesta$Q15_Alunizaje[encuesta$Q15_Alunizaje == '1'] <- 'Si'
+encuesta$Q15_Alunizaje[encuesta$Q15_Alunizaje == '0'] <- 'No'
+encuesta$Q15_Alunizaje <- as.factor(encuesta$Q15_Alunizaje)
 summary(encuesta$Q15_Alunizaje)
-is.na(encuesta$Q15_Alunizaje)
 ```
 
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q16_EspionajeInternet <- as.character(encuesta$Q16_EspionajeInternet)
+encuesta$Q16_EspionajeInternet[encuesta$Q16_EspionajeInternet == '1'] <- 'Si'
+encuesta$Q16_EspionajeInternet[encuesta$Q16_EspionajeInternet == '0'] <- 'No'
+encuesta$Q16_EspionajeInternet <- as.factor(encuesta$Q16_EspionajeInternet)
 summary(encuesta$Q16_EspionajeInternet)
-is.na(encuesta$Q16_EspionajeInternet)
 ```
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q17_Experimentos <- as.character(encuesta$Q17_Experimentos)
+encuesta$Q17_Experimentos[encuesta$Q17_Experimentos == '1'] <- 'Si'
+encuesta$Q17_Experimentos[encuesta$Q17_Experimentos == '0'] <- 'No'
+encuesta$Q17_Experimentos <- as.factor(encuesta$Q17_Experimentos)
 summary(encuesta$Q17_Experimentos)
-is.na(encuesta$Q17_Experimentos)
 ```
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q18_Vacunas <- as.character(encuesta$Q18_Vacunas)
+encuesta$Q18_Vacunas[encuesta$Q18_Vacunas == '1'] <- 'Si'
+encuesta$Q18_Vacunas[encuesta$Q18_Vacunas == '0'] <- 'No'
+encuesta$Q18_Vacunas <- as.factor(encuesta$Q18_Vacunas)
 summary(encuesta$Q18_Vacunas)
-is.na(encuesta$Q18_Vacunas)
 ```
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q19_EvidenciaFalsa <- as.character(encuesta$Q19_EvidenciaFalsa)
+encuesta$Q19_EvidenciaFalsa[encuesta$Q19_EvidenciaFalsa == '1'] <- 'Si'
+encuesta$Q19_EvidenciaFalsa[encuesta$Q19_EvidenciaFalsa == '0'] <- 'No'
+encuesta$Q19_EvidenciaFalsa <- as.factor(encuesta$Q19_EvidenciaFalsa)
 summary(encuesta$Q19_EvidenciaFalsa)
-is.na(encuesta$Q19_EvidenciaFalsa)
 ```
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q20_RafagasSolares <- as.character(encuesta$Q20_RafagasSolares)
+encuesta$Q20_RafagasSolares[encuesta$Q20_RafagasSolares == '1'] <- 'Si'
+encuesta$Q20_RafagasSolares[encuesta$Q20_RafagasSolares == '0'] <- 'No'
+encuesta$Q20_RafagasSolares <- as.factor(encuesta$Q20_RafagasSolares)
 summary(encuesta$Q20_RafagasSolares)
-is.na(encuesta$Q20_RafagasSolares)
 ```
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q21_TierraHueca <- as.character(encuesta$Q21_TierraHueca)
+encuesta$Q21_TierraHueca[encuesta$Q21_TierraHueca == '1'] <- 'Si'
+encuesta$Q21_TierraHueca[encuesta$Q21_TierraHueca == '0'] <- 'No'
+encuesta$Q21_TierraHueca <- as.factor(encuesta$Q21_TierraHueca)
 summary(encuesta$Q21_TierraHueca)
-is.na(encuesta$Q21_TierraHueca)
 ```
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q22_alienigenas <- as.character(encuesta$Q22_alienigenas)
+encuesta$Q22_alienigenas[encuesta$Q22_alienigenas == '1'] <- 'Si'
+encuesta$Q22_alienigenas[encuesta$Q22_alienigenas == '0'] <- 'No'
+encuesta$Q22_alienigenas <- as.factor(encuesta$Q22_alienigenas)
 summary(encuesta$Q22_alienigenas)
-is.na(encuesta$Q22_alienigenas)
 ```
 
-```{r, include = F}
+```{r, include = FALSE}
+encuesta$Q23_CambioClimatico <- as.character(encuesta$Q23_CambioClimatico)
+encuesta$Q23_CambioClimatico[encuesta$Q23_CambioClimatico == '1'] <- 'Si'
+encuesta$Q23_CambioClimatico[encuesta$Q23_CambioClimatico == '0'] <- 'No'
+encuesta$Q23_CambioClimatico <- as.factor(encuesta$Q23_CambioClimatico)
 summary(encuesta$Q23_CambioClimatico)
-is.na(encuesta$Q23_CambioClimatico)
 ```
 
 ### Tercera sección: álgebra y percepción grupal
@@ -638,4 +739,130 @@ tbl_v6P
 # Gráfico de barras para PUNTAJE SABER 11 
 barplot(tbl_v6P)
 ```
+
+
+#Continuacion del analisis descriptivo - Luis Miguel Martinez
+
+
+```{r}
+barplot(table(encuesta$Q10_Estrato),
+        col = "#002e8b",
+        main = "Estrato Socioeconomico",
+        xlab = "Estrato de la vivienda ",
+        ylab = "Numero de estudiantes"
+        )
+```
+
+El estrato corresponde en este caso a una variable categorica la cual esta dividida en diferentes clasificaciones. En el caso de la encuesta que se realizo para los estudiantes de EDAED, corresponde desde la clasificacion "1" que seria el estrado mas bajo respectivamente e iria hasta la clasificacion "5" que seria el estrato evidentemente mas alto de los estudiantes encuestados. Cabe notar que al final se observa una clasificacion algo inusual para las anteriores, siendo esta "No se conoce" la cual indicaria que el estudiante al momento de realizar la encuesta no conocia su estrato al que pertenecia su vivienda en ese momento o no sabia distinguir donde hallar en la cuenta de servicios publicos dicha clasicacion socioeconomica. De la tabla podemos evidenciar que los estratos en los cuales se concentran los estudiantes del curso EDAED son el estrado 2 y 3. Se observa que hay pocos estudiantes que pertenecen a los estratos 1, 4 y 5. 
+
+
+
+```{r}
+barplot(table(encuesta$Q11_R),
+        col = "#002e8b",
+        main = "Programa R instalado y/o actualizado",
+        xlab = "Instalacion o actualizacion de R ",
+        ylab = "Numero de estudiantes")
+```
+```{r}
+summary(encuesta$Q11_R)
+summary(encuesta$Q12_RStudio)
+```
+Analisis descriptivo de las variables R y RStudio
+
+De acuerdo con la informacion anterior y a la pregunta que se planteaba sobre la instalacion del R y el RStudio o su respectiva actualizacion, se puede decir que 80 personas habian realizado la instalacion y/o actualizacion del software R, esto equivalente a un 92% del total de los estudiantes encuestados. El resto que fue el 8% correspondian a los encuestados que o no habian instalado el r o no habian actualizado el r teniendolo instalado en su computador. Respondiendo a la pregunta que concierne al RStudio, se puede decir que el 77% equivalente a 76 personas, habian instalado el RStudio como lo habia dictaminado el profesor en la clase #1, y de acuerdo a esto se puede decir que el 23% restante no habia hecho la instalacion de RStudio al momento de la realizacion de la encuesta de la asignatura EDAED.
+
+
+```{r}
+table(encuesta$Q13_NoRoRStudio)
+```
+De acuerdo a la tabla anterior, se puede inferir en sus respuestas, que hace referencia a no tener en el ordenador ninguno de los programas estadisticos solicitados por el docente de EDAED por lo que cabe resaltar que del total de los 87 estudiantes, 76  si tenian uno o los dos programas instalados, pero 8 no poseian la forma de tener alguno de los dos software correctamente instalados dado a varias razones externas a la asignatura. Se puede destacar que hubo un estudiante que su respuesta no fue coherente con el fin de la pregunta.
+
+```{r}
+summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
+summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
+```
+Con respecto a la pregunta de tener internet de cable propio o no y respondiendo a la primera pregunta ("Contar con internet de cable propio"), 39 de los estudiantes de EDAED si tenian mientras que 48 de ellos, no. 
+Partiendo con la segunda pregunta ("No poseer internet de cable propio"), observamos que ya son 85 estudiantes (98%) y el 2% restante si tiene internet de cable pero no pertenece a ellos como tal. 
+
+
+```{r}
+summary(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+summary(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
+```
+Respecto a la variable WiFi se tenian dos opciones de respuesta (propio o no propio). Las tablas muestran que 75 estudiantes de EDAED tenian WiFi propio al momento de la encuesta, cuyo numero equivale de un total de 87 estudiantes al 86%. El 14% restante no tenia WiFi propio. Estudiando la otra variable ("WiFi no propio") se evidencia que 10 personas no tenian el WiFi propio en sus hogares (11%)
+
+
+```{r}
+summary(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
+summary(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
+```
+En la pregunta de celular con datos al momento de la encuesta, 61 estudiantes no contaban con servicio de intenet movil mientras que 26 estudiantes si tenian datos en su celular.
+Cabe resaltar que la siguiente pregunta sobre si no se tenian datos en el celular. Podemos decir que los estudiantes encuestados, mas del 50% no tenian datos moviles en su celular.
+
+```{r}
+summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
+summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
+```
+71 estudiantes(82%) de EDAED poseian portatil propio al momento de realizar la encuesta, mientras que 16 de ellos (18%) no tenian portatil o bien, tenian computador de escritorio. Tomando para el analisis la segunda pregunta ("Portatil no propio"), 6 estudiantes contaban con portatil pero no era propio. Se puede decir que con un total de 77 estudiantes (89%) contaban con portatil en sus hogares.
+
+
+```{r}
+summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
+summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
+summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
+summary(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
+```
+Segun lo anterior, 14 estudiantes contaban al momento de la encuesta con computador propio de escritorio bien sea exclusivo o no. 4 de ellos no contaban con computador de escritorio propio y que fuera exclusivo y solamente 1 estudiante no tenia posesion de un computador de escritorio pero si era exclusivo.
+
+```{r}
+summary(encuesta$Q14_RecursosInformaticos..Tablet.con.datos.)
+summary(encuesta$Q14_RecursosInformaticos..Tablet.sin.datos)
+```
+Solamente 3 estudiantes tenian Tablet con datos a su disposicion, los otros 7 no tenian datos en su tablet.
+
+```{r}
+summary(encuesta$Q15_Alunizaje)
+```
+Con respecto a la pregunta que se habia planteado sobre si el hombre habia llegado realmente a la luna o si era un montaje de HollyWood, 11 personas respondieron erroneamente dicha pregunta ya que la respuesta correcta fue que si habia llegado a la luna, la cual 76 estudiantes acertaron. 
+
+```{r}
+summary(encuesta$Q16_EspionajeInternet)
+```
+El 68% de los encuestados (59 estudiantes) estuvieron de acuerdo que la Agencia de Seguridad Nacional de Estados Unidos estuvo en problemas por crear un proyecto para espiar el internet de los civiles, plan que fue llevado a juicio dado que privaba de la libertad a las personas como un derecho fundamental y aparte era ilegal ya que se estaba haciendo sin consentimiento alguno. El 32% de los encuestados respondio con un "No" dado a que no creian tal hecho o tenian desconocimiento tal sobre este.
+
+```{r}
+summary(encuesta$Q17_Experimentos)
+```
+El 63% de los que respondieron la encuesta estuvieron a favor de que si era cierto que se hicieron experimentos en personas afroamericanas mediante la no aplicacion de penicilina a la poblacion que padecia de sifilis. El 37% restante de los encuestados no estuvieron de acuerdo a que tal hecho fuese cierto o desconocian de el.
+
+```{r}
+summary(encuesta$Q18_Vacunas)
+```
+De un total de 100%, el 97% esta a favor de que las vacunas sirven y no son una conspiracion de las multinacionales farmaceuticas para enriquecerse a costillas de estas. Solo el 3% de los encuestados arremete contra las farmaceuticas por su enriquecimiento programado y la no naturalidad de las vacunas en el cuerpo humano.
+
+```{r}
+summary(encuesta$Q19_EvidenciaFalsa)
+```
+El 78% de los encuestados respondio acertadmente sobre la cuestion de que el FBI habia utilizado evidencia falsa en el siglo pasado para condenar inocentes. 22% restante estuvo en contra y se podria decir que estaban a favor del FBI por la rectitud y la imagen social que se tiene de ellos. 
+
+```{r}
+summary(encuesta$Q20_RafagasSolares)
+```
+Llegando a una pregunta relacionada a la geologia, el 23% de los encuestados esta a favor de que el sol cumple una funcion en el movimiento de la tierra cuando se dan los temidos sismos, de hecho el 77% de los otros, dice que las rafagas solares no son los precursores de los sismos de la tierra dado que realmente estos ultimos se dan por la tectonica de las placas de la tierra y de actividad neotectonica de algunas partes de la tierra
+
+```{r}
+summary(encuesta$Q21_TierraHueca)
+```
+Casi el 100% de los estudiantes encuestados (94%) afirma rotundamente que la tierra en su forma fisica no es hueca y dentro de ella no existe una civilizacion oculta que los seres humanos tengamos prueba. Solamente el 6% restante afirma lo contrario. 
+
+```{r}
+summary(encuesta$Q22_alienigenas)
+```
+La pregunta sobre los alienigenas hace cambiar un poco los resultados. Un poco mas de la mitad (64%) respondio "No" a la visita de los alienigenas a las civilizaciones antiguas y su influencia en la historia y aparte de que segun teorias, estos fueron los precursores de las construcciones de los megamonumentos que datan de la antiguedad. El 36% de los encuestados si esta totalmente de acuerdo al planteamiento de esta pregunta.
+
+```{r}
+summary(encuesta$Q23_CambioClimatico)
+```
+Esta pregunta es algo revolucionaria al dia de hoy ya que demasiadas personas afirman que la mayoria de industrias son las causantes del cambio climatico que ha venido sufriendo la tierra en los ultimos anos. Cabe destacar que el 84% de los encuestados pertenece a este tipo de personas que no estan de acuerdo con las metodologias de algunas industrias y gobiernos con la preservacion del medio ambiente. El 16% de los encuestados (14 personas) van en contra de estas personas y dicen lo que ha sufrido la tierra en los ultimos anos es algo natural.
 
