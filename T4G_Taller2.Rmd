@@ -543,7 +543,13 @@ encuesta$Q27_PorcentDivisor[encuesta$Q27_PorcentDivisor < 1 & !is.na(encuesta$Q2
 
 ## Análisis descriptivo
 
-### 1. Tiempo empleado en responder la encuesta
+*Observación. La numeración de las preguntas no coincide con la de la encuesta original, en tanto existen varias preguntas que son analizadas en grupos.*
+
+### Primera parte de la encuesta
+
+A continuación se presenta el análisis descriptivo de la primera sección de preguntas de la encuesta, la cual consiste de preguntas de caracterización del estudiante.
+
+#### 1. Tiempo empleado en responder la encuesta
 
 Como anteriormente se había dicho, para analizar la fecha de envío de la encuesta se usará una nueva variable correspondiente al tiempo usado en minutos para responder la encuesta. Se ve que en promedio los estudiantes del curso respondieron la encuesta en 16.24 minutos, donde el que la envió de primero usó un tiempo de 5.03 minutos y el que la envió de último usó un tiempo de 28.93 minutos. En la gráfica también se puede ver que la mayoría de estudiantes usaron entre 10 y 20 minutos para responder la encuesta.
 
@@ -557,7 +563,7 @@ hist(encuesta$tiempo_usado, breaks="Sturges", col="#002e8b",
      ylab = "Frecuencia", xlab = "Tiempo(Minutos)")
 ```
 
-### 2. Género
+#### 2. Género
 
 La variable **género** se constituye como una variable categórica con un orden de medición nominal, donde las posibles categorías son ***masculino***, ***femenino*** y ***otro*** (notar que la pregunta es por la identidad de género y no por el sexo). Así, a partir de la tabla y el gráfico expuestos a continuación, es posible observar que el curso está compuesto por hombres en un poco más de sus tres cuartas partes (75.86 % del total), mientras que las mujeres solo conforman un 22.99%, lo que permite establecer una relación aproximada de tres hombres por cada mujer. Además, entre los estudiantes del curso, existe una persona (que se hace con el 1.15 % del total) que se autopercibe como una persona no binaria, pues no es del género femenino ni masculino.
 
@@ -577,7 +583,7 @@ title(main = "Género de los estudiantes de EDAED",
       xlab = "Género", ylab = "Porcentaje (%)")
 ```
 
-### 3. Edad
+#### 3. Edad
 
 Para analizar la fecha de nacimiento, se va a apelar a la variable auxiliar ***edad*** que se creó con el objeto de facilitar el análisis de esta variable. Así, como se puede ver a continuación, la edad promedio de los estudiantes de EDAED al 26 de febrero de 2021 era de 21.55 años y tiene su mediana en 20.86 años. Además, el estudiante más joven del curso tiene 17.53 años, mientras que el mayor cuenta con 38.61 años. Además, como se puede observar en el histograma, hay un carácter bimodal en la distribución, pues existen un par de edades que se repiten con mucha frecuencia: una un poco antes de los veinte años y otra hacia los 22.5 años.
 
@@ -601,7 +607,7 @@ rug(encuesta$Edad)
 par(paramAnt)
 ```
 
-### 4. Carrera
+#### 4. Carrera
 
 ```{r, echo = FALSE}
 # Tabla para la carrera
@@ -619,7 +625,7 @@ title(main = "Carrera de los estudiantes de EDAED",
       ylab = "Porcentaje (%)")
 ```
 
-### 5. Avance en la carrera
+#### 5. Avance en la carrera
 
 Como ya se explicó anteriormente, para el análisis de la variable ***semestre*** se va a apelar a la conversión ***avance***, la cual es una variable continua con un nivel de medición de razón, y como se puede notar a continuación, el estudiante que presenta un menor avance lleva un 15% de créditos aprobados, mientras que el estudiante con más avance alcanza el 80%. Además, es curioso notar que al menos el 75 % de los estudiantes de EDAED presentan un avance igual o menor al 50 %. Por otro lado, en el histograma se puede observar que esta es una variable unimodal, siendo claro que la mayor parte de los estudiantes de este curso apenas están comenzando con sus carreras universitarias.
 
@@ -645,7 +651,7 @@ lines(density(encuesta$Edad), col = "#748b00", lwd = 3)
 par(paramAnt)
 ```
 
-### 6. Puntaje en las pruebas Saber 11
+#### 6. Puntaje en las pruebas Saber 11
 
 Como se puede observar a continuación, los estudiantes del curso de EDAED tienen puntajes que toman todo el rango de posibles resultados para esta prueba, es decir, desde cero hasta quinientos, siendo de interés que la calificación promedio es de 322.7 puntos y que al menos el 50 % de los estudiantes del curso han obtenido un puntaje de 322.7 o menos. También se puede observar a partir del gráfico adjunto que esta es una distribución unimodal y que es sesgada hacia la derecha, es decir, que hay una mayor concentración de valores hacia los puntajes medios-altos, especialmente entre 250 y los 400 puntos.
 
@@ -660,9 +666,9 @@ hist(encuesta$Q05_Saber11, breaks="Sturges", col="#002e8b",
 ```
 
 
-### 7. Percentil en las pruebas Saber 11
+#### 7. Percentil en las pruebas Saber 11
 
-Como se ve a continuación, los estudiantes del curso tienen percentiles que toman todo el rango de posibles percentiles para esta prueba, es decir, desde cero hasta cien, e interesa que el percentil promedio es del 78.94 y que por lo menos el 50 % de los estudiantes del curso han obtenido un percentil de 88 o menos. También se puede observar a partir del gráfico que esta es una distribución bastante sesgada hacia la derecha, es decir, que hay una mayor frecuencia de estudiantes en los percentiles altos.
+Como se ve en el siguiente gráfico, los estudiantes del curso abarcan casi que todos los posibles percentiles para esta prueba, es decir, desde cero hasta cien, e interesa que el percentil promedio es el 78.94 y que por lo menos el 50 % de los estudiantes del curso se sitúan en el percentil 88 o inferior. También se puede observar a partir del gráfico que esta es una distribución bastante sesgada hacia la derecha, es decir, que hay una mayor frecuencia de estudiantes en los percentiles altos.
 
 ```{r, echo = FALSE}
 summary(na.omit(encuesta$Q06_PercentilSaber11))
@@ -674,7 +680,7 @@ hist(encuesta$Q06_PercentilSaber11, breaks="Sturges", col="#002e8b",
      ylab = "Frecuencia", xlab = "Percentil")
 ```
 
-### 8. Fecha de presentación de las pruebas Saber 11
+#### 8. Fecha de presentación de las pruebas Saber 11
 
 Se puede ver que gran parte de los estudiantes del curso presentaron las pruebas Saber 11 no hace mucho tiempo, pues el año promedio de presentación corresponde al 2016, y porque a lo menos el 25% de los estudiantes del curso presentaron su prueba antes del 2015. Esto se puede verificar al observar el gráfico, pues es una distribución sesgada hacia la derecha, pues hay una mayor frecuencia de presentación de la prueba hacia los años más recientes, más que todo entre el 2014 y el 2020.
 
@@ -688,7 +694,7 @@ hist(as.numeric(format(encuesta$Q07_FechaSaber11, "%Y")), breaks="Sturges", col=
      ylab = "Frecuencia", xlab = "Año")
 ```
 
-### 9. PAPA
+#### 9. PAPA
 
 Corresponde al Promedio Aritmético Ponderado Acumulado de los estudiantes del curso, y vemos que en promedio estos tienen un PAPA de 4.042, donde el mayor PAPA es de 4.7 y el menor es de 3. Además, en la gráfica vemos que la mayoría de los estudiantes del curso tienen un PAPA entre 3.6 y 4.6.
 
@@ -699,10 +705,11 @@ summary(na.omit(encuesta$Q08_PAPA))
 ```{r, echo = FALSE}
 hist(encuesta$Q08_PAPA, breaks="Sturges", col="#002e8b",
      main = "Promedio Aritmético Ponderado Acumulado\n de los estudiantes del curso EDAED",
-     ylab = "Frecuencia", xlab = "PAPA")
+     ylab = "Frecuencia", xlab = "PAPA",
+     xlim = c(3, 5))
 ```
 
-### 10. Presencia en el Área Metropolitana del Valle de Aburrá
+#### 10. Presencia en el Área Metropolitana del Valle de Aburrá
 
 ```{r, echo = FALSE}
 # Tabla para la variable EnAreaMetropolitana
@@ -719,150 +726,225 @@ text(gr_area, tbl_areaP + 6, paste(round(tbl_areaP, 2), "%"))
 title(main = "Presencia de los estudiantes de EDAED en\n el Área Metropolitana del Valle de Aburrá",
       ylab = "Porcentaje (%)")
 ```
-======
+
+#### 11. Estrato socioeconómico
+
+
 ```{r, echo = FALSE}
-# Creación de una variable auxiliar con los rangos de PUNTAJE SABER 11
-clases_sbr11 <- nclass.Sturges(encuesta$Q05_Saber11)
-vector_sbr11 <- c(0, 63, 126, 189, 252, 315, 378, 441, 504)
-encuesta <- encuesta %>% 
-  mutate(as.numeric(Q05_Saber11), V6_Saber11 = cut(Q05_Saber11, vector_sbr11, include.lowest = TRUE))
-```
-
-```{r}
-# Tabla de frecuencias de las diferentes categorías
-tbl_v6 <- table(encuesta$V6_Saber11)
-tbl_v6P <- round(tbl_v6 * 100 / sum(tbl_v6), 2)
-tbl_v6P
-```
-
-```{r}
-# Gráfico de barras para PUNTAJE SABER 11 
-barplot(tbl_v6P)
-```
-
-
-#Continuacion del analisis descriptivo - Luis Miguel Martinez
-
-
-```{r}
 barplot(table(encuesta$Q10_Estrato),
         col = "#002e8b",
-        main = "Estrato Socioeconomico",
+        main = "Estrato Socioeconómico",
         xlab = "Estrato de la vivienda ",
         ylab = "Numero de estudiantes"
         )
 ```
 
-El estrato corresponde en este caso a una variable categorica la cual esta dividida en diferentes clasificaciones. En el caso de la encuesta que se realizo para los estudiantes de EDAED, corresponde desde la clasificacion "1" que seria el estrado mas bajo respectivamente e iria hasta la clasificacion "5" que seria el estrato evidentemente mas alto de los estudiantes encuestados. Cabe notar que al final se observa una clasificacion algo inusual para las anteriores, siendo esta "No se conoce" la cual indicaria que el estudiante al momento de realizar la encuesta no conocia su estrato al que pertenecia su vivienda en ese momento o no sabia distinguir donde hallar en la cuenta de servicios publicos dicha clasicacion socioeconomica. De la tabla podemos evidenciar que los estratos en los cuales se concentran los estudiantes del curso EDAED son el estrado 2 y 3. Se observa que hay pocos estudiantes que pertenecen a los estratos 1, 4 y 5. 
+El estrato corresponde en este caso a una variable categórica la cual esta dividida en diferentes clasificaciones. En el caso de la encuesta que se realizó para los estudiantes de EDAED, corresponde desde la clasificacion "1" que seria el estrado más bajo, e iría hasta la clasificación "5" que seria el estrato evidentemente más alto de los estudiantes encuestados. Cabe anotar que al final se observa una clasificacioó algo inusual para las anteriores, siendo esta *"No se conoce"* la cual indica que el estudiante al momento de realizar la encuesta no conocía el estrato al que pertenecia su vivienda. De la tabla podemos evidenciar que los estratos en los cuales se concentran los estudiantes del curso EDAED son los estrados 2 y 3. Además, se observa que hay pocos estudiantes que pertenecen a los estratos 1, 4 y 5. 
 
+#### 12. Instalación de R y RStudio
 
-
-```{r}
+```{r, echo = FALSE}
 barplot(table(encuesta$Q11_R),
         col = "#002e8b",
         main = "Programa R instalado y/o actualizado",
         xlab = "Instalacion o actualizacion de R ",
         ylab = "Numero de estudiantes")
 ```
-```{r}
+
+##### **Instalación de R**
+```{r, echo = FALSE}
 summary(encuesta$Q11_R)
+```
+
+##### **Instalación de RStudio**
+
+```{r, echo = FALSE}
 summary(encuesta$Q12_RStudio)
 ```
-Analisis descriptivo de las variables R y RStudio
 
-De acuerdo con la informacion anterior y a la pregunta que se planteaba sobre la instalacion del R y el RStudio o su respectiva actualizacion, se puede decir que 80 personas habian realizado la instalacion y/o actualizacion del software R, esto equivalente a un 92% del total de los estudiantes encuestados. El resto que fue el 8% correspondian a los encuestados que o no habian instalado el r o no habian actualizado el r teniendolo instalado en su computador. Respondiendo a la pregunta que concierne al RStudio, se puede decir que el 77% equivalente a 76 personas, habian instalado el RStudio como lo habia dictaminado el profesor en la clase #1, y de acuerdo a esto se puede decir que el 23% restante no habia hecho la instalacion de RStudio al momento de la realizacion de la encuesta de la asignatura EDAED.
+De acuerdo con la información anterior y a la pregunta que se planteaba sobre la instalación del R y el RStudio o su respectiva actualizacion, se puede decir que 80 personas habían realizado la instalacion y/o actualización del software R, esto ws equivalente a un 92 % del total de los estudiantes encuestados. El resto que, fue el 8 %, correspondían a los encuestados que no habian instalado el R o no habían actualizado el r teniéndolo ya instalado en su computador. Respondiendo a la pregunta que concierne al RStudio, se puede decir que el 77 %, equivalente a 76 personas, habían instalado el RStudio como lo había dictaminado el profesor en la primera clase, y de acuerdo a esto se puede decir que el 23 % restante no había hecho la instalación de RStudio al momento de la realización de la encuesta de la asignatura EDAED.
 
-
-```{r}
+##### **No instalación de R o RStudio**
+```{r, echo = FALSE}
 table(encuesta$Q13_NoRoRStudio)
 ```
-De acuerdo a la tabla anterior, se puede inferir en sus respuestas, que hace referencia a no tener en el ordenador ninguno de los programas estadisticos solicitados por el docente de EDAED por lo que cabe resaltar que del total de los 87 estudiantes, 76  si tenian uno o los dos programas instalados, pero 8 no poseian la forma de tener alguno de los dos software correctamente instalados dado a varias razones externas a la asignatura. Se puede destacar que hubo un estudiante que su respuesta no fue coherente con el fin de la pregunta.
 
-```{r}
+Así pues, de acuerdo a la tabla anterior, que hace referencia a no tener en el ordenador ninguno de los programas estadísticos solicitados por el docente de EDAED, de la cual se observa que del total de los 87 estudiantes, 76  sí tenian uno o los dos programas instalados, pero 8 no poseían la forma de tener alguno de los dos software correctamente instalados dado a diversas razones ajenas a la asignatura. Se puede destacar que hubo un estudiante que su respuesta no fue coherente con el fin de la pregunta.
+
+#### 13. Acceso a internet de cable propio
+
+##### **Recursos informáticos: Internet de cable propio**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.propio)
+```
+
+##### **Recursos informáticos: Internet de cable no propio**
+
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Internet.de.cable.no.propio)
 ```
-Con respecto a la pregunta de tener internet de cable propio o no y respondiendo a la primera pregunta ("Contar con internet de cable propio"), 39 de los estudiantes de EDAED si tenian mientras que 48 de ellos, no. 
-Partiendo con la segunda pregunta ("No poseer internet de cable propio"), observamos que ya son 85 estudiantes (98%) y el 2% restante si tiene internet de cable pero no pertenece a ellos como tal. 
 
+Con respecto a la pregunta de tener internet de cable propio o no y respondiendo a la primera pregunta ("contar con internet de cable propio"), 39 de los estudiantes de EDAED sí lo tenían mientras que 48 de ellos, no. Luego, sobre la segunda pregunta ("no poseer internet de cable propio"), observamos que ya son 85 estudiantes (98%) y el 2% restante sí tiene internet de cable pero no pertenece a ellos como tal. 
 
-```{r}
+#### 14. Acceso a Wi-Fi
+
+##### **Recursos informáticos: Wi-Fi propio**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Wifi.propio)
+```
+
+##### **Recursos informáticos: Wi-Fi no propio**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Wifi.no.propio)
 ```
-Respecto a la variable WiFi se tenian dos opciones de respuesta (propio o no propio). Las tablas muestran que 75 estudiantes de EDAED tenian WiFi propio al momento de la encuesta, cuyo numero equivale de un total de 87 estudiantes al 86%. El 14% restante no tenia WiFi propio. Estudiando la otra variable ("WiFi no propio") se evidencia que 10 personas no tenian el WiFi propio en sus hogares (11%)
 
 
-```{r}
+Respecto a la variable relacionada con la pregunta que cuestiona sobre la propiedad de Wi-Fi, se tenían dos opciones de respuesta: propio y no propio. Las tablas muestran que 75 estudiantes de EDAED tenian Wi-Fi propio al momento de la encuesta, cuyo numero equivale de un total de 87 estudiantes al 86 %. El 14% restante no tenía W-iFi propio. Estudiando la otra variable ("Wi-Fi no propio"), se evidencia que 10 personas no tenían Wi-Fi propio en sus hogares (11%)
+
+#### 15. Acceso a red de datos
+
+##### **Recursos informáticos: celular con datos**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
+```
+
+##### **Recursos informáticos: celular sin datos**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Celular.sin.datos)
 ```
-En la pregunta de celular con datos al momento de la encuesta, 61 estudiantes no contaban con servicio de intenet movil mientras que 26 estudiantes si tenian datos en su celular.
-Cabe resaltar que la siguiente pregunta sobre si no se tenian datos en el celular. Podemos decir que los estudiantes encuestados, mas del 50% no tenian datos moviles en su celular.
 
-```{r}
+
+En la pregunta de celular con datos al momento de la encuesta, 61 estudiantes no contaban con servicio de intenet móvil, mientras que 26 estudiantes sí tenían datos en su celular.
+Cabe resaltar que la siguiente pregunta sobre si no se tenian datos en el celular, de los estudiantes encuestados, más del 50% no tenáan datos móviles en su celular.
+
+#### 16. Acceso a portátil propio.
+
+##### **Recursos informáticos: portátil propio**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
+```
+
+##### **Recursos informáticos: portátil no propio**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
 ```
-71 estudiantes(82%) de EDAED poseian portatil propio al momento de realizar la encuesta, mientras que 16 de ellos (18%) no tenian portatil o bien, tenian computador de escritorio. Tomando para el analisis la segunda pregunta ("Portatil no propio"), 6 estudiantes contaban con portatil pero no era propio. Se puede decir que con un total de 77 estudiantes (89%) contaban con portatil en sus hogares.
 
 
-```{r}
+71 estudiantes (82 %) de EDAED poseían portátil propio al momento de realizar la encuesta, mientras que 16 de ellos (18 %) no tenían porttil o bien, tenían computador de escritorio. Tomando para el análisis la segunda pregunta ("portátil no propio"), 6 estudiantes contaban con portátil pero no era propio. Se puede decir que un total de 77 estudiantes (89%) contaban con portátil en sus hogares.
+
+#### 17. Computador de escritorio propio y exclusivo
+
+##### **Recursos informáticos: Computador de escritorio propio y exclusivo**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo)
+```
+
+##### **Recursos informáticos: Computador de escritorio no propio pero exclusivo**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo)
+```
+
+##### **Recursos informáticos: Computador de escritorio ni propio ni exclusivo**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo)
+```
+
+##### **Recursos informáticos: Computador de escritorio propio pero no exclusivo**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo)
 ```
-Segun lo anterior, 14 estudiantes contaban al momento de la encuesta con computador propio de escritorio bien sea exclusivo o no. 4 de ellos no contaban con computador de escritorio propio y que fuera exclusivo y solamente 1 estudiante no tenia posesion de un computador de escritorio pero si era exclusivo.
 
-```{r}
+
+Según las tablas anteriores, 14 estudiantes contaban al momento de la encuesta con computador propio de escritorio, bien sea exclusivo o no. Por otro lado, cuatro de ellos no contaban con computador de escritorio propio y que fuera exclusivo y solamente 1 estudiante no tenía posesion de un computador de escritorio pero sí era exclusivo.
+
+#### 18. Acceso a tablet con datos
+
+##### **Recursos informáticos: tablet sin datos**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Tablet.con.datos.)
+```
+
+##### **Recursos informáticos: tablet sin datos**
+```{r, echo = FALSE}
 summary(encuesta$Q14_RecursosInformaticos..Tablet.sin.datos)
 ```
-Solamente 3 estudiantes tenian Tablet con datos a su disposicion, los otros 7 no tenian datos en su tablet.
 
-```{r}
+Solamente tres estudiantes tenían acceso a tablet con datos, mientras que otros siete no tenían datos en su tablet.
+
+### Segunda parte de la encuesta
+
+En esta sección se indagarán los resultados relacionados con diversas conspiraciones, siendo algunas falsas y otras verdaderas (debidamente documentadas) y las posiciones de los estudiantesd del curso de EDADED respecto a estas.
+
+#### 19. Conspiraciones: alunizaje
+
+```{r, echo = FALSE}
 summary(encuesta$Q15_Alunizaje)
 ```
-Con respecto a la pregunta que se habia planteado sobre si el hombre habia llegado realmente a la luna o si era un montaje de HollyWood, 11 personas respondieron erroneamente dicha pregunta ya que la respuesta correcta fue que si habia llegado a la luna, la cual 76 estudiantes acertaron. 
 
-```{r}
+Con respecto a la pregunta que se habia planteado sobre si el hombre había llegado realmente a la Luna o si era un montaje de HollyWood, once personas respondieron erróneamente dicha pregunta, ya que la respuesta correcta fue que el hombre sí había llegado a la Luna, y en este sentido,  76 estudiantes acertaron este interrogante.
+
+#### 20. Conspiraciones: espionaje en Internet
+
+```{r, echo = FALSE}
 summary(encuesta$Q16_EspionajeInternet)
 ```
-El 68% de los encuestados (59 estudiantes) estuvieron de acuerdo que la Agencia de Seguridad Nacional de Estados Unidos estuvo en problemas por crear un proyecto para espiar el internet de los civiles, plan que fue llevado a juicio dado que privaba de la libertad a las personas como un derecho fundamental y aparte era ilegal ya que se estaba haciendo sin consentimiento alguno. El 32% de los encuestados respondio con un "No" dado a que no creian tal hecho o tenian desconocimiento tal sobre este.
 
-```{r}
+El 68% de los encuestados (59 estudiantes) estuvieron de acuerdo con que la Agencia de Seguridad Nacional de Estados Unidos estuvo en problemas por crear un proyecto para espiar el internet de los civiles, plan que fue llevado a juicio dado que violaba la libertad de las personas, siendo este un derecho fundamental en tal país, y aparte era ilegal ya que se estaba haciendo sin consentimiento alguno. El 32 % de los encuestados respondió con un "No" dado que no creían tal hecho o tenían desconocimiento sobre este.
+
+#### 21. Conspiraciones: experimentos en personas afroamericanas
+
+```{r, echo = FALSE}
 summary(encuesta$Q17_Experimentos)
 ```
-El 63% de los que respondieron la encuesta estuvieron a favor de que si era cierto que se hicieron experimentos en personas afroamericanas mediante la no aplicacion de penicilina a la poblacion que padecia de sifilis. El 37% restante de los encuestados no estuvieron de acuerdo a que tal hecho fuese cierto o desconocian de el.
 
-```{r}
+El 63 % de los que respondieron la encuesta contestaron que sí era cierto que se hicieron experimentos en personas afroamericanas mediante la no aplicación de penicilina a la población que padecia de sifilis. El 37% restante de los encuestados no estuvieron de acuerdo a que tal hecho fuese cierto o lo desconocían.
+
+
+#### 22. Conspiraciones: vacunas
+
+```{r, echo = FALSE}
 summary(encuesta$Q18_Vacunas)
 ```
-De un total de 100%, el 97% esta a favor de que las vacunas sirven y no son una conspiracion de las multinacionales farmaceuticas para enriquecerse a costillas de estas. Solo el 3% de los encuestados arremete contra las farmaceuticas por su enriquecimiento programado y la no naturalidad de las vacunas en el cuerpo humano.
 
-```{r}
+Entre todos los estudiantes del curso de EDAED,, el 97% está a favor de que las vacunas sirven y no son una conspiración de las multinacionales farmacéuticas para enriquecerse a costillas de estas. Solo el 3% de los encuestados arremete contra las farmacéuticas por su enriquecimiento programado y la no naturalidad de las vacunas en el cuerpo humano.
+
+#### 23. Conspiración: uso de evidencia falsa por parte del FBI
+
+```{r, echo = FALSE}
 summary(encuesta$Q19_EvidenciaFalsa)
 ```
-El 78% de los encuestados respondio acertadmente sobre la cuestion de que el FBI habia utilizado evidencia falsa en el siglo pasado para condenar inocentes. 22% restante estuvo en contra y se podria decir que estaban a favor del FBI por la rectitud y la imagen social que se tiene de ellos. 
 
-```{r}
+El 78% de los encuestados respondió acertadmente sobre la cuestión de que el FBI había utilizado evidencia falsa en el siglo pasado para condenar inocentes. Así pues, el 22% restante estuvo en contra de tal postura, considerando falso que el FBI estuviese implicado en acusaciones de tal gravedad.
+
+#### 24. Conspiraciones: ráfagas solares
+
+```{r, echo = FALSE}
 summary(encuesta$Q20_RafagasSolares)
 ```
-Llegando a una pregunta relacionada a la geologia, el 23% de los encuestados esta a favor de que el sol cumple una funcion en el movimiento de la tierra cuando se dan los temidos sismos, de hecho el 77% de los otros, dice que las rafagas solares no son los precursores de los sismos de la tierra dado que realmente estos ultimos se dan por la tectonica de las placas de la tierra y de actividad neotectonica de algunas partes de la tierra
 
-```{r}
+Llegando a una pregunta relacionada a la geologia, el 23 % de los encuestados está a favor de que el Sol cumple una función en el movimiento de la Tierra cuando se dan los temidos sismos, de hecho el 77 % de los estudiantes del curso, dice que las ráfagas solares no son los precursores de los sismos de la Tierra dado que realmente estos últimos se dan por la tectónica de las placas de la Tierra y de actividad neotectónica de algunas partes de nuestro planeta.
+
+#### 25. Conspiraciones: Tierra hueca
+
+```{r, echo = FALSE}
 summary(encuesta$Q21_TierraHueca)
 ```
-Casi el 100% de los estudiantes encuestados (94%) afirma rotundamente que la tierra en su forma fisica no es hueca y dentro de ella no existe una civilizacion oculta que los seres humanos tengamos prueba. Solamente el 6% restante afirma lo contrario. 
 
-```{r}
+Casi el la totalidad de los estudiantes encuestados (94 %) afirma rotundamente que la Tierra en su forma física no es hueca y dentro de ella no existe una civilización oculta que los seres humanos tengamos prueba. Solamente el 6% restante afirma lo contrario. 
+
+#### 26. Conspiraciones: Alienígenas
+
+```{r, echo = FALSE}
 summary(encuesta$Q22_alienigenas)
 ```
-La pregunta sobre los alienigenas hace cambiar un poco los resultados. Un poco mas de la mitad (64%) respondio "No" a la visita de los alienigenas a las civilizaciones antiguas y su influencia en la historia y aparte de que segun teorias, estos fueron los precursores de las construcciones de los megamonumentos que datan de la antiguedad. El 36% de los encuestados si esta totalmente de acuerdo al planteamiento de esta pregunta.
 
-```{r}
+La pregunta sobre los alienígenas hace cambiar un poco los resultados. Un poco más de la mitad (64%) respondió "No" a la visita de los alienígenas a las civilizaciones antiguas y su influencia en la historia y aparte de que, según teorias, estos fueron los precursores de las construcciones de los megamonumentos que datan de la antiguedad. El 36 % de los encuestados sí esta totalmente de acuerdo al planteamiento de esta pregunta.
+
+#### 27. Cambio climático.
+
+```{r, echo = FALSE}
 summary(encuesta$Q23_CambioClimatico)
 ```
-Esta pregunta es algo revolucionaria al dia de hoy ya que demasiadas personas afirman que la mayoria de industrias son las causantes del cambio climatico que ha venido sufriendo la tierra en los ultimos anos. Cabe destacar que el 84% de los encuestados pertenece a este tipo de personas que no estan de acuerdo con las metodologias de algunas industrias y gobiernos con la preservacion del medio ambiente. El 16% de los encuestados (14 personas) van en contra de estas personas y dicen lo que ha sufrido la tierra en los ultimos anos es algo natural.
+
+Esta pregunta es algo controversial a día de hoy, ya que demasiadas personas afirman que la mayoría de industrias son las causantes del cambio climático que ha venido sufriendo la Tierra en los ultimos años. Cabe destacar que el 84 % de los encuestados están en contra de la idea de que el cambio climático que ocurre en la actualidad se dé por procesos naturales. En cambio, El 16 % restante de los encuestados (equivalente a 14 personas) van en contra de esta posición y afirman que lo que ha sufrido la Tierra en los últimos años se debe a un proceso natural.
 
