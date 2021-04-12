@@ -22,7 +22,7 @@ library(tidyverse)
 
 ```{r}
 ## Lectura de una base de datos tipo ".csv"
-encuesta <- read.csv("encuesta1.csv")
+encuesta <- read.csv("encuesta1.csv", fileEncoding = "UTF-8")
 ```
 
 ## Depuración y adecuación de la base de datos.
@@ -361,22 +361,16 @@ porque los intervalos de confianza se superponen. Por lo tanto no se
 puede inferir que este comportamiento es generalizado.
 
 Sorprende la tendencia del promedio y la mediana del grupo de estadística
-que han istalado los dos programas relativamente bajo, contrario a lo
+que han instalado los dos programas relativamente bajo, contrario a lo
 que se esperaba. Esto indica que posiblemente hayan otros factores que
 puedan estar asociado al desempeño académico y no solo el hecho de
 estar al día con la clase en cuanto a la instalación del software. 
 
 Se puede concluir que aunque no haya diferencia significativa entre los
 grupos si hay una tendencia a tener mejor desempeño en el el PAPA los
-estudiantes de estadístca que tienen instalado solo el R, mientras que
+estudiantes de estadística que tienen instalado solo el R, mientras que
 los que no lo han instalado los programas el desempeño académico tiene
 a se más bajo sin que haya diferencia significativa. 
-
-Hola mundo
-
-Hola, Miguel, ¿cómo vas? :]
-
-
 
 
 

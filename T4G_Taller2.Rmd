@@ -25,7 +25,7 @@ library(tidyverse)
 ```
 
 ```{r, include=FALSE}
-encuesta <- read.csv("encuesta1.csv")
+encuesta <- read.csv("encuesta1.csv", fileEncoding = "UTF-8")
 ```
 
 ```{r, include=FALSE}
@@ -42,7 +42,7 @@ glimpse(encuesta)
 ```
 ## Introducción
 
-La estadística es una herramienta bastante útil y con una creciente demanda, pues estamos constantemente rodeados por millones de datos que pueden ser traducidos a información importante si son tratados de la manera adecuada, y para ello es imprescindible comenzar con una fase exploratoria y descriptiva en la cual se comienzan a manipular los datos, entenderlos, realizar procesos de depuración de ser necesario y generar resúmenes estadísticos y gráficos, entre otros, con la finalidad de comprenderlos mejor y poder realizar de forma más adecuada otras actividades como las inferenciales y las p#8b1700ictivas.
+La estadística es una herramienta bastante útil y con una creciente demanda, pues estamos constantemente rodeados por millones de datos que pueden ser traducidos a información importante si son tratados de la manera adecuada, y para ello es imprescindible comenzar con una fase exploratoria y descriptiva en la cual se comienzan a manipular los datos, entenderlos, realizar procesos de depuración de ser necesario y generar resúmenes estadísticos y gráficos, entre otros, con la finalidad de comprenderlos mejor y poder realizar de forma más adecuada otras actividades como las inferenciales y las predictivas.
 
 Así, lenguajes de programación como R, con sus múltiples librerías, se convierten en una gran opción con la cual se puede realizar de forma ágil y elegante la exploración y descripción de los datos. Es por ello que en este trabajo se pondrá en práctica los conceptos, metodologías y las funciones y tips de R aprendidas en el curso de **Estadística Descriptiva y Análisis Exploratorio de Datos** (en adelante EDAED) a partir de una encuesta realizada a los estudiantes de esta materia.
 
@@ -52,7 +52,7 @@ Es importante aclarar que este trabajo ha sido planteado para que pueda ser leí
 
 Para este proceso se tomó cada una de las variables de la base de datos y se estudió si los valores incluidos tenían sentido en su propio contexto. Además, **se crearon algunas variables adicionales** con el fin de analizar interrogantes que no podrían resolverse directamente con las variables existentes o para facilitar la comprensión de algunas otras. Es importante anotar que solo se hará mención de aquellas variables en las que se realizó alguna depuración o que fueron introducidas. También se mencionarán algunos cambios en la presentación de algunas variables categóricas de cara a la presentación al lector.
 
-Es importante aclarar que en este trabajo no se le asignaron valores a los diferentes *NA* que se hayaron y se optó más bien por realizar los procesos descriptivos con aquellos valores definidos; esto con la finalidad de no alterar la información que se pudiese obtener a partir de ellas y no introducir posibles errores mediante una depuración equívoca.
+Es importante aclarar que en este trabajo no se le asignaron valores a los diferentes *NA* que se hallaron y se optó más bien por realizar los procesos descriptivos con aquellos valores definidos; esto con la finalidad de no alterar la información que se pudiese obtener a partir de ellas y no introducir posibles errores mediante una depuración equívoca.
 
 ### Primera sección de la encuesta: preguntas de caracterización
 
@@ -73,13 +73,6 @@ encuesta$Q01_Genero[encuesta$Q01_Genero == '3 : Otro'] <- 'Otro'
 encuesta$Q01_Genero <- as.factor(encuesta$Q01_Genero)
 levels(encuesta$Q01_Genero)
 summary(encuesta$Q01_Genero)
-```
-
-
-```{r, , include=FALSE}
-# Para GÉNERO
-summary(encuesta$Q01_Genero)
-# ¡Okay!
 ```
 
 ```{r, include=FALSE}
@@ -123,17 +116,17 @@ encuesta$tiempo_usado <- round(encuesta$tiempo_usado, 2)
 
 ##### **Carrera:**
 
-Dado el formato que toman los diferentes ordenadores, es posible que existan caracteres especiales que no son vistos de forma adecuada, por lo que se realiza la conversión de los nombres de las carreras que se observaban con carácteres extraños para que se vean legibles. También se eliminó el número asociado a cada una de las respuestas, pues este no está dando información adicional o relevante, considerando especialmente que se trata de variables categóricas. Así, por ejemplo, se cambio ***'1 : MatemÃ¡ticas'*** por ***'Matemáticas'***.
+Se eliminó el número asociado a cada una de las respuestas, pues este no está dando información adicional o relevante, considerando especialmente que se trata de variables categóricas. Así, por ejemplo, se cambio ***'1 : Matemáticas'*** por ***'Matemáticas'***.
 
 ```{r, include = FALSE}
 #Cambio de nombre de los pregrados  
 encuesta$Q03_Carrera <- as.character(encuesta$Q03_Carrera)
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '1 : MatemÃ¡ticas'] <- 'Matemáticas'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '2 : IngenierÃ­a de sistemas e informÃ¡tica'] <- 'Ingeniería de sistemas e informática'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '3 : EstadÃ­stica'] <- 'Estadística'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '4 : IngenierÃ­a administrativa'] <- 'Ingeniería administrativa'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '5 : IngenierÃ­a fÃ­sica'] <- 'Ingeniería física'
-encuesta$Q03_Carrera[encuesta$Q03_Carrera == '6 : IngenierÃ­a industrial'] <- 'Ingeniería industrial'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '1 : Matemáticas'] <- 'Matemáticas'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '2 : Ingeniería de sistemas e informática'] <- 'Ingeniería de sistemas e informática'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '3 : Estadística'] <- 'Estadística'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '4 : Ingeniería administrativa'] <- 'Ingeniería administrativa'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '5 : Ingeniería física'] <- 'Ingeniería física'
+encuesta$Q03_Carrera[encuesta$Q03_Carrera == '6 : Ingeniería industrial'] <- 'Ingeniería industrial'
 encuesta$Q03_Carrera[encuesta$Q03_Carrera == '7 : Otra'] <- 'Otra'
 encuesta$Q03_Carrera <- as.factor(encuesta$Q03_Carrera)
 levels(encuesta$Q03_Carrera)
@@ -343,20 +336,20 @@ summary(encuesta$Q14_RecursosInformaticos..Celular.con.datos)
 
 
 ```{r, include = FALSE}
-encuesta$Q14_RecursosInformaticos..PortÃ.til.propio <- as.character(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
-encuesta$Q14_RecursosInformaticos..PortÃ.til.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.propio == '1'] <- 'Si'
-encuesta$Q14_RecursosInformaticos..PortÃ.til.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.propio == '0'] <- 'No'
-encuesta$Q14_RecursosInformaticos..PortÃ.til.propio <- as.factor(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
-summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
+encuesta$Q14_RecursosInformaticos..Portátil.propio <- as.character(encuesta$Q14_RecursosInformaticos..Portátil.propio)
+encuesta$Q14_RecursosInformaticos..Portátil.propio[encuesta$Q14_RecursosInformaticos..Portátil.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Portátil.propio[encuesta$Q14_RecursosInformaticos..Portátil.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Portátil.propio <- as.factor(encuesta$Q14_RecursosInformaticos..Portátil.propio)
+summary(encuesta$Q14_RecursosInformaticos..Portátil.propio)
 ```
 
 
 ```{r, include = FALSE}
-encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio <- as.character(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
-encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio == '1'] <- 'Si'
-encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio[encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio == '0'] <- 'No'
-encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio <- as.factor(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
-summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
+encuesta$Q14_RecursosInformaticos..Portátil.no.propio <- as.character(encuesta$Q14_RecursosInformaticos..Portátil.no.propio)
+encuesta$Q14_RecursosInformaticos..Portátil.no.propio[encuesta$Q14_RecursosInformaticos..Portátil.no.propio == '1'] <- 'Si'
+encuesta$Q14_RecursosInformaticos..Portátil.no.propio[encuesta$Q14_RecursosInformaticos..Portátil.no.propio == '0'] <- 'No'
+encuesta$Q14_RecursosInformaticos..Portátil.no.propio <- as.factor(encuesta$Q14_RecursosInformaticos..Portátil.no.propio)
+summary(encuesta$Q14_RecursosInformaticos..Portátil.no.propio)
 ```
 
 
@@ -413,7 +406,15 @@ summary(encuesta$Q14_RecursosInformaticos..Tablet.con.datos.)
 
 ### Segunda sección: conspiraciones
 
-En esta sección se tienen variables dicotómicas que no requieren ninguna depuración conforme al proceso de chequeo realizado.
+Para el análisis exploratorio se decidió crear una nueva variable llamada ***numero_conspiraciones***, donde se almacenará el número de conspiraciones falsas en que creen los encuestados. El máximo valor que tendrá esta variable es de 5, mientras que el mínimo será de 0. Después de la creación de esta variable se reemplazan las respuestas individuales de conspiraciones de la siguiente manera: Un "1" por un ***"Si"*** y un "0" por un ***"No"***. Esto es simplemente para facilitar su respectivo análisis descriptivo.
+
+```{r, include = FALSE}
+# Creación de la variable numero_conspiraciones
+# Se calculó sumando los unos y ceros almacenados en las variables correspondientes a las conspiraciones falsas.
+encuesta <- encuesta %>% 
+  mutate(numero_conspiraciones = Q15_Alunizaje + Q18_Vacunas + Q20_RafagasSolares + Q21_TierraHueca + Q22_alienigenas + Q23_CambioClimatico)
+encuesta$numero_conspiraciones <- as.factor(encuesta$numero_conspiraciones)
+```
 
 ```{r, include = FALSE}
 encuesta$Q15_Alunizaje <- as.character(encuesta$Q15_Alunizaje)
@@ -422,7 +423,6 @@ encuesta$Q15_Alunizaje[encuesta$Q15_Alunizaje == '0'] <- 'No'
 encuesta$Q15_Alunizaje <- as.factor(encuesta$Q15_Alunizaje)
 summary(encuesta$Q15_Alunizaje)
 ```
-
 
 ```{r, include = FALSE}
 encuesta$Q16_EspionajeInternet <- as.character(encuesta$Q16_EspionajeInternet)
@@ -509,7 +509,7 @@ summary(encuesta$Q24_area)
 
 ##### **Porcentaje de estudiantes que se cree que respondieron bien la pregunta del área:**
 
-Para esta pregunta, se asume que el valor que debio haber sido ingresado era un número del cero al cien que representaba un porcentaje. En este sentido, si bien un valor menor a uno tendría a cero (pues está dentro del rango permitido de valores), este no tiene mucho sentido considerando el tamaño del grupo. Así, se puede pensar que la persona con respuesta 2461 que introdujo como respuesta en realidad quería plantear que un diez por ciento (10 %) de los estudiantes del EDAED contestarían bien tal pregunta.
+Para esta pregunta, se asume que el valor que debió haber sido ingresado era un número del cero al cien que representaba un porcentaje. En este sentido, si bien un valor menor a uno tendría a cero (pues está dentro del rango permitido de valores), este no tiene mucho sentido considerando el tamaño del grupo. Así, se puede pensar que la persona con respuesta 2461 que introdujo como respuesta en realidad quería plantear que un diez por ciento (10 %) de los estudiantes del EDAED contestarían bien tal pregunta.
 
 ```{r, include = FALSE}
 summary(encuesta$Q25_PorcentArea)
@@ -522,6 +522,18 @@ encuesta %>%
 
 ```{r, include = FALSE}
 encuesta$Q25_PorcentArea[encuesta$Q25_PorcentArea < 1 & !is.na(encuesta$Q25_PorcentArea)] <- 10
+```
+
+##### **Divisores**
+
+Dado que esta pregunta era de múltiple respuesta y tenía tres opciones de respuesta, además que las tres opciones eran correctas y por lo tanto para haber respondido acertadamente es su totalidad había que elegir las tres opciones, se decidió crear una nueva variable llamada ***opciones_divisor*** para así ver cuántos estudiantes contestaron correctamente esta pregunta. La variable almacenará la cantidad de opciones que los estudiantes eligieron, siendo la mínima cantidad de 0 y la máxima cantidad de 3.
+
+```{r, include = FALSE}
+# Creación de la variable opciones_divisor
+# Se calculó sumando los unos y ceros almacenados en las variables correspondientes a las opciones, un uno cuando la opción fue seleccionada, o un cero si no fue seleccionada.
+encuesta <- encuesta %>% 
+  mutate(opciones_divisor = Q26_Divisor..f.es.divisor.de.g.2. + Q26_Divisor..f.es.divisor.de.gh. + Q26_Divisor..f.es.divisor.de.h.g)
+encuesta$opciones_divisor <- as.factor(encuesta$opciones_divisor)
 ```
 
 ##### **Porcentaje de estudiantes que se cree que respondieron bien la pregunta de álgebra:**
@@ -873,9 +885,9 @@ Solamente tres estudiantes tenían acceso a tablet con datos, mientras que otros
 
 ### Segunda parte de la encuesta
 
-En esta sección se indagarán los resultados relacionados con diversas conspiraciones, siendo algunas falsas y otras verdaderas (debidamente documentadas) y las posiciones de los estudiantesd del curso de EDADED respecto a estas.
+En esta sección se indagarán los resultados relacionados con diversas conspiraciones, siendo algunas falsas y otras verdaderas (debidamente documentadas) y las posiciones de los estudiantes del curso de EDAED respecto a estas.
 
-#### 19. Conspiraciones: alunizaje
+#### 19. Conspiraciones: Alunizaje
 
 ```{r, echo = FALSE}
 summary(encuesta$Q15_Alunizaje)
@@ -883,7 +895,7 @@ summary(encuesta$Q15_Alunizaje)
 
 Con respecto a la pregunta que se habia planteado sobre si el hombre había llegado realmente a la Luna o si era un montaje de HollyWood, once personas respondieron erróneamente dicha pregunta, ya que la respuesta correcta fue que el hombre sí había llegado a la Luna, y en este sentido,  76 estudiantes acertaron este interrogante.
 
-#### 20. Conspiraciones: espionaje en Internet
+#### 20. Conspiraciones: Espionaje en Internet
 
 ```{r, echo = FALSE}
 summary(encuesta$Q16_EspionajeInternet)
@@ -891,7 +903,7 @@ summary(encuesta$Q16_EspionajeInternet)
 
 El 68% de los encuestados (59 estudiantes) estuvieron de acuerdo con que la Agencia de Seguridad Nacional de Estados Unidos estuvo en problemas por crear un proyecto para espiar el internet de los civiles, plan que fue llevado a juicio dado que violaba la libertad de las personas, siendo este un derecho fundamental en tal país, y aparte era ilegal ya que se estaba haciendo sin consentimiento alguno. El 32 % de los encuestados respondió con un "No" dado que no creían tal hecho o tenían desconocimiento sobre este.
 
-#### 21. Conspiraciones: experimentos en personas afroamericanas
+#### 21. Conspiraciones: Experimentos en personas afroamericanas
 
 ```{r, echo = FALSE}
 summary(encuesta$Q17_Experimentos)
@@ -900,7 +912,7 @@ summary(encuesta$Q17_Experimentos)
 El 63 % de los que respondieron la encuesta contestaron que sí era cierto que se hicieron experimentos en personas afroamericanas mediante la no aplicación de penicilina a la población que padecia de sifilis. El 37% restante de los encuestados no estuvieron de acuerdo a que tal hecho fuese cierto o lo desconocían.
 
 
-#### 22. Conspiraciones: vacunas
+#### 22. Conspiraciones: Vacunas
 
 ```{r, echo = FALSE}
 summary(encuesta$Q18_Vacunas)
@@ -908,15 +920,15 @@ summary(encuesta$Q18_Vacunas)
 
 Entre todos los estudiantes del curso de EDAED,, el 97% está a favor de que las vacunas sirven y no son una conspiración de las multinacionales farmacéuticas para enriquecerse a costillas de estas. Solo el 3% de los encuestados arremete contra las farmacéuticas por su enriquecimiento programado y la no naturalidad de las vacunas en el cuerpo humano.
 
-#### 23. Conspiración: uso de evidencia falsa por parte del FBI
+#### 23. Conspiración: Uso de evidencia falsa por parte del FBI
 
 ```{r, echo = FALSE}
 summary(encuesta$Q19_EvidenciaFalsa)
 ```
 
-El 78% de los encuestados respondió acertadmente sobre la cuestión de que el FBI había utilizado evidencia falsa en el siglo pasado para condenar inocentes. Así pues, el 22% restante estuvo en contra de tal postura, considerando falso que el FBI estuviese implicado en acusaciones de tal gravedad.
+El 78% de los encuestados respondió acertadamente sobre la cuestión de que el FBI había utilizado evidencia falsa en el siglo pasado para condenar inocentes. Así pues, el 22% restante estuvo en contra de tal postura, considerando falso que el FBI estuviese implicado en acusaciones de tal gravedad.
 
-#### 24. Conspiraciones: ráfagas solares
+#### 24. Conspiraciones: Ráfagas solares
 
 ```{r, echo = FALSE}
 summary(encuesta$Q20_RafagasSolares)
@@ -948,3 +960,72 @@ summary(encuesta$Q23_CambioClimatico)
 
 Esta pregunta es algo controversial a día de hoy, ya que demasiadas personas afirman que la mayoría de industrias son las causantes del cambio climático que ha venido sufriendo la Tierra en los ultimos años. Cabe destacar que el 84 % de los encuestados están en contra de la idea de que el cambio climático que ocurre en la actualidad se dé por procesos naturales. En cambio, El 16 % restante de los encuestados (equivalente a 14 personas) van en contra de esta posición y afirman que lo que ha sufrido la Tierra en los últimos años se debe a un proceso natural.
 
+### Tercera parte de la encuesta
+
+En esta sección final se presenta el análisis descriptivo de las últimas preguntas de la encuesta, preguntas que respondieron los estudiantes del curso de EDAED y que tienen que ver con temas geométricos y algebraicos, además del porcentaje estimado de estudiantes que ellos creían que responderían correctamente a las preguntas.
+
+#### 24. Área de la región sombreada
+
+```{r, echo = FALSE}
+summary(encuesta$Q24_area)
+```
+
+Se le preguntó a los estudiantes cuál era el área de cierta región sombreada de un circulo, donde el radio del círculo es de 6. La respuesta correcta es "4*pi", por lo que notamos que 39 de los encuestados (lo que corresponde al 45%) respondieron correctamente a la pregunta. Como ya se analizó antes, siendo que los estudiantes del curso son de carreras afines a las matemáticas, sorprende la proporción tan baja de aquellos que respondieron correctamente.
+
+#### 25. Porcentaje de área sombreada
+
+```{r, echo = FALSE}
+summary(encuesta$Q25_PorcentArea)
+```
+
+Esta vez se le preguntó a los estudiantes por el porcentaje del curso de EDAED que ellos consideraban había contestado acertadamente la pregunta del área sombreada. Vemos que en promedio el porcentaje que estimaron es del 52%, que es un porcentaje muy cercano al real que fue de 45%. Esto se comprueba en el siguiente histograma, donde se ve que una porción grande del curso acertó al estimar este porcentaje.
+
+```{r, echo = FALSE}
+hist(encuesta$Q25_PorcentArea, col="#002e8b",
+     main = "Porcentaje de estudiantes que los encuestados consideran que habían\n contestado acertadamente la pregunta del área sombreada",
+     ylab = "Frecuencia", xlab = "Porcentaje")
+```
+
+#### 26. Divisor
+
+Se le hizo a los estudiantes la siguiente pregunta: "Si f, g y h son todos número enteros positivos y f es divisor de g y g es divisor de h entonces marque las sentencias que son correctas", donde la primera opción fue "f es divisor de g^2", la segunda "f es divisor de gh" y la tercera "f es divisor de h-g". Como se dijo anteriormente, dado que las tres opciones son correctas se optó por la creación de una nueva variable que almacenara la cantidad de opciones que seleccionaron los estudiantes, y se obtuvo lo siguiente:
+
+```{r, echo = FALSE}
+summary(encuesta$opciones_divisor)
+```
+
+Como vemos, el número de estudiantes que respondieron correctamente la pregunta es sí fue de 20, lo que corresponde al 23% de los estudiantes del curso de EDAED y, al igual que con la pregunta del área sombreada, es un porcentaje sorprendentemente bajo dadas las carreras a las que pertenecen dichos estudiantes.
+
+#### 27. Porcentaje de divisor
+
+```{r, echo = FALSE}
+summary(na.omit(encuesta$Q27_PorcentDivisor))
+```
+
+Al igual que con la pregunta del área sombreada, se le preguntó a los encuestados por el porcentaje de estudiantes del curso de EDAED que ellos consideraban había contestado acertadamente la pregunta del divisor. Vemos que en promedio el porcentaje que estimaron es del 54%, que es un porcentaje alejado del real que fue de 23%. Esto se comprueba en el siguiente histograma, donde se ve que una gran parte del curso consideró un porcentaje de entre 40 y 80 por ciento.
+
+```{r, echo = FALSE}
+hist(encuesta$Q27_PorcentDivisor, col="#002e8b",
+     main = "Porcentaje de estudiantes que los encuestados consideran que\n contestaron correctamente la pregunta sobre los divisores",
+     ylab = "Frecuencia", xlab = "Porcentaje")
+```
+
+## Análisis exploratorio - Cruces bivariados
+
+### Primera pregunta
+
+***¿Existe alguna relación entre la creencia en diversas conspiraciones falsas y el PAPA?***
+
+Como grupo, pensamos que aquellos estudiantes que suelen creer en conspiraciones falsas pueden tener un PAPA menor a aquellos estudiantes que no creen en estas conspiraciones. También se piensa que, dentro de los que creen en conspiraciones falsas, tendrán un peor PAPA aquellos estudiantes que crean en una mayor cantidad de las conspiraciones por las que se preguntó en la encuesta.
+
+#### Resumen numérico
+
+```{r, echo = FALSE}
+table(encuesta$numero_conspiraciones,encuesta$Q08_PAPA)
+```
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
