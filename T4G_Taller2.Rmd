@@ -1010,7 +1010,7 @@ hist(encuesta$Q27_PorcentDivisor, col="#002e8b",
      ylab = "Frecuencia", xlab = "Porcentaje")
 ```
 
-## Análisis exploratorio - Cruces bivariados
+## Análisis exploratorio. Cruces bivariados
 
 ### Primera pregunta
 
@@ -1069,7 +1069,7 @@ bla bla bla
 
 
 
-## Análisis exploratorio - Cruces multivariados
+## Análisis exploratorio. Cruces multivariados
 
 ### Cuarta pregunta
 
