@@ -90,7 +90,6 @@ encuesta %>%
 encuesta$Q08_PAPA[encuesta$Q08_PAPA == 45 & !is.na(encuesta$Q08_PAPA)] <- 4.5
 ```
 
-
 ```{r}
 encuesta <- encuesta %>% 
   mutate(puntaje_pregunta2 = 
@@ -103,10 +102,6 @@ t_p2
 pt_p2 <- t_p2 / sum(t_p2) * 100
 pt_p2
 ```
-
-
-
-
 
 ```{r}
 # Se construye una nueva variable que indica si se ha instalado el 
@@ -122,8 +117,6 @@ encuesta <-  encuesta %>%
   mutate(instala_prog = Q11_R + Q12_RStudio * 2,
          Carrera_instala  = factor(paste(Q03_Carrera, instala_prog)))
 ```
-
-
 
 ## Análisis univariado.
 
@@ -153,14 +146,10 @@ text(1.3, cumsum(m_gen_p) - m_gen_p/2,
      adj = 0)
 ```
 
-
 ```{r}
 pie(t_gen_p, labels = paste(names(t_gen_p), round(t_gen_p, 1), "%"),
     col = c("blue", "red", "green3"))
 ```
-
-
-
 
 ### Edad.
 
@@ -194,8 +183,6 @@ par(paramAnt)
 
 ```
 
-
-
 ```{r}
 promedioEdad <- mean(encuesta$Edad)
 medianaEdad <- median(encuesta$Edad)
@@ -223,17 +210,11 @@ arrows(promedioEdad -  desv_Est_Edad / sqrt(nrow(encuesta)), 1,
          col = "red")
 ```
 
-
-
-
 ## Análisis bivariado.
-
-
 
 ```{r}
 with(encuesta, plot(Q10_Estrato, Q08_PAPA, notch = TRUE))
 ```
-
 
 ```{r}
 encuesta_Estrato1 <- encuesta %>% 
@@ -242,16 +223,13 @@ dotchart(encuesta_Estrato1$Q08_PAPA)
 summary(encuesta_Estrato1$Q08_PAPA)
 ```
 
-
 ```{r}
 with(encuesta, plot(Q01_Genero, Q08_PAPA, notch = TRUE))
 ```
 
-
 ```{r}
 with(encuesta, scatter.smooth(tiempo_usado, Q08_PAPA))
 ```
-
 
 ```{r}
 with(encuesta, plot(Q27_PorcentDivisor))
@@ -291,7 +269,6 @@ mejor desempeño académico en comparación con los que no lo hicieron.
 También se cree que los estudiantes de estadística son los que en
 su mayoría han instalado el R y el RStudio. 
 
-
 ### Resumen numérico
 ```{r}
 encuesta_sist_estad <- encuesta %>% 
@@ -311,6 +288,7 @@ encuesta_sist_estad_resumen %>% data.frame()
 ```
 
 ### Gráfica exploratoria.
+
 ```{r, fig.height=8, fig.width=8}
 op <- par(no.readonly = TRUE)
 par(mar = op$mar + c(15, 0, 0, 0))
@@ -371,9 +349,3 @@ grupos si hay una tendencia a tener mejor desempeño en el el PAPA los
 estudiantes de estadística que tienen instalado solo el R, mientras que
 los que no lo han instalado los programas el desempeño académico tiene
 a se más bajo sin que haya diferencia significativa. 
-
-
-
-
-
-

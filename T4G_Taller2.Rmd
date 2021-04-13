@@ -1021,8 +1021,94 @@ Como grupo, pensamos que aquellos estudiantes que suelen creer en conspiraciones
 #### Resumen numérico
 
 ```{r, echo = FALSE}
-table(encuesta$numero_conspiraciones,encuesta$Q08_PAPA)
+intervalos_PAPA <- cut(encuesta$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+table(intervalos_PAPA, encuesta$numero_conspiraciones, dnn = c("Intervalos del PAPA","# Conspiraciones"))
 ```
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+### Segunda pregunta
+
+***BLA BLA BLA***
+
+bla bla bla
+
+#### Resumen numérico
+
+
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+### Tercera pregunta
+
+***BLA BLA BLA***
+
+bla bla bla
+
+#### Resumen numérico
+
+
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+## Análisis exploratorio - Cruces multivariados
+
+### Cuarta pregunta
+
+***¿Son los estudiantes con mayor avance en la carrera los que respondieron mejor las preguntas de álgebra y geometría?***
+
+Inicialmente se cree que aquellos estudiantes que tengan un mayor avance en su carrera hayan respondido correctamente las preguntas sobre el área sombreada y los divisores; en otras palabras, se piensa que aquellos que tengan un menor avance en su carreras habrán respondido incorrectamente dichas preguntas. Recordar que la respuesta correcta del área sombreada es ***"4*pi"***, además que solamente quienes hallan seleccionado las tres opciones en la pregunta de los divisores habrán respondido correctamente en su totalidad esa pregunta.
+
+#### Resumen numérico
+
+```{r, echo = FALSE}
+#respuestas_correctas <- encuesta$Q24_area[encuesta$Q24_area == "4*pi"]
+encuesta$Q24_area[!is.na(encuesta$Q24_area) & is.na(encuesta$V51_Avance)] <- NA
+intervalos_avance <- cut(encuesta$V51_Avance,c(10,20,30,40,50,60,70,80),include.lowest=TRUE)
+table(intervalos_avance, encuesta$Q24_area, dnn = c("Intervalos de avance en la carrera","Selección área sombreada"))
+```
+
+```{r, echo = FALSE}
+intervalos_avance <- cut(encuesta$V51_Avance,c(10,20,30,40,50,60,70,80),include.lowest=TRUE)
+
+table(intervalos_avance,encuesta$opciones_divisor, dnn = c("Intervalos de avance en la carrera","Número de opciones"))
+```
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+### Quinta pregunta
+
+***BLA BLA BLA***
+
+bla bla bla
+
+#### Resumen numérico
+
+
 
 #### Gráfica exploratoria
 
