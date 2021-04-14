@@ -1360,6 +1360,29 @@ Pensamos que tal vez las personas que más se destacan en promedio y puntaje en 
 
 Se podría esperar que una persona que vive en el Área Metropolitana del Valle de Aburrá y que tenga buenos ingresos económicos tiene más posibilidades de mejorar su promedio académico, ya que se encuentra más cerca de la Universidad y tiene más posibilidades de asesorías privadas o cursos para mejorar su promedio, mientras que alguien fuera del Valle de Aburrá con pocos ingresos le es mucho más difícil adquirir estos privilegios.
 
+```{r}
+summary(encuesta$Q08_PAPA)
+
+summary(encuesta$Q10_Estrato)
+
+summary(encuesta$Q09_EnAreaMetropolitana)
+```
+
+```{r}
+plot(encuesta$Q10_Estrato, encuesta$Q08_PAPA,
+    main = "Estrato socioeconomico VS PAPA", 
+    xlab = "Estrato socioeconomico", 
+    ylab = "PAPA")
+```
+
+```{r}
+plot(encuesta$Q09_EnAreaMetropolitana, encuesta$Q08_PAPA,
+    main = "Area Metropolitana VS PAPA", 
+    xlab = "Estar en el area metropolitana", 
+    ylab = "PAPA")
+```
+
+
 #### Resumen numérico
 
 
@@ -1573,7 +1596,21 @@ asieh
 #### Gráfica exploratoria
 
 
+#### Análisis
 
+
+
+
+### Tienen mejor PAPA aquellos estudiantes que son de estrato socioeconomico alto y que residen en el AMVA en comparacion con aquellos que son de estrato socioeconomico bajo y habitan por fuera de este?
+
+```{r}
+
+```
+
+
+
+
+<<<<<<< Updated upstream
 #### Análisis
 
 
@@ -1603,3 +1640,5 @@ Bla bla bla x3
   - Cosas del icfes: https://laquecorresponda.com.co
   - Más cibergrafías que hayan usado...
  
+=======
+>>>>>>> Stashed changes
