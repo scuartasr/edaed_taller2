@@ -1163,9 +1163,9 @@ Como se ve en las gráficas, hay tres estudiantes con el mejor PAPA del curso (U
 
 ### Tercera pregunta
 
-***BLA BLA BLA***
+***olo***
 
-bla bla bla
+
 
 #### Resumen numérico
 
@@ -1250,10 +1250,10 @@ Es interesante que al mirar los resúmenes numéricos se ve que en promedio aque
 **(Señores estadísticos, ayuden por favor completando con el análisis de las dos boxplots anteriores. Muchas gracias)**
 
 ### Quinta pregunta
+  
+***¿Hay alguna relación entre la edad, el PAPA y el género de los estudiantes?***
 
-***BLA BLA BLA***
-
-bla bla bla
+Como grupo, consideramos que seguramente mientras más edad tenga el estudiante, más alto será su promedio, ya que mientras más madurez presente la persona más responsabilidad obtiene, especialmente si son mujeres, lo cual esperemos se vea reflejado en cada gráfica.
 
 #### Resumen numérico
 
@@ -1264,3 +1264,97 @@ bla bla bla
 
 
 #### Análisis
+
+
+
+### Sexta pregunta
+
+***¿Aquellos estudiantes con PAPA alto y que obtuvieron un buen puntaje en sus pruebas saber confiaron más en sus compañeros y estimaron que un alto porcentaje del curso respondería correctamente las preguntas de álgebra y geometría?***
+
+Pensamos que, tal vez las personas que más se destacan en promedio y puntaje en sus pruebas saber, tienen un alta estima en su grupo, y consideran que el grupo tuvo un buen desempeño en las preguntas de álgebra y geometría
+
+#### Resumen numérico
+
+
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+### Séptima pregunta
+
+***oliwiw uwu***
+
+a
+
+#### Resumen numérico
+
+
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+### Octava pregunta
+
+***Pregunta***
+
+ola
+
+#### Resumen numérico
+
+
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+### Novena pregunta
+
+***Pregunta***
+
+O:
+
+#### Resumen numérico
+
+
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+### Décima pregunta
+
+***Pregunta Final***
+
+asieh
+
+#### Resumen numérico
+
+
+
+#### Gráfica exploratoria
+
+
+
+#### Análisis
+
+
+
+ 
