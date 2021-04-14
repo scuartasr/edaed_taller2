@@ -5,7 +5,6 @@ author:
   - Danilo Isaac García Castaño
   - David Mateo García Vallejo
   - Luis Miguel Martínez Escobar
-  - Sebastián Yepes Sánchez
 date: "Miércoles, 14 de abril de 2021"
 output: 
   html_document: 
@@ -1021,35 +1020,146 @@ Como grupo, pensamos que aquellos estudiantes que suelen creer en conspiraciones
 #### Resumen numérico
 
 ```{r, echo = FALSE}
+conspiraciones0 <- encuesta %>%
+  filter(numero_conspiraciones == "0")
+conspiraciones1 <- encuesta %>%
+  filter(numero_conspiraciones == "1")
+conspiraciones2 <- encuesta %>%
+  filter(numero_conspiraciones == "2")
+conspiraciones3 <- encuesta %>%
+  filter(numero_conspiraciones == "3")
+conspiraciones4 <- encuesta %>%
+  filter(numero_conspiraciones == "4")
+conspiraciones5 <- encuesta %>%
+  filter(numero_conspiraciones == "5")
+
 intervalos_PAPA <- cut(encuesta$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
-table(intervalos_PAPA, encuesta$numero_conspiraciones, dnn = c("Intervalos del PAPA","# Conspiraciones"))
+table(encuesta$numero_conspiraciones, intervalos_PAPA,dnn = c("# Conspiraciones","Intervalos del PAPA"))
+```
+
+###### Resumen del PAPA para la creencia en 0 conspiraciones falsas:
+
+```{r, echo = FALSE}
+summary(conspiraciones0$Q08_PAPA)
+```
+
+###### Resumen del PAPA para la creencia en 1 conspiración falsa:
+
+```{r, echo = FALSE}
+summary(conspiraciones1$Q08_PAPA)
+```
+
+###### Resumen del PAPA para la creencia en 2 conspiraciones falsas:
+
+```{r, echo = FALSE}
+summary(conspiraciones2$Q08_PAPA)
+```
+
+###### Resumen del PAPA para la creencia en 3 conspiraciones falsas:
+
+```{r, echo = FALSE}
+summary(conspiraciones3$Q08_PAPA)
+```
+
+###### Resumen del PAPA para la creencia en 4 conspiraciones falsas:
+
+```{r, echo = FALSE}
+summary(conspiraciones4$Q08_PAPA)
+```
+
+###### Resumen del PAPA para la creencia en 5 conspiraciones falsas:
+
+```{r, echo = FALSE}
+summary(conspiraciones5$Q08_PAPA)
 ```
 
 #### Gráfica exploratoria
 
-
+```{r, echo = FALSE, fig.height=6, fig.width=8}
+plot(encuesta$numero_conspiraciones, encuesta$Q08_PAPA, main = "Conspiraciones falsas vs PAPA", xlab = "Número de conspiraciones falsas", ylab = "PAPA")
+```
 
 #### Análisis
 
+Como vemos tanto en las gráficas como en las tablas, en general el PAPA empieza a disminuir a partir de creer en 4 o más de las conspiraciones consideradas como falsas. Sin embargo, para la creencia en 1, 2 y hasta 3 conspiraciones consideradas falsas, el PAPA promedio se sigue manteniendo lo suficientemente alto. Es de notar la poca población para la creencia en 3 o más conspiraciones falsas, por lo que no se logra apreciar de forma general que el número de conspiraciones falsas en que creen los estudiantes influya negativamente en su respectivo PAPA. Además, gracias a los resúmenes numéricos, se puede decir que 5 de los 7 estudiantes con un PAPA de clasificación "Superior" (Entre 4.5 y 5) no creen en ninguna de las conspiraciones consideradas como falsas... 
 
+**(Señores estadísticos, ayuden por favor completando con el análisis de la boxplot anterior. Muchas gracias)**
 
 ### Segunda pregunta
 
-***BLA BLA BLA***
+***¿Tienen los estudiantes de estratos superiores (cuatro, cinco y seis) un mejor PAPA que aquellos de estratos inferiores (uno, dos y tres)?***
 
-bla bla bla
+La pregunta lo dice todo: se piensa inicialmente que aquellos estudiantes que son de mayor estrato tenderán a tener un PAPA más alto, mientras que los de menor estrato a tener un PAPA algo más bajo, esto porque debido a las necesidades económicas de cada quien se le puede dedicar o no más tiempo al estudio, además que de acuerdo al estrato se deduce que aquellos de mayor estrato han tenido una mejor formación académica, posiblemente privada, mientras que la de los estratos más bajos pudo haber sido más deficiente. Sin embargo, se tiene en cuenta que el resultado puede llegar a ser todo lo contrario, y que los de estratos más bajos podrían tener mejor PAPA por el esfuerzo que dedican al estudio o buenas prácticas para estudiar, entre muchos otros más factores.
 
 #### Resumen numérico
 
+```{r, echo = FALSE}
+estrato1 <- encuesta %>%
+  filter(Q10_Estrato == "1")
+estrato2 <- encuesta %>%
+  filter(Q10_Estrato == "2")
+estrato3 <- encuesta %>%
+  filter(Q10_Estrato == "3")
+estrato4 <- encuesta %>%
+  filter(Q10_Estrato == "4")
+estrato5 <- encuesta %>%
+  filter(Q10_Estrato == "5")
 
+encuesta$Q10_Estrato[!is.na(encuesta$Q24_area) & is.na(encuesta$V51_Avance)] <- NA
+table(encuesta$Q10_Estrato, intervalos_PAPA, dnn = c("Estrato","Intervalos del PAPA"))
+```
+###### Resumen del PAPA para el Estrato 1:
 
-#### Gráfica exploratoria
+```{r, echo = FALSE}
+summary(estrato1$Q08_PAPA)
+```
 
+###### Resumen del PAPA para el Estrato 2:
 
+```{r, echo = FALSE}
+summary(estrato2$Q08_PAPA)
+```
+
+###### Resumen del PAPA para el Estrato 3:
+
+```{r, echo = FALSE}
+summary(estrato3$Q08_PAPA)
+```
+
+###### Resumen del PAPA para el Estrato 4:
+
+```{r, echo = FALSE}
+summary(estrato4$Q08_PAPA)
+```
+
+###### Resumen del PAPA para el Estrato 5:
+
+```{r, echo = FALSE}
+summary(estrato5$Q08_PAPA)
+```
+
+#### Gráficas exploratorias
+
+```{r, echo = FALSE, fig.height=4, fig.width=4}
+plot(estrato1$Q08_PAPA, main = "Estrato 1 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+grid(NA,22)
+
+plot(estrato2$Q08_PAPA, main = "Estrato 2 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+grid(NA,22)
+
+plot(estrato3$Q08_PAPA, main = "Estrato 3 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+grid(NA,22)
+
+plot(estrato4$Q08_PAPA, main = "Estrato 4 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+grid(NA,22)
+
+plot(estrato5$Q08_PAPA, main = "Estrato 5 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+grid(NA,22)
+```
 
 #### Análisis
 
-
+Como se ve en las gráficas, hay tres estudiantes con el mejor PAPA del curso (Un PAPA de 4.7), y además los tres pertenecen al estrato 2. Incluso para el segundo mejor PAPA (Un PAPA de 4.6) hay cuatro estudiantes, donde tres son de estrato 3 y uno de estrato 2. Aunque para los estratos 4 y 5 todos los PAPAs son mayores o iguales a 4.0, se ve que los estratos bajos-intermedios, como lo son el estrato 2 y 3, presentan un mejor PAPA en general, teniendo en cuenta que son los estratos con mayor población, pues si se miran las tablas de resumen para dichos estratos su PAPA promedio es de 4.0; sin embargo, debido a la poca población en estratos 4 y 5 (Y nula población para el estrato 6), no se puede asegurar con certeza que el estrato influya definitivamente en el rendimiento académico, sino que esto dependerá de muchos otros factores.
 
 ### Tercera pregunta
 
@@ -1073,32 +1183,71 @@ bla bla bla
 
 ### Cuarta pregunta
 
-***¿Son los estudiantes con mayor avance en la carrera los que respondieron mejor las preguntas de álgebra y geometría?***
+***¿Son los estudiantes con mayor avance en la carrera los que respondieron mejor las preguntas de álgebra y/o geometría?***
 
-Inicialmente se cree que aquellos estudiantes que tengan un mayor avance en su carrera hayan respondido correctamente las preguntas sobre el área sombreada y los divisores; en otras palabras, se piensa que aquellos que tengan un menor avance en su carreras habrán respondido incorrectamente dichas preguntas. Recordar que la respuesta correcta del área sombreada es ***"4*pi"***, además que solamente quienes hallan seleccionado las tres opciones en la pregunta de los divisores habrán respondido correctamente en su totalidad esa pregunta.
+Inicialmente se cree que aquellos estudiantes que tengan un mayor avance en su carrera hayan respondido correctamente las preguntas sobre el área sombreada y/o los divisores; en otras palabras, se piensa que aquellos que tengan un menor avance en su carreras habrán respondido incorrectamente dichas preguntas. Recordar que la respuesta correcta del área sombreada es ***"4*pi"***, además que solamente quienes hallan seleccionado las tres opciones en la pregunta de los divisores habrán respondido correctamente en su totalidad esa pregunta.
 
-#### Resumen numérico
+#### Resumen numérico: Área sombreada
 
 ```{r, echo = FALSE}
-#respuestas_correctas <- encuesta$Q24_area[encuesta$Q24_area == "4*pi"]
+resp_correcta_as <- encuesta %>%
+  filter(Q24_area == "4*pi")
+resp_correcta_div <- encuesta %>%
+  filter(opciones_divisor == "3")
+resp_incorrecta_as <- encuesta %>%
+  filter(Q24_area != "4*pi")
+resp_incorrecta_div <- encuesta %>%
+  filter(opciones_divisor != "3")
+
 encuesta$Q24_area[!is.na(encuesta$Q24_area) & is.na(encuesta$V51_Avance)] <- NA
 intervalos_avance <- cut(encuesta$V51_Avance,c(10,20,30,40,50,60,70,80),include.lowest=TRUE)
-table(intervalos_avance, encuesta$Q24_area, dnn = c("Intervalos de avance en la carrera","Selección área sombreada"))
+table(encuesta$Q24_area, intervalos_avance, dnn = c("Selección área sombreada","Intervalos de avance en la carrera"))
 ```
+
+###### Resumen del avance en la carrera para los que respondieron correctamente la pregunta del área sombreada:
+
+```{r, echo = FALSE}
+summary(resp_correcta_as$V51_Avance)
+```
+
+###### Resumen del avance en la carrera para los que respondieron incorrectamente la pregunta del área sombreada:
+
+```{r, echo = FALSE}
+summary(resp_incorrecta_as$V51_Avance)
+```
+
+#### Resumen numérico: Divisores
 
 ```{r, echo = FALSE}
 intervalos_avance <- cut(encuesta$V51_Avance,c(10,20,30,40,50,60,70,80),include.lowest=TRUE)
-
-table(intervalos_avance,encuesta$opciones_divisor, dnn = c("Intervalos de avance en la carrera","Número de opciones"))
+table(encuesta$opciones_divisor, intervalos_avance, dnn = c("Número de opciones","Intervalos de avance en la carrera"))
 ```
 
-#### Gráfica exploratoria
+###### Resumen del avance en la carrera para los que respondieron correctamente la pregunta de los divisores:
 
+```{r, echo = FALSE}
+summary(resp_correcta_div$V51_Avance)
+```
 
+###### Resumen del avance en la carrera para los que respondieron incorrectamente la pregunta de los divisores:
+
+```{r, echo = FALSE}
+summary(resp_incorrecta_div$V51_Avance)
+```
+
+#### Gráficas exploratorias
+
+```{r, echo = FALSE}
+plot(encuesta$Q24_area, encuesta$V51_Avance, main = "Pregunta área sombreada vs Avance en la carrera", xlab = "Respuesta seleccionada (4*pi es la correcta)", ylab = "Porcentaje de avance en la carrera")
+
+plot(encuesta$opciones_divisor, encuesta$V51_Avance, main = "Pregunta divisores vs Avance en la carrera", xlab = "Número de opciones seleccionadas (Si son 3 se respondió correctamente)", ylab = "Porcentaje de avance en la carrera")
+```
 
 #### Análisis
 
+Es interesante que al mirar los resúmenes numéricos se ve que en promedio aquellos estudiantes que respondieron correctamente las preguntas del área sombreada y/o de los divisores tienen un mayor avance en sus carreras, aunque esto solamente en promedio, porque hay algunas excepciones a esta regla...
 
+**(Señores estadísticos, ayuden por favor completando con el análisis de las dos boxplots anteriores. Muchas gracias)**
 
 ### Quinta pregunta
 
