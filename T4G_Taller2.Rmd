@@ -14,7 +14,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
+knitr::opts_chunk$set(echo = FALSE,
                       message = FALSE,
                       warning = FALSE)
 ```
@@ -277,6 +277,22 @@ summary(encuesta$Q12_RStudio)
 
 ```{r, include = FALSE}
 summary(encuesta$Q13_NoRoRStudio)
+```
+
+##### **Recursos tecnológicos**
+
+Para el análisis exploratorio se decidieron crear dos nuevas variables, una relacionada con los recursos tecnológicos propios (o con datos) y otra con los recursos tecnológicos no propios (o sin datos), donde se almacenará el número de recursos tecnológicos de dicho tipo con que cuentan los encuestados. El máximo valor que pueden tener estas variables es de 7, debido a que este es el número de opciones de dichos tipos que había disponible en la encuesta; mientras que el mínimo será de 0. Después de la creación de esta variable se reemplazan las respuestas individuales de cada recurso tecnológico de la siguiente manera: Un "1" por un ***"Si"*** y un "0" por un ***"No"***. Esto es simplemente para facilitar su análisis descriptivo.
+
+```{r, include = FALSE}
+# Creación de las variables numero_recursos_propios y numero_recursos_no_propios
+# Se calculó sumando los unos y ceros almacenados en las variables correspondientes a cada tipo de recurso tecnológico.
+encuesta <- encuesta %>% 
+  mutate(numero_recursos_propios = Q14_RecursosInformaticos..Internet.de.cable.propio + Q14_RecursosInformaticos..Wifi.propio + Q14_RecursosInformaticos..Celular.con.datos + Q14_RecursosInformaticos..Portátil.propio + Q14_RecursosInformaticos..Computador.de.escritorio.propio.y.exclusivo + Q14_RecursosInformaticos..Computador.propio..pero.no.exclusivo + Q14_RecursosInformaticos..Tablet.con.datos.)
+encuesta$numero_recursos_propios <- as.numeric(encuesta$numero_recursos_propios)
+
+encuesta <- encuesta %>% 
+  mutate(numero_recursos_no_propios = Q14_RecursosInformaticos..Internet.de.cable.no.propio + Q14_RecursosInformaticos..Wifi.no.propio + Q14_RecursosInformaticos..Celular.sin.datos + Q14_RecursosInformaticos..Portátil.no.propio + Q14_RecursosInformaticos..Computador.de.escritorio.no.propio.pero.exclusivo + Q14_RecursosInformaticos..Computador.de.escritorio.ni.propio.ni.exclusivo + Q14_RecursosInformaticos..Tablet.sin.datos)
+encuesta$numero_recursos_no_propios <- as.numeric(encuesta$numero_recursos_no_propios)
 ```
 
 ```{r, include = FALSE}
@@ -1105,9 +1121,9 @@ estrato4 <- encuesta %>%
 estrato5 <- encuesta %>%
   filter(Q10_Estrato == "5")
 
-encuesta$Q10_Estrato[!is.na(encuesta$Q24_area) & is.na(encuesta$V51_Avance)] <- NA
 table(encuesta$Q10_Estrato, intervalos_PAPA, dnn = c("Estrato","Intervalos del PAPA"))
 ```
+
 ###### Resumen del PAPA para el Estrato 1:
 
 ```{r, echo = FALSE}
@@ -1141,19 +1157,19 @@ summary(estrato5$Q08_PAPA)
 #### Gráficas exploratorias
 
 ```{r, echo = FALSE, fig.height=4, fig.width=4}
-plot(estrato1$Q08_PAPA, main = "Estrato 1 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+plot(estrato1$Q08_PAPA, main = "Estrato 1 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
 grid(NA,22)
 
-plot(estrato2$Q08_PAPA, main = "Estrato 2 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+plot(estrato2$Q08_PAPA, main = "Estrato 2 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
 grid(NA,22)
 
-plot(estrato3$Q08_PAPA, main = "Estrato 3 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+plot(estrato3$Q08_PAPA, main = "Estrato 3 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
 grid(NA,22)
 
-plot(estrato4$Q08_PAPA, main = "Estrato 4 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+plot(estrato4$Q08_PAPA, main = "Estrato 4 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
 grid(NA,22)
 
-plot(estrato5$Q08_PAPA, main = "Estrato 5 vs PAPA", xlab = "Número de encuesta", ylab = "PAPA", ylim = c(3,5))
+plot(estrato5$Q08_PAPA, main = "Estrato 5 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
 grid(NA,22)
 ```
 
@@ -1163,21 +1179,68 @@ Como se ve en las gráficas, hay tres estudiantes con el mejor PAPA del curso (U
 
 ### Tercera pregunta
 
-***olo***
+***¿El número de recursos tecnológicos propios que poseen los estudiantes depende del estrato al que pertenecen?***
 
-
+Como dice la pregunta, se plantea el supuesto de que aquellos estudiantes que tengan mayor número de recursos tecnológicos propios pertenecerán a un estrato más alto que aquellos que tengan menos recursos tecnológicos propios disponibles.
 
 #### Resumen numérico
 
+```{r, echo = FALSE}
+table(encuesta$Q10_Estrato, encuesta$numero_recursos_propios, dnn = c("Estrato","Número de recursos propios"))
+```
 
+###### Resumen de número de recursos propios para el Estrato 1:
 
-#### Gráfica exploratoria
+```{r, echo = FALSE}
+summary(estrato1$numero_recursos_propios)
+```
 
+###### Resume de número de recursos propios para el Estrato 2:
 
+```{r, echo = FALSE}
+summary(estrato2$numero_recursos_propios)
+```
+
+###### Resumen de número de recursos propios para el Estrato 3:
+
+```{r, echo = FALSE}
+summary(estrato3$numero_recursos_propios)
+```
+
+###### Resumen de número de recursos propios para el Estrato 4:
+
+```{r, echo = FALSE}
+summary(estrato4$numero_recursos_propios)
+```
+
+###### Resumen de número de recursos propios para el Estrato 5:
+
+```{r, echo = FALSE}
+summary(estrato5$numero_recursos_propios)
+```
+
+#### Gráficas exploratorias
+
+```{r, echo = FALSE, fig.height=4, fig.width=4}
+plot(estrato1$numero_recursos_propios, main = "Estrato 1 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+grid(NA,5)
+
+plot(estrato2$numero_recursos_propios, main = "Estrato 2 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+grid(NA,5)
+
+plot(estrato3$numero_recursos_propios, main = "Estrato 3 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+grid(NA,5)
+
+plot(estrato4$numero_recursos_propios, main = "Estrato 4 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+grid(NA,5)
+
+plot(estrato5$numero_recursos_propios, main = "Estrato 5 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+grid(NA,5)
+```
 
 #### Análisis
 
-
+En los resúmenes numéricos se ve que, conforme el estrato de los estudiantes aumenta, el número de recursos tecnológicos propios en promedio con que cuentan estos estudiantes tiende a aumentar. Dicha tendencia se verifica también en las gráficas, donde para los estratos más bajos los recursos tecnológicos propios son menos, mientras que el número de estudiantes con estos recursos empieza a aumentar para estratos más altos. Por lo tanto, se verifica la hipótesis y se concluye que el número de recursos tecnológicos propios que poseen los estudiantes sí depende del estrato al que pertenecen, pues a mayor estrato, mayor número de recursos tecnológicos propios se poseen en promedio.
 
 ## Análisis exploratorio. Cruces multivariados
 
@@ -1287,9 +1350,9 @@ Pensamos que, tal vez las personas que más se destacan en promedio y puntaje en
 
 ### Séptima pregunta
 
-***¿Tienen mejor PAPA aquellos estudiantes que son de estrato socioeconómico alto y que residen en el AMVA en comparación con aquellos que son de estrato socioeconómico bajo y habitan por fuera de esta?***
+***¿Tienen mejor PAPA aquellos estudiantes que son de estrato socioeconómico alto y que residen en el Área Metropolitana del Valle de Aburrá en comparación con aquellos que son de estrato socioeconómico bajo y habitan por fuera de esta?***
 
-Se podría esperar que una persona que vive en el Área Metropolitana del Valle de Aburrá con buenos ingresos económicos, tenga más posibilidades de mejorar su promedio académico, ya que se encuentra más cerca de la Universidad, y tiene más posibilidades de asesorías privadas o cursos para mejorar en su promedio, mientras que alguien fuera del Valle de aburrá con pocos ingresos le es mucho más díficil adquirir estos privilegios.
+Se podría esperar que una persona que vive en el Área Metropolitana del Valle de Aburrá y tenga buenos ingresos económicos tiene más posibilidades de mejorar su promedio académico, ya que se encuentra más cerca de la Universidad y tiene más posibilidades de asesorías privadas o cursos para mejorar en su promedio, mientras que alguien fuera del Valle de Aburrá con pocos ingresos le es mucho más difícil adquirir estos privilegios.
 
 #### Resumen numérico
 
@@ -1307,7 +1370,7 @@ Se podría esperar que una persona que vive en el Área Metropolitana del Valle 
 
 ***¿Se puede plantear alguna diferencia entre el PAPA y el número de conspiraciones falsas que se creen verdaderas en función del género del estudiante?***
 
-Seguramente el género no influya mucho, pero pensamos que mientras más conspiraciones falsas el estudiante haya considerado como verdaderas, es más propenso a tener un PAPA bajo, ya que consideramos que las personas que respondieron las conspiraciones correctamente cuentan con un espirítu de investigación que tal vez una persona que la respondió incorrectamente no tenga.
+Seguramente el género no influye mucho, pero pensamos que mientras más conspiraciones falsas el estudiante haya considerado como verdaderas, es más propenso a tener un PAPA bajo, pues creemos que las personas que respondieron las conspiraciones correctamente cuentan con un espíritu de investigación que tal vez una persona que la respondió incorrectamente no tenga.
 
 #### Resumen numérico
 
@@ -1389,7 +1452,7 @@ summary(conspiraciones4M$Q08_PAPA)
 
 ##### Resumen numérico del PAPA para las personas del género femenino que en cinco conspiraciones falsa
 
-```{r}
+```{r, echo = FALSE}
 summary(conspiraciones5M$Q08_PAPA)
 ```
 
@@ -1455,7 +1518,7 @@ summary(conspiraciones4H$Q08_PAPA)
 
 ##### Resumen numérico del PAPA para las personas del género masculino que en cinco conspiraciones falsa
 
-```{r}
+```{r, echo = FALSE}
 summary(conspiraciones5H$Q08_PAPA)
 ```
 
@@ -1516,4 +1579,27 @@ asieh
 
 
 
- 
+## Conclusiones generales
+
+### Primera conclusión
+
+Bla bla bla
+
+### Segunda conclusión
+
+Bla bla bla x2
+
+## Recomendaciones
+
+### Primera recomendación
+
+De acuerdo a la configuración del RStudio, la encuesta no se leía en la codificación correcta, por lo que se distorsionaban ciertos caracteres especiales, como por ejemplo las tildes. Para solucionar esto, se especificó en la función que leía la encuesta que la codificación del archivo csv fuera UTF-8. Por lo tanto, se recomienda tener mucho cuidado a la hora de trabajar encuestas que incluyen caracteres de una codificación específica, para no incurrir en errores a la hora de la depuración y el análisis.
+
+### Segunda recomendación
+
+Bla bla bla x3
+
+## Bibliografía
+
+  - Cosas del icfes: https://laquecorresponda.com.co
+  - Más cibergrafías que hayan usado...
