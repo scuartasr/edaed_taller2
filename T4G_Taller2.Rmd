@@ -13,6 +13,11 @@ output:
     toc_float: true
 ---
 
+<style>
+body {
+text-align: justify}
+</style>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       message = FALSE,
@@ -1097,9 +1102,11 @@ plot(encuesta$numero_conspiraciones, encuesta$Q08_PAPA, main = "Conspiraciones f
 
 #### Análisis
 
-Como vemos tanto en las gráficas como en las tablas, en general el PAPA empieza a disminuir a partir de creer en 4 o más de las conspiraciones consideradas como falsas. Sin embargo, para la creencia en 1, 2 y hasta 3 conspiraciones consideradas falsas, el PAPA promedio se sigue manteniendo lo suficientemente alto. Es de notar la poca población para la creencia en 3 o más conspiraciones falsas, por lo que no se logra apreciar de forma general que el número de conspiraciones falsas en que creen los estudiantes influya negativamente en su respectivo PAPA. Además, gracias a los resúmenes numéricos, se puede decir que 5 de los 7 estudiantes con un PAPA de clasificación "Superior" (Entre 4.5 y 5) no creen en ninguna de las conspiraciones consideradas como falsas... 
+Como vemos tanto en las gráficas como en las tablas, en general el PAPA empieza a disminuir a partir de creer en 4 o más de las conspiraciones consideradas como falsas. Sin embargo, para la creencia en 1, 2 y hasta 3 conspiraciones consideradas falsas, el PAPA promedio se sigue manteniendo lo suficientemente alto, si bien observa que las primeras cuatro cajas (desde cero conspiraciones falsas creídas hasta tres conspiraciones falsas creídas) se traslapa, de modo que se puede establecer que no existe evidencia suficiente para sugerir que el PAPA cambia en función del número de conspiraciones creídas en promedio. En cambio, sí se establece que hay evidencia suficiente para sugerir que las personas que creen en tres conspiraciones o menos poseen un PAPA mayor que aquellos que creen en todas las conspiraciones falsas (es decir, cinco conspiraciones en total).
 
-**(Señores estadísticos, ayuden por favor completando con el análisis de la boxplot anterior. Muchas gracias)**
+Tambien es de notar la poca población para la creencia en 3 o más conspiraciones falsas, por lo que no se logra apreciar de forma general que el número de conspiraciones falsas en que creen los estudiantes influya negativamente en su respectivo PAPA. Además, gracias a los resúmenes numéricos, se puede decir que 5 de los 7 estudiantes con un PAPA de clasificación "Superior" (Entre 4.5 y 5) no creen en ninguna de las conspiraciones consideradas como falsas.
+
+También se observa que las cajas son inicialmente altas, lo que quiere decir que el rango intercuartídico es alto y que, en consecuencia, existe una gran dispersión de los datos para el cruce de este par de variables, lo cual podría respaldar la idea de que finalmente no existe tal relación.
 
 ### Segunda pregunta
 
