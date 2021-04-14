@@ -1375,24 +1375,6 @@ summary(conspiraciones1M$Q08_PAPA)
 summary(conspiraciones2M$Q08_PAPA)
 ```
 
-##### Resumen numérico del PAPA para las personas del género femenino que en tres conspiraciones falsa
-
-```{r, echo = FALSE}
-summary(conspiraciones3M$Q08_PAPA)
-```
-
-##### Resumen numérico del PAPA para las personas del género femenino que en cuatro conspiraciones falsa
-
-```{r, echo = FALSE}
-summary(conspiraciones4M$Q08_PAPA)
-```
-
-##### Resumen numérico del PAPA para las personas del género femenino que en cinco conspiraciones falsa
-
-```{r}
-summary(conspiraciones5M$Q08_PAPA)
-```
-
 #### Resumen numérico: personas del género masculino
 
 La siguiente es una tabla que da cuenta del número de conspiraciones que están documentadas como falsas pero que son asumidas como verdaderas por parte de las personas que se autoperciben como parte del género masculino del curso de EDAED:
@@ -1494,7 +1476,20 @@ Y en este caso, no tiene sentido presentar un resumen numérico para esta submue
 
 Para este caso, y para diferenciarlo del análisis bivariado semejante realizado previamente (en el que se contrastaban el número de conspiraciones previas y el PAPA), se va a plantear un par de diagramas de dispersión para las variables *número de conspiraciones falsas creídas* y *PAPA*, siendo una para las personas del género femenino y la otra para aquellos que hacen parte del género masculino en el curso de EDAED. En el caso de la persona no binaria, al no ser una submuestra de un tamaño lo suficientemente grande como para poder contrastarlo efectivamente con las personas del género femenino y masculino.
 
+```{r, , echo = FALSE, fig.height=5, fig.width=5}
+plot(enc_mujeres$numero_conspiraciones, enc_mujeres$Q08_PAPA,
+     main = "Conspiraciones falsas v. PAPA - género femen.",
+     xlab = "Número de conspiraciones falsas",
+     ylab = "PAPA")
+plot(enc_hombres$numero_conspiraciones, enc_hombres$Q08_PAPA,
+     main = "Conspiraciones falsas v. PAPA - género mascul.",
+     xlab = "Número de conspiraciones falsas",
+     ylab = "PAPA")
+```
+
+
 #### Análisis
+
 
 
 
