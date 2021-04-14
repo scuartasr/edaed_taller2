@@ -1323,9 +1323,178 @@ ola
 
 ### Novena pregunta
 
-***Pregunta***
+***Se puede plantear alguna diferencia entre el PAPA y el número de conspiraciones falsas que se creen verdaderas en función del género del estudiante?***
 
-O:
+A partir de lo visto en la segunda pregunta, se puede plantear que existe una ligera diferencia en el PAPA de los estudiantes que creen en un mayor número de conspiraciones y que estas se van a conservar para cada uno de los géneros estudiantes, si bien al comparar los diferentes géneros entre sí, no se podrán establacer diferencias entre ellos, lo que quiere decir que el género no se correlaciona con el PAPA y el número de creencias falsas que creen los estudiantes.
+
+#### Resumen numérico: personas del género femenino
+
+La siguiente es una tabla que da cuenta del número de conspiraciones que están documentadas como falsas pero que son asumidas como verdaderas por parte de las mujeres del curso de EDAED:
+
+```{r, include = FALSE}
+enc_mujeres <- encuesta %>% 
+  filter(Q01_Genero == "Femenino")
+
+intervalos_PAPAmuj <- cut(enc_mujeres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+```
+
+```{r, echo = FALSE}
+conspiraciones0M <- enc_mujeres %>%
+  filter(numero_conspiraciones == "0")
+conspiraciones1M <- enc_mujeres %>%
+  filter(numero_conspiraciones == "1")
+conspiraciones2M <- enc_mujeres %>%
+  filter(numero_conspiraciones == "2")
+conspiraciones3M <- enc_mujeres %>%
+  filter(numero_conspiraciones == "3")
+conspiraciones4M <- enc_mujeres %>%
+  filter(numero_conspiraciones == "4")
+conspiraciones5M <- enc_mujeres %>%
+  filter(numero_conspiraciones == "5")
+
+table(enc_mujeres$numero_conspiraciones, intervalos_PAPAmuj,dnn = c("# Conspiraciones","Intervalos del PAPA"))
+```
+
+Y se pueden obtener los siguientes resúmenes numéricos:
+
+##### Resumen numérico del PAPA para las personas del género femenino que no creen en ninguna conspiración falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones0M$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género femenino que en una conspiración falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones1M$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género femenino que en dos conspiraciones falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones2M$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género femenino que en tres conspiraciones falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones3M$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género femenino que en cuatro conspiraciones falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones4M$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género femenino que en cinco conspiraciones falsa
+
+```{r}
+summary(conspiraciones5M$Q08_PAPA)
+```
+
+#### Resumen numérico: personas del género masculino
+
+La siguiente es una tabla que da cuenta del número de conspiraciones que están documentadas como falsas pero que son asumidas como verdaderas por parte de las personas que se autoperciben como parte del género masculino del curso de EDAED:
+
+```{r, include = FALSE}
+enc_hombres <- encuesta %>% 
+  filter(Q01_Genero == "Masculino")
+
+intervalos_PAPAhom <- cut(enc_hombres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+```
+
+```{r, echo = FALSE}
+conspiraciones0H <- enc_hombres %>%
+  filter(numero_conspiraciones == "0")
+conspiraciones1H <- enc_hombres %>%
+  filter(numero_conspiraciones == "1")
+conspiraciones2H <- enc_hombres %>%
+  filter(numero_conspiraciones == "2")
+conspiraciones3H <- enc_hombres %>%
+  filter(numero_conspiraciones == "3")
+conspiraciones4H <- enc_hombres %>%
+  filter(numero_conspiraciones == "4")
+conspiraciones5H <- enc_hombres %>%
+  filter(numero_conspiraciones == "5")
+
+table(enc_hombres$numero_conspiraciones, intervalos_PAPAhom,dnn = c("# Conspiraciones","Intervalos del PAPA"))
+```
+
+Y se pueden obtener los siguientes resúmenes numéricos:
+
+##### Resumen numérico del PAPA para las personas del género masculino que no creen en ninguna conspiración falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones0H$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género masculino que en una conspiración falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones1H$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género masculino que en dos conspiraciones falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones2H$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género masculino que en tres conspiraciones falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones3H$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género masculino que en cuatro conspiraciones falsa
+
+```{r, echo = FALSE}
+summary(conspiraciones4H$Q08_PAPA)
+```
+
+##### Resumen numérico del PAPA para las personas del género masculino que en cinco conspiraciones falsa
+
+```{r}
+summary(conspiraciones5H$Q08_PAPA)
+```
+
+#### Resumen numérico: personas no binarias
+
+Ahora se van a obtener análisis numéricos para las personas no binarias del curso de EDAED, es decir, aquellas que no se perciben como parte del género femenino o masculino, que en realidad se va a simplificar bastante en el sentido que como se vio en el análisis univariado, solo existe una persona dentro de esta categoría, que igual se puede corroborar en la siguiente tabla donde solo hay un valor diferente de cero, siendo este exactamente igual uno.
+
+
+```{r, include = FALSE}
+enc_otrog <- encuesta %>% 
+  filter(Q01_Genero == "Otro")
+
+intervalos_PAPAotro <- cut(enc_otrog$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+```
+
+```{r, echo = FALSE}
+conspiraciones0X <- enc_hombres %>%
+  filter(numero_conspiraciones == "0")
+conspiraciones1X <- enc_hombres %>%
+  filter(numero_conspiraciones == "1")
+conspiraciones2X <- enc_hombres %>%
+  filter(numero_conspiraciones == "2")
+conspiraciones3X <- enc_hombres %>%
+  filter(numero_conspiraciones == "3")
+conspiraciones4X <- enc_hombres %>%
+  filter(numero_conspiraciones == "4")
+conspiraciones5X <- enc_hombres %>%
+  filter(numero_conspiraciones == "5")
+
+table(enc_otrog$numero_conspiraciones, intervalos_PAPAotro,dnn = c("# Conspiraciones","Intervalos del PAPA"))
+```
+
+Y en este caso, no tiene sentido presentar un resumen numérico para esta submuestra con una sola observación, pues el resultado es bastante obvio en el sentido que toda la información que se puede obtener es la dada por esta persona. Así, se establece que la persona no binaria del curso no cree en ninguna conspiración falsa, o dicho de otra manera, el 100 % de los estudiantes no binarios del curso de EDAED no creen en ninguna conspiración documentada como falsa.
+
+#### Gráfica exploratoria
+
+Para este caso, y para diferenciarlo del análisis bivariado semejante realizado previamente (en el que se contrastaban el número de conspiraciones previas y el PAPA), se va a plantear un par de diagramas de dispersión para las variables *número de conspiraciones falsas creídas* y *PAPA*, siendo una para las personas del género femenino y la otra para aquellos que hacen parte del género masculino en el curso de EDAED. En el caso de la persona no binaria, al no ser una submuestra de un tamaño lo suficientemente grande como para poder contrastarlo efectivamente con las personas del género femenino y masculino.
+
+#### Análisis
 
 #### Resumen numérico
 
