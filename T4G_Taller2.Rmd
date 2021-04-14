@@ -1399,7 +1399,7 @@ plot(encuesta$Q09_EnAreaMetropolitana, encuesta$Q08_PAPA,
 
 ***¿Tienen el R instalado las personas de estrato socio económico más alto y con más recursos tecnológicos propios?***
 
-Se podría esperar que, un estudiante con mayores recursos económicos y tecnológicos tenga el r instalado, mientras que, una persona que no cuenta con las mismas posibilidades de una persona de estrato alto, sería más propensa a no tener el r instalado.
+Se podría esperar que, un estudiante con mayores recursos económicos y tecnológicos tenga el r instalado, mientras que, una persona que no cuenta con las mismas posibilidades de una persona de estrato alto, sería más propensa a no tener el r instalado. :D
 
 #### Resumen numérico
 
