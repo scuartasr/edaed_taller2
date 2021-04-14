@@ -1289,7 +1289,7 @@ Pensamos que, tal vez las personas que más se destacan en promedio y puntaje en
 
 ***¿Tienen mejor PAPA aquellos estudiantes que son de estrato socioeconómico alto y que residen en el AMVA en comparación con aquellos que son de estrato socioeconómico bajo y habitan por fuera de esta?***
 
-a
+Se podría esperar que una persona que vive en el Área Metropolitana del Valle de Aburrá con buenos ingresos económicos, tenga más posibilidades de mejorar su promedio académico, ya que se encuentra más cerca de la Universidad, y tiene más posibilidades de asesorías privadas o cursos para mejorar en su promedio, mientras que alguien fuera del Valle de aburrá con pocos ingresos le es mucho más díficil adquirir estos privilegios.
 
 #### Resumen numérico
 
@@ -1307,7 +1307,7 @@ a
 
 ***¿Se puede plantear alguna diferencia entre el PAPA y el número de conspiraciones falsas que se creen verdaderas en función del género del estudiante?***
 
-ola
+Seguramente el género no influya mucho, pero pensamos que mientras más conspiraciones falsas el estudiante haya considerado como verdaderas, es más propenso a tener un PAPA bajo, ya que consideramos que las personas que respondieron las conspiraciones correctamente cuentan con un espirítu de investigación que tal vez una persona que la respondió incorrectamente no tenga.
 
 #### Resumen numérico
 
@@ -1493,16 +1493,6 @@ Y en este caso, no tiene sentido presentar un resumen numérico para esta submue
 #### Gráfica exploratoria
 
 Para este caso, y para diferenciarlo del análisis bivariado semejante realizado previamente (en el que se contrastaban el número de conspiraciones previas y el PAPA), se va a plantear un par de diagramas de dispersión para las variables *número de conspiraciones falsas creídas* y *PAPA*, siendo una para las personas del género femenino y la otra para aquellos que hacen parte del género masculino en el curso de EDAED. En el caso de la persona no binaria, al no ser una submuestra de un tamaño lo suficientemente grande como para poder contrastarlo efectivamente con las personas del género femenino y masculino.
-
-#### Análisis
-
-#### Resumen numérico
-
-
-
-#### Gráfica exploratoria
-
-
 
 #### Análisis
 
