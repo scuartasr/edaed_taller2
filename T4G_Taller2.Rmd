@@ -1287,7 +1287,7 @@ Pensamos que, tal vez las personas que más se destacan en promedio y puntaje en
 
 ### Séptima pregunta
 
-***oliwiw uwu***
+***¿Tienen mejor PAPA aquellos estudiantes que son de estrato socioeconómico alto y que residen en el AMVA en comparación con aquellos que son de estrato socioeconómico bajo y habitan por fuera de esta?***
 
 a
 
@@ -1305,7 +1305,7 @@ a
 
 ### Octava pregunta
 
-***Pregunta***
+***¿Se puede plantear alguna diferencia entre el PAPA y el número de conspiraciones falsas que se creen verdaderas en función del género del estudiante?***
 
 ola
 
