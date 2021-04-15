@@ -1852,7 +1852,7 @@ plot(as.factor(enc_mujeres$maths), enc_mujeres$tiempo_usado,
      ylab = "Tiempo empleado [min]",
      ylim = c(0, 30))
 plot(as.factor(enc_hombres$maths), enc_hombres$tiempo_usado,
-     main = "Tiempo empleado vs.rtas. correctas - gen. masculino",
+     main = "Tiempo empleado vs. rtas. correctas - gen. masculino",
      xlab = "Número de respuestas tomadas como correctas",
      ylab = "Tiempo empleado [min]",
      ylim = c(0, 30))
@@ -1881,7 +1881,7 @@ Es evidente que el proceso exploratorio y descriptivo en un análisis estadísti
 
 ### Cuarta conclusión: de la encuesta
 
-En general, se observó que el estrato 
+En general, se observó que el estrato no es un factor influyente en lo que concierne a tener un mejor PAPA en la universidad, lo cual puede estar dando cuenta de que la universidad se encarga, con éxito, de hacer una adecuada nivelación para todos los estudiantes, haciendo que factores exógenos como el estrato sean irrelevantes en cuanto al éxito académico, o bien, sucede que los estudiantes que vienen de zonas con calidad educativa deficiente y que a lo mejor carecen de la preparación académica necesaria para poder afrontar la universidad, son expulsados rápidamente por un bajo rendimiento académico. También puede estar sucediendo que el sistema de Bienestar Universitario es exitoso en cuanto a la garantía de condiciones de subsistencia, bienestar y promoción de actividades y programas orientados a la mejoría de los estudiantes, facilitando su instancia en la universidad.
 
 ## Recomendaciones
 
@@ -1897,4 +1897,4 @@ En ese sentido, se podría apelar a una herramienta que tienen muchos sistemas d
 
 ## Bibliografía
 
-[1] U. Centro de InvestigaciÃ³n y Desarrollo de Software CIDS, "Página del Grupo de Admisiones, Registro y Control Académico de la Universidad del Magdalena", Admisiones.unimagdalena.edu.co, 2021. [En línea]. Disponible en: https://admisiones.unimagdalena.edu.co/inscripcionPRE/conversionICFES.jsp?rnd425615. [Accedido el]: 15- Apr- 2021].
+[1] U. Centro de Investigación y Desarrollo de Software CIDS, "Página del Grupo de Admisiones, Registro y Control Académico de la Universidad del Magdalena", Admisiones.unimagdalena.edu.co, 2021. [En línea]. Disponible en: https://admisiones.unimagdalena.edu.co/inscripcionPRE/conversionICFES.jsp?rnd425615. [Accedido el]: 15- Apr- 2021].
