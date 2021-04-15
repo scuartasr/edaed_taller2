@@ -1409,7 +1409,7 @@ Pensamos que tal vez las personas que más se destacan en promedio y puntaje en 
 Se podría esperar que una persona que vive en el Área Metropolitana del Valle de Aburrá y que tenga buenos ingresos económicos tiene más posibilidades de mejorar su promedio académico, ya que se encuentra más cerca de la Universidad y tiene más posibilidades de asesorías privadas o cursos para mejorar su promedio, mientras que alguien fuera del Valle de Aburrá con pocos ingresos le es mucho más difícil adquirir estos privilegios.
 
 
-# Resumen numerico, personas que si residen en el Area Metropolitana del Valle de Aburra
+#### Resumen numérico, personas que si residen en el Area Metropolitana del Valle de Aburra
 
 
 Se realizara una tabla donde se evidencia el numero de personas que estan residiendo en el area metropolitana y que pertenecen a los estratos 1, 2, 3, 4, y 5.
@@ -1438,7 +1438,7 @@ table(enc_aream$Q10_Estrato, intervalos_PAPAareametro,dnn = c("Estrato","Interva
 ```
 Resumen numerico arrojado
 
-```{r, echo = FALSE}}
+```{r, echo = FALSE}
 summary(estratodentro$Q08_PAPA)
 ```
 ```{r}
@@ -1454,7 +1454,7 @@ summary(estratodentro$Q08_PAPA)
 summary(estratodentro$Q08_PAPA)
 ```
 
-# Resumen numerico, personas que no residen en el Area Metropolitana del Valle de Aburra
+#### Resumen numerico, personas que no residen en el Area Metropolitana del Valle de Aburra
 
 ```{r}
 enc_noaream <- encuesta %>% 
@@ -1479,19 +1479,20 @@ estratofuera <- enc_noaream %>%
 table(enc_noaream$Q10_Estrato, intervalos_PAPAnoareametro,dnn = c("Estrato","Intervalos del PAPA"))
 ```
 ```{r}
-summary(estratofuera1$Q08_PAPA)
+summary(estratofuera$Q08_PAPA)
 ```
 ```{r}
-summary(estratofuera2$Q08_PAPA)
+summary(estratofuera$Q08_PAPA)
 ```
 
 ```{r}
-summary(estratofuera3$Q08_PAPA)
+summary(estratofuera$Q08_PAPA)
 ```
 
 ```{r}
-summary(estratofuera4$Q08_PAPA)
+summary(estratofuera$Q08_PAPA)
 ```
+
 ```{r}
 summary(estratofuera$Q08_PAPA)
 ```
