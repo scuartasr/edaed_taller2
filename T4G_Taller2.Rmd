@@ -1314,13 +1314,13 @@ plot(encuesta$opciones_divisor, encuesta$V51_Avance, main = "Pregunta divisores 
 
 #### Análisis
 
-En el primer boxplot se observa que 
-
-### Quinta pregunta que no hay diferencias en promedio en el avance en la carrera y la respuesta seleccionada en la pregunta de geometría incluida en la tercera parte de la encuesta realizada a los estudiantes de EDAED, pero en este caso se puede observar que la respuesta correcta, 4pi y la respuesta "Ninguna de las anteriores", que corresponde a la última caja del primer boxplot, son las que presentan mayor dispersión en sus respuestas, mientras que las respuestas 6pi y 7.5pi son las de menor dispersión.
+En el primer boxplot se observa que que no hay diferencias en promedio en el avance en la carrera y la respuesta seleccionada en la pregunta de geometría incluida en la tercera parte de la encuesta realizada a los estudiantes de EDAED, pero en este caso se puede observar que la respuesta correcta, 4pi y la respuesta "Ninguna de las anteriores", que corresponde a la última caja del primer boxplot, son las que presentan mayor dispersión en sus respuestas, mientras que las respuestas 6pi y 7.5pi son las de menor dispersión.
 
 Por otro lado, en el segundo boxplot, que esquematiza a la pregunta de los divisores y el avance, nuevamente se observa que no hay diferencias en promedio para los tres casos posibles y que la dispersión es relativamente alta para cada uno de esos casos.
 
 Respecto a la pregunta planteada, se descarta la respuesta sugerida para esta, pues se observa que hay bigotes que llegan a lo alto ambas tablas, siendo esto indicador de que existen estudiantes con avance considerable que respondieron incorrectamente las preguntas de geometría o de manera incompleta las de álgebra.
+
+### Quinta pregunta
   
 ***¿Hay alguna relación entre la edad, el PAPA y el género de los estudiantes?***
 
