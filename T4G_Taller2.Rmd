@@ -1097,7 +1097,7 @@ summary(conspiraciones5$Q08_PAPA)
 #### Gráfica exploratoria
 
 ```{r, echo = FALSE, fig.height=6, fig.width=8}
-plot(encuesta$numero_conspiraciones, encuesta$Q08_PAPA, main = "Conspiraciones falsas vs PAPA", xlab = "Número de conspiraciones falsas", ylab = "PAPA")
+plot(encuesta$numero_conspiraciones, encuesta$Q08_PAPA, main = "Conspiraciones falsas vs PAPA", xlab = "Número de conspiraciones falsas", ylab = "PAPA", col = "#002e8b")
 ```
 
 #### Análisis
@@ -1163,19 +1163,19 @@ summary(estrato5$Q08_PAPA)
 #### Gráficas exploratorias
 
 ```{r, echo = FALSE, fig.height=4, fig.width=4}
-plot(estrato1$Q08_PAPA, main = "Estrato 1 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
+plot(estrato1$Q08_PAPA, main = "Estrato 1 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5), col = "#002e8b")
 grid(NA,22)
 
-plot(estrato2$Q08_PAPA, main = "Estrato 2 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
+plot(estrato2$Q08_PAPA, main = "Estrato 2 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5), col = "#002e8b")
 grid(NA,22)
 
-plot(estrato3$Q08_PAPA, main = "Estrato 3 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
+plot(estrato3$Q08_PAPA, main = "Estrato 3 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5), col = "#002e8b")
 grid(NA,22)
 
-plot(estrato4$Q08_PAPA, main = "Estrato 4 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
+plot(estrato4$Q08_PAPA, main = "Estrato 4 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5), col = "#002e8b")
 grid(NA,22)
 
-plot(estrato5$Q08_PAPA, main = "Estrato 5 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5))
+plot(estrato5$Q08_PAPA, main = "Estrato 5 vs PAPA", xlab = "Número de encuestas", ylab = "PAPA", ylim = c(3,5), col = "#002e8b")
 grid(NA,22)
 ```
 
@@ -1228,19 +1228,19 @@ summary(estrato5$numero_recursos_propios)
 #### Gráficas exploratorias
 
 ```{r, echo = FALSE, fig.height=4, fig.width=4}
-plot(estrato1$numero_recursos_propios, main = "Estrato 1 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+plot(estrato1$numero_recursos_propios, main = "Estrato 1 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5), col = "#002e8b")
 grid(NA,5)
 
-plot(estrato2$numero_recursos_propios, main = "Estrato 2 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+plot(estrato2$numero_recursos_propios, main = "Estrato 2 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5), col = "#002e8b")
 grid(NA,5)
 
-plot(estrato3$numero_recursos_propios, main = "Estrato 3 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+plot(estrato3$numero_recursos_propios, main = "Estrato 3 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5), col = "#002e8b")
 grid(NA,5)
 
-plot(estrato4$numero_recursos_propios, main = "Estrato 4 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+plot(estrato4$numero_recursos_propios, main = "Estrato 4 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5), col = "#002e8b")
 grid(NA,5)
 
-plot(estrato5$numero_recursos_propios, main = "Estrato 5 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5))
+plot(estrato5$numero_recursos_propios, main = "Estrato 5 vs # recursos tec. propios", xlab = "Número de encuestas", ylab = "Número de recursos tecnológicos", ylim = c(0,5), col = "#002e8b")
 grid(NA,5)
 ```
 
@@ -1307,9 +1307,9 @@ summary(resp_incorrecta_div$V51_Avance)
 #### Gráficas exploratorias
 
 ```{r, echo = FALSE}
-plot(encuesta$Q24_area, encuesta$V51_Avance, main = "Pregunta área sombreada vs Avance en la carrera", xlab = "Respuesta seleccionada (4*pi es la correcta)", ylab = "Porcentaje de avance en la carrera")
+plot(encuesta$Q24_area, encuesta$V51_Avance, main = "Pregunta área sombreada vs Avance en la carrera", xlab = "Respuesta seleccionada (4*pi es la correcta)", ylab = "Porcentaje de avance en la carrera", col = "#002e8b")
 
-plot(encuesta$opciones_divisor, encuesta$V51_Avance, main = "Pregunta divisores vs Avance en la carrera", xlab = "Número de opciones seleccionadas (Si son 3 se respondió correctamente)", ylab = "Porcentaje de avance en la carrera")
+plot(encuesta$opciones_divisor, encuesta$V51_Avance, main = "Pregunta divisores vs Avance en la carrera", xlab = "Número de opciones seleccionadas (Si son 3 se respondió correctamente)", ylab = "Porcentaje de avance en la carrera", col = "#002e8b")
 ```
 
 #### Análisis
@@ -1371,10 +1371,10 @@ summary(enc_mujeres$Q08_PAPA)
 #### Gráfica exploratoria
 
 ```{r, echo = FALSE}
-plot(intervalos_PAPAhom, enc_hombres$Edad, main = "PAPA vs Edad (Hombres)", xlab = "Intervalo del PAPA", ylab = "Edad (Años)", ylim = c(17,39))
+plot(intervalos_PAPAhom, enc_hombres$Edad, main = "PAPA vs Edad (Hombres)", xlab = "Intervalo del PAPA", ylab = "Edad (Años)", ylim = c(17,39), col = "#002e8b")
 grid(NA,24)
 
-plot(intervalos_PAPAmuj, enc_mujeres$Edad, main = "PAPA vs Edad (Mujeres)", xlab = "Intervalo del PAPA", ylab = "Edad (Años)", ylim = c(17,39))
+plot(intervalos_PAPAmuj, enc_mujeres$Edad, main = "PAPA vs Edad (Mujeres)", xlab = "Intervalo del PAPA", ylab = "Edad (Años)", ylim = c(17,39), col = "#002e8b")
 grid(NA,24)
 ```
 
@@ -1443,16 +1443,16 @@ summary(enc_estadistica$Q05_Saber11)
 #### Gráficas exploratorias
 
 ```{r, echo = FALSE}
-plot(intervalos_PAPAis, enc_sistemas$Q05_Saber11, main = "PAPA vs Puntaje SABER 11 (Sistemas)", xlab = "Intervalo del PAPA", ylab = "Puntaje SABER 11", ylim = c(0,500))
+plot(intervalos_PAPAis, enc_sistemas$Q05_Saber11, main = "PAPA vs Puntaje SABER 11 (Sistemas)", xlab = "Intervalo del PAPA", ylab = "Puntaje SABER 11", ylim = c(0,500), col = "#002e8b")
 grid(NA,22)
 
-plot(intervalos_PAPAes, enc_estadistica$Q05_Saber11, main = "PAPA vs Puntaje SABER 11 (Estadística)", xlab = "Intervalo del PAPA", ylab = "Puntaje SABER 11", ylim = c(0,500))
+plot(intervalos_PAPAes, enc_estadistica$Q05_Saber11, main = "PAPA vs Puntaje SABER 11 (Estadística)", xlab = "Intervalo del PAPA", ylab = "Puntaje SABER 11", ylim = c(0,500), col = "#002e8b")
 grid(NA,22)
 ```
 
 #### Análisis
 
-En los resúmenes numéricos se observa que en promedio no se presentan diferencias significativas entre el PAPA de los estudiantes de ingeniería de sistemas y el PAPA de los de estadística. Además, por el lado de las pruebas SABER 11, se ve que los estudiantes de ingeniería de sistemas tuvieron en promedio mejores puntajes que los de estadística. Sin embargo, el mayor puntaje en las pruebas SABER 11 corresponde a un estudiante de estadística, aunque este es un caso atípico y por eso no representa a la muestra general.
+En los resúmenes numéricos se observa que en promedio no se presentan diferencias significativas entre el PAPA de los estudiantes de ingeniería de sistemas y el PAPA de los de estadística. Además, por el lado de las pruebas SABER 11, se ve que los estudiantes de ingeniería de sistemas tuvieron en promedio mejores puntajes que los de estadística. Sin embargo, el mayor puntaje en las pruebas SABER 11 corresponde a un estudiante de estadística, aunque este es un caso atípico y por eso no es representativo para los estudiantes de estadística.
 
 Al pasar a analizar las gráficas, resulta interesante ver cierta tendencia en los estudiantes de estadística, tendencia que consiste en que, a mayor PAPA, mayor puntaje obtenido en las pruebas SABER 11; sin embargo, esta tendencia no se logra apreciar con los estudiantes de ingeniería de sistemas, por lo que no se puede asegurar que el puntaje en las pruebas SABER 11 esté relaciona con el PAPA. En las gráficas también se puede verificar lo que se observó en los resúmenes numéricos: que los estudiantes de sistemas tuvieron mejor puntaje en sus pruebas SABER 11.
 
@@ -1577,13 +1577,13 @@ plot(enc_aream$Q10_Estrato, enc_aream$Q08_PAPA,
      main = "Estrato vs P.A.P.A - Vivir en AMVA",
      xlab = "Estrato Socioeconomico",
      ylab = "PAPA",
-     ylim = c(3, 5))
+     ylim = c(3, 5), col = "#002e8b")
 
 plot(enc_noaream$Q10_Estrato, enc_noaream$Q08_PAPA,
      main = "Estrato v. P.A.P.A - No vivir en AMVA",
      xlab = "Estrato Socioeconomico",
      ylab = "PAPA",
-     ylim = c(3,5))
+     ylim = c(3,5), col = "#002e8b")
 ```
 
 #### Análisis
@@ -1599,19 +1599,82 @@ Por lo demás, se puede mencionar que en la mayoría de los casos hay una disper
 
 ### Octava pregunta
 
-***¿Tienen el R instalado las personas de estrato socio económico más alto y con más recursos tecnológicos propios?***
+*¿Tienen el R instalado las personas de estrato socioeconómico más alto y con más recursos tecnológicos propios?*
 
-Se podría esperar que, un estudiante con mayores recursos económicos y tecnológicos tenga el r instalado, mientras que, una persona que no cuenta con las mismas posibilidades de una persona de estrato alto, sería más propensa a no tener el r instalado. :D
+Se podría esperar que, un estudiante con mayores recursos económicos y tecnológicos tenga el r instalado, mientras que, una persona que no cuenta con las mismas posibilidades de una persona de estrato alto, sería más propensa a no tener el r instalado.
 
-#### Resumen numérico
+#### Resumen númerico personas  con recursos tecnologícos    
+
+```{r, echo = FALSE}
+table(encuesta$Q10_Estrato, encuesta$numero_recursos_propios, dnn = c("Estrato","Número de recursos propios"))
+```
 
 
+
+#### Resumen numérico para instalación de R
+
+A continuación se presenta una tabla donde se observa la cantidad de personas que han instalado R o no por estrato.
+
+```{r, echo=FALSE}
+enc_r_inst <- encuesta %>%
+  filter(Q10_Estrato == "4" | Q10_Estrato == "5",
+         Q11_R== "Si") 
+
+
+table(encuesta$Q10_Estrato, encuesta$Q11_R, dnn = c("Estrato","R instalado"))
+```
+
+
+
+##### Resumen numérico para la cantidad de recursos de los estratos 4 y 5
+```{r, echo = FALSE}
+summary(enc_r_inst$numero_recursos_propios)
+```
+
+
+
+##### Resumen numérico para la cantidad de recursos de los estratos 1, 2 y 3
+```{r, echo = FALSE}
+enc_r_instb <- encuesta %>%
+  filter(Q10_Estrato == "1" | Q10_Estrato == "2" | Q10_Estrato == "3",
+         Q11_R== "Si") 
+
+summary(enc_r_instb$numero_recursos_propios)
+```
 
 #### Gráfica exploratoria
+```{r, echo = FALSE}
+enc_r <- encuesta %>%
+  filter(Q11_R== "Si") 
+
+enc_rn <- encuesta %>%
+  filter(Q11_R== "No") 
+```
+
+```{r, echo = FALSE, fig.height=6, fig.width=6}
+plot(as.factor(enc_r$Q10_Estrato), enc_r$numero_recursos_propios, 
+     main="Estrato vs Número de recursos propios - R instalado",
+     xlab="Estrato",
+     ylab="Número de recursos propios",
+     ylim=c(0,5),
+     col = "#002e8b")
+plot(as.factor(enc_rn$Q10_Estrato), enc_rn$numero_recursos_propios, 
+     main="Estrato vs Número de recursos propios - R no instalado",
+     xlab="Estrato",
+     ylab="Número de recursos propios",
+     ylim=c(0,5),
+     col = "#002e8b")
+```
 
 
 
 #### Análisis
+
+De acuerdo a las gráficas de caja y bigotes que se analizaron con las variables estrato, número de recursos propios y R instalado se puede evidenciar que todas las cajas son cortadas entre sí por lo que se podría decir que no hay diferencia entre el número de recursos propios que tienen los estudiantes de EDAED según su estrato, salvo en el caso de los estratos 5 y 1, donde se evidencia que los estudiantes de estrato 5 que tienen R instalado tienen en promedio mayor cantidad de recursos propios que sus pares de estrato 1; sin embargo, se debe anotar que los estudiantes que son de estrato 5 son muy pocos, por lo cual puede existir una distorsión en ese análisis en tanto no hay representatividad para ese estrato.
+
+En el caso de los estudiantes que no tienen R instalado solamente se observan diferencias en promedio para los estratos 3 y 1 siendo los estrato 3 los que tienen mayores recursos en promedio que los de estrato 1.
+
+Ahora bien, haciendo un análisis holístico para ambas gráficas, se tiene que no se encuentran diferencias entre los estratos altos y bajos para la instalación del R, excepto por el caso del estrato 5 de quienes tienen el R instalado, pero como ya se explicó, puede implicar un análisis sesgado.
 
 
 
@@ -1760,17 +1823,26 @@ Para este ejercicio se debe considerar que para el caso de la persona no binaria
 plot(enc_mujeres$numero_conspiraciones, enc_mujeres$Q08_PAPA,
      main = "Conspiraciones falsas v. PAPA - género femenino",
      xlab = "Número de conspiraciones falsas",
-     ylab = "PAPA")
+     ylab = "PAPA",
+     ylim = c(3, 5),
+     col = "#002e8b")
 plot(enc_hombres$numero_conspiraciones, enc_hombres$Q08_PAPA,
      main = "Conspiraciones falsas v. PAPA - género masculino",
      xlab = "Número de conspiraciones falsas",
-     ylab = "PAPA")
+     ylab = "PAPA",
+     ylim = c(3, 5),
+     col = "#002e8b")
 ```
 
 
 #### Análisis
 
-***Falta este análisis Simón***
+A partir de los boxplots anteriores, se puede observar que, en términos generales, no hay diferencias en promedio en el número de conspiraciones falsas (y documentadas como tal) pero consideradas verdaderas de acuerdo con el PAPA entre géneros y en cada uno de ellos, salvo en el caso de los estudiantes de género masculino que creen en cinco conspiraciones dadas como falsas, que en promedio tienen menor PAPA que todos los demás estudiantes del curso de EDAED independientemente de su género, pero se debe ser cuidadosos respecto a estos en tanto la submuestra es personas de género masculino que creen en cinco conspiraciones falsas es muy pequeña en comparación con el resto, lo cual da indicios de que podría resultar en un análisis sesgado.
+
+Por otro parte, es curioso que la mediana del PAPA de las personas del curso de EDAED de género femenino es ligeramente mayor que la de los estudiantes de género masculino que solo creen en cero, dos y cuatro conspiraciones, además que hay una menor tendencia en las personas de género femenino en asumir tales conspiraciones como ciertas, lo cual se evidencia en una cantidad nula de personas de este género que creen en cuatro o cinco conspiraciones, lo cual no es el caso para el otro género.
+
+Finalmente, se debe hacer mención de que para efectos de este análisis, no fue considerada la persona no binario teniendo presente que su muestra era de una única persona, lo cual podría conducir a análisis sesgados.
+
 
 ### Décima pregunta
 
@@ -1903,12 +1975,14 @@ plot(as.factor(enc_mujeres$maths), enc_mujeres$tiempo_usado,
      main = "Tiempo empleado vs. rtas. correctas - gen. femenino",
      xlab = "Número de respuestas tomadas como correctas",
      ylab = "Tiempo empleado [min]",
-     ylim = c(0, 30))
+     ylim = c(0, 30),
+     col = "#002e8b")
 plot(as.factor(enc_hombres$maths), enc_hombres$tiempo_usado,
      main = "Tiempo empleado vs. rtas. correctas - gen. masculino",
      xlab = "Número de respuestas tomadas como correctas",
      ylab = "Tiempo empleado [min]",
-     ylim = c(0, 30))
+     ylim = c(0, 30),
+     col = "#002e8b")
 ```
 
 #### Análisis
