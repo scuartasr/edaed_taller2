@@ -1734,13 +1734,22 @@ Adicionalmente, al hacer un análisis simultáneo de ambas gráficas, se observa
 
 ## Conclusiones generales
 
-### Primera conclusión
+### Primera conclusión: de la encuesta.
 
-Bla bla bla
+Para los análisis no univariados realizados en este ejercicio que implicase el género, se halló que no existen diferencias en promedio entre los estudiantes del curso de EDAED del género femenino y del género masculino de acuerdo a las variables que aplicasen para cada caso, lo que lo hace un factor con poca relevancia para extraer mayor información interesante **en los casos analizados.**  Adicionalmente, es relevante detallar que en el curso hay una persona que es no binaria, lo cual da cuenta de como las identidades de género no tradicionales también ocurren en nuestro curso; desafortunadamente, la cantidad de personas que pueden ser agrupadas como no binarias no son muchas, ¡de hecho es solo una!, por lo cual no tiene mucho sentido considerarlas en el análisis que se realizó para hacer la comparación con los otros géneros, de los cuales se conoce mucha más información en cada caso analizado.
 
-### Segunda conclusión
+### Segunda conclusión: sobre el proceso estadístico.
 
-Bla bla bla x2
+El uso de herramientas digitales, y en particular de RStudio para este caso, se hace fundamental para realizar análisis estadístico de manera sagaz, oportuna y precisa, en el sentido que facilita realizar una gran diversidad de procesos de manera expedita, ahorrándole tiempo al analista y que puede ser empleado para realizar más análisis estadísticos con los cuales pueda obtenerse mayor información a partir del experimento realizado, en este caso una encuesta.
+
+
+### Tercera conclusión: sobre el proceso estadístico.
+
+Es evidente que el proceso exploratorio y descriptivo en un análisis estadístico es fundamental, en el sentido que este permite obtener información inicial como datos que no tienen sentido en el marco de alguna variable, para lo cual se puede proceder a realizar diversos procesos de imputación, o realizar filtrados en la base de datos que acerquen al investigador a información útil e interesante que puedan esconder los datos obtenidos a través del experimento. Con esto, se pueden plantear preguntas que orienten mejor un proceso de investigación para así poder pasar a otras fases como los de estimación puntual, análisis inferenciales y de regresión, entre otros.
+
+### Cuarta conclusión: de la encuesta
+
+En general, se observó que el estrato 
 
 ## Recomendaciones
 
