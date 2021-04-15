@@ -1195,31 +1195,31 @@ Como dice la pregunta, se plantea el supuesto de que aquellos estudiantes que te
 table(encuesta$Q10_Estrato, encuesta$numero_recursos_propios, dnn = c("Estrato","Número de recursos propios"))
 ```
 
-###### Resumen de número de recursos propios para el Estrato 1:
+###### Resumen de número de recursos tecnológicos propios para el Estrato 1:
 
 ```{r, echo = FALSE}
 summary(estrato1$numero_recursos_propios)
 ```
 
-###### Resume de número de recursos propios para el Estrato 2:
+###### Resume de número de recursos tecnológicos propios para el Estrato 2:
 
 ```{r, echo = FALSE}
 summary(estrato2$numero_recursos_propios)
 ```
 
-###### Resumen de número de recursos propios para el Estrato 3:
+###### Resumen de número de recursos tecnológicos propios para el Estrato 3:
 
 ```{r, echo = FALSE}
 summary(estrato3$numero_recursos_propios)
 ```
 
-###### Resumen de número de recursos propios para el Estrato 4:
+###### Resumen de número de recursos tecnológicos propios para el Estrato 4:
 
 ```{r, echo = FALSE}
 summary(estrato4$numero_recursos_propios)
 ```
 
-###### Resumen de número de recursos propios para el Estrato 5:
+###### Resumen de número de recursos tecnológicos propios para el Estrato 5:
 
 ```{r, echo = FALSE}
 summary(estrato5$numero_recursos_propios)
@@ -1314,7 +1314,7 @@ plot(encuesta$opciones_divisor, encuesta$V51_Avance, main = "Pregunta divisores 
 
 #### Análisis
 
-Es interesante que al mirar los resúmenes numéricos se ve que en promedio aquellos estudiantes que respondieron correctamente las preguntas del área sombreada y/o de los divisores tienen un mayor avance en sus carreras, aunque esto solamente en promedio, porque hay algunas excepciones a esta regla...
+Es interesante que al mirar los resúmenes numéricos se ve que en promedio aquellos estudiantes que respondieron correctamente las preguntas del área sombreada y/o de los divisores tienen un mayor avance en sus carreras, aunque esto solamente en promedio, porque hay algunas excepciones a esta regla.
 
 **(Señores estadísticos, ayuden por favor completando con el análisis de las dos boxplots anteriores. Muchas gracias)**
 
@@ -1322,25 +1322,73 @@ Es interesante que al mirar los resúmenes numéricos se ve que en promedio aque
   
 ***¿Hay alguna relación entre la edad, el PAPA y el género de los estudiantes?***
 
-Como grupo, consideramos que seguramente mientras más edad tenga el estudiante, más alto será su promedio, ya que mientras más madurez presente la persona más responsabilidad obtiene, especialmente si son mujeres, lo cual esperemos se vea reflejado en cada gráfica.
+Como grupo, consideramos que mientras más edad tengan los estudiantes, más alto será su PAPA, ya que mientras más madurez presente la persona más responsabilidad obtiene, sobretodo si se trata de las mujeres, por lo que esperemos que esto se vea reflejado al analizar los resúmenes y las gráfica. Más específicamente, esperamos que los estudiantes de género femenino tengan PAPA más alto que los estudiantes de género masculino, y dentro de estos casos, se espera que aquellos estudiantes de mayor edad sean los que presenten los PAPAs más altos. No se tomará en cuenta el género "Otro" por encontrarse una única vez en la encuesta.
 
-#### Resumen numérico
+#### Resumen numérico: Género Masculino
 
+```{r, echo = FALSE}
+enc_hombres <- encuesta %>% 
+  filter(Q01_Genero == "Masculino")
 
+intervalos_PAPAhom <- cut(enc_hombres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+table(round(enc_hombres$Edad,0), intervalos_PAPAhom, dnn = c("Edad Hombres (Años)","Intervalos del PAPA"))
+```
+
+###### Resumen de la edad de los estudiantes de género masculino:
+
+```{r, echo = FALSE}
+summary(enc_hombres$Edad)
+```
+
+###### Resumen del PAPA de los estudiantes de género masculino:
+
+```{r, echo = FALSE}
+summary(enc_hombres$Q08_PAPA)
+```
+
+#### Resumen numérico: Género Femenino
+
+```{r, echo = FALSE}
+enc_mujeres <- encuesta %>% 
+  filter(Q01_Genero == "Femenino")
+
+intervalos_PAPAmuj <- cut(enc_mujeres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+table(round(enc_mujeres$Edad,0), intervalos_PAPAmuj, dnn = c("Edad Mujeres (Años)","Intervalos del PAPA"))
+```
+
+###### Resumen de la edad de las estudiantes de género femenino:
+
+```{r, echo = FALSE}
+summary(enc_mujeres$Edad)
+```
+
+###### Resumen del PAPA de las estudiantes de género femenino:
+
+```{r, echo = FALSE}
+summary(enc_mujeres$Q08_PAPA)
+```
 
 #### Gráfica exploratoria
 
+```{r, echo = FALSE}
+plot(intervalos_PAPAhom, enc_hombres$Edad, main = "PAPA vs Edad (Hombres)", xlab = "Intervalo del PAPA", ylab = "Edad (Años)", ylim = c(17,39))
+grid(NA,24)
 
+plot(intervalos_PAPAmuj, enc_mujeres$Edad, main = "PAPA vs Edad (Mujeres)", xlab = "Intervalo del PAPA", ylab = "Edad (Años)", ylim = c(17,39))
+grid(NA,24)
+```
 
 #### Análisis
 
+Por el lado de las edades, se ve que el promedio de edad para hombres y mujeres en el curso es el mismo, correspondiente a una edad promedio de 20 años. Además, en general las mujeres del curso son más jóvenes que los hombres. También es bastante interesante que entre las mujeres ninguna tiene un PAPA menor a 3.6 y, aunque la diferencia promedio del PAPA entre los hombres y las mujeres no se supera en una unidad, en general se ve que las mujeres presentan mejor PAPA que los hombres. 
 
+Por otro lado, en las gráficas se ve que el rango de edad para los PAPAs más altos es relativamente menor que el rango de edad para los PAPAs intermedios, por lo que los estudiantes de mayor edad no necesariamente tienen un PAPA más alto que el resto del curso. Así se concluye que las mujeres en general presentaron mejor PAPA que los hombres, mientras que el PAPA no depende de la edad del estudiante.
 
 ### Sexta pregunta
 
 ***¿Aquellos estudiantes con PAPA alto y que obtuvieron un buen puntaje en sus pruebas saber confiaron más en sus compañeros y estimaron que un alto porcentaje del curso respondería correctamente las preguntas de álgebra y geometría?***
 
-Pensamos que tal vez las personas que más se destacan en promedio y puntaje en sus pruebas saber, tienen un alta estima en su grupo, y consideran que el grupo tuvo un buen desempeño en las preguntas de álgebra y geometría
+Pensamos que tal vez las personas que más se destacan en promedio y puntaje en sus pruebas saber, tienen en alta estima al resto del curso, y consideran que el grupo tuvo un buen desempeño en las preguntas de álgebra y geometría.
 
 #### Resumen numérico
 
@@ -1423,13 +1471,6 @@ A partir de lo visto en la segunda pregunta, se puede plantear que existe una li
 
 La siguiente es una tabla que da cuenta del número de conspiraciones que están documentadas como falsas pero que son asumidas como verdaderas por parte de las mujeres del curso de EDAED:
 
-```{r, include = FALSE}
-enc_mujeres <- encuesta %>% 
-  filter(Q01_Genero == "Femenino")
-
-intervalos_PAPAmuj <- cut(enc_mujeres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
-```
-
 ```{r, echo = FALSE}
 conspiraciones0M <- enc_mujeres %>%
   filter(numero_conspiraciones == "0")
@@ -1470,13 +1511,6 @@ summary(conspiraciones2M$Q08_PAPA)
 #### Resumen numérico: personas del género masculino
 
 La siguiente es una tabla que da cuenta del número de conspiraciones que están documentadas como falsas pero que son asumidas como verdaderas por parte de las personas que se autoperciben como parte del género masculino del curso de EDAED:
-
-```{r, include = FALSE}
-enc_hombres <- encuesta %>% 
-  filter(Q01_Genero == "Masculino")
-
-intervalos_PAPAhom <- cut(enc_hombres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
-```
 
 ```{r, echo = FALSE}
 conspiraciones0H <- enc_hombres %>%
@@ -1582,8 +1616,7 @@ plot(enc_hombres$numero_conspiraciones, enc_hombres$Q08_PAPA,
 
 #### Análisis
 
-
-
+***Falta este análisis Simón***
 
 ### Décima pregunta
 
@@ -1667,8 +1700,7 @@ maths2h <- enc_hombres %>%
 maths3h <- enc_hombres %>%
   filter(maths == "3")
 
-table(enc_hombres$maths, intervalos_tiempohom,dnn = c("# Respuestas correctas",
-                                                      "Intervalos de tiempo empleado [min]"))
+table(enc_hombres$maths, intervalos_tiempohom,dnn = c("# Respuestas correctas","Intervalos de tiempo empleado [min]"))
 ```
 
 ##### Resumen numérico del tiempo empleado para los hombres con una respuesta correcta
@@ -1697,8 +1729,7 @@ enc_otrog <- encuesta %>%
 
 intervalos_tiempog <- cut(enc_otrog$tiempo_usado,c(0,5,10,15,20,25,30),include.lowest=TRUE)
 
-table(enc_otrog$maths, intervalos_tiempog,dnn = c("# Respuestas correctas",
-                                                      "Intervalos de tiempo empleado [min]"))
+table(enc_otrog$maths, intervalos_tiempog,dnn = c("# Respuestas correctas", "Intervalos de tiempo empleado [min]"))
 ```
 
 ```{r, echo = FALSE}
@@ -1750,18 +1781,12 @@ De acuerdo a la configuración del RStudio, la encuesta no se leía en la codifi
 
 ### Segunda recomendación
 
-Para esta encuesta se tomó como el tiempo usado aquel que había entre la hora en que la encuesta fue abierta y el tiempo de entrada. Sin embargo, esto puede presentar una distorsión del tiempo real empleado para resolver esta encuesta, pues no necesariamente se cumple que los estudiantes del curso abrirían la encuesta justo en el momento en que esta fue liberada (de esto hecho se podría etiquetar como simple ya que, en el mejor de los casos, habría una diferencia de algunos milisegundos, ¡y eso con el mejor internet de Colombia!).
+Para esta encuesta se tomó como el tiempo usado aquel que había entre la hora en que la encuesta fue abierta y el tiempo de entrega. Sin embargo, esto puede presentar una distorsión del tiempo real empleado para resolver esta encuesta, pues no necesariamente se cumple que los estudiantes del curso abrirían la encuesta justo en el momento en que esta fue liberada (de esto hecho se podría etiquetar como simple ya que, en el mejor de los casos, habría una diferencia de algunos milisegundos, ¡y eso con el mejor internet de Colombia!).
 
-En ese sentido, se podría apelar a una herramienta que tienen muchos sistemas encuestas virtuales que, además de tomar la hora de entrega, registra la hora de inicio de la encuesta y, con esto, se pueden realizar las transformaciones adecuadas en un software como R con el objetivo de conseguir el tiempo de solución real.
-
-### Segunda recomendación
-
-Bla bla bla x3
+En ese sentido, se podría apelar a una herramienta que tienen muchos sistemas de encuestas virtuales que, además de tomar la hora de entrega, registra la hora de inicio de la encuesta, y una vez con esto se pueden realizar las transformaciones adecuadas en un software como R con el objetivo de conseguir el tiempo de solución real.
 
 ## Bibliografía
 
   - Cosas del icfes: https://laquecorresponda.com.co
   - Más cibergrafías que hayan usado...
  
-=======
->>>>>>> Stashed changes
