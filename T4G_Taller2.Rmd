@@ -1452,7 +1452,7 @@ grid(NA,22)
 
 #### Análisis
 
-En los resúmenes numéricos se observa que en promedio no se presentan diferencias significativas entre el PAPA de los estudiantes de ingeniería de sistemas y el PAPA de los de estadística. Además, por el lado de las pruebas SABER 11, se ve que los estudiantes de ingeniería de sistemas tuvieron en promedio mejores puntajes que los de estadística. Sin embargo, el mayor puntaje en las pruebas SABER 11 corresponde a un estudiante de esadística, aunque este es un caso atípico y por eso no representa a la muestra general.
+En los resúmenes numéricos se observa que en promedio no se presentan diferencias significativas entre el PAPA de los estudiantes de ingeniería de sistemas y el PAPA de los de estadística. Además, por el lado de las pruebas SABER 11, se ve que los estudiantes de ingeniería de sistemas tuvieron en promedio mejores puntajes que los de estadística. Sin embargo, el mayor puntaje en las pruebas SABER 11 corresponde a un estudiante de estadística, aunque este es un caso atípico y por eso no representa a la muestra general.
 
 Al pasar a analizar las gráficas, resulta interesante ver cierta tendencia en los estudiantes de estadística, tendencia que consiste en que, a mayor PAPA, mayor puntaje obtenido en las pruebas SABER 11; sin embargo, esta tendencia no se logra apreciar con los estudiantes de ingeniería de sistemas, por lo que no se puede asegurar que el puntaje en las pruebas SABER 11 esté relaciona con el PAPA. En las gráficas también se puede verificar lo que se observó en los resúmenes numéricos: que los estudiantes de sistemas tuvieron mejor puntaje en sus pruebas SABER 11.
 
