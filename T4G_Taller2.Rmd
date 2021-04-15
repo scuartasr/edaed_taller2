@@ -1058,37 +1058,37 @@ intervalos_PAPA <- cut(encuesta$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=T
 table(encuesta$numero_conspiraciones, intervalos_PAPA,dnn = c("# Conspiraciones","Intervalos del PAPA"))
 ```
 
-###### Resumen del PAPA para la creencia en 0 conspiraciones falsas:
+##### Resumen del PAPA para la creencia en 0 conspiraciones falsas:
 
 ```{r, echo = FALSE}
 summary(conspiraciones0$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para la creencia en 1 conspiración falsa:
+##### Resumen del PAPA para la creencia en 1 conspiración falsa:
 
 ```{r, echo = FALSE}
 summary(conspiraciones1$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para la creencia en 2 conspiraciones falsas:
+##### Resumen del PAPA para la creencia en 2 conspiraciones falsas:
 
 ```{r, echo = FALSE}
 summary(conspiraciones2$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para la creencia en 3 conspiraciones falsas:
+##### Resumen del PAPA para la creencia en 3 conspiraciones falsas:
 
 ```{r, echo = FALSE}
 summary(conspiraciones3$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para la creencia en 4 conspiraciones falsas:
+##### Resumen del PAPA para la creencia en 4 conspiraciones falsas:
 
 ```{r, echo = FALSE}
 summary(conspiraciones4$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para la creencia en 5 conspiraciones falsas:
+##### Resumen del PAPA para la creencia en 5 conspiraciones falsas:
 
 ```{r, echo = FALSE}
 summary(conspiraciones5$Q08_PAPA)
@@ -1130,31 +1130,31 @@ estrato5 <- encuesta %>%
 
 table(encuesta$Q10_Estrato, intervalos_PAPA, dnn = c("Estrato","Intervalos del PAPA"))
 ```
-###### Resumen del PAPA para el Estrato 1:
+##### Resumen del PAPA para el Estrato 1:
 
 ```{r, echo = FALSE}
 summary(estrato1$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para el Estrato 2:
+##### Resumen del PAPA para el Estrato 2:
 
 ```{r, echo = FALSE}
 summary(estrato2$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para el Estrato 3:
+##### Resumen del PAPA para el Estrato 3:
 
 ```{r, echo = FALSE}
 summary(estrato3$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para el Estrato 4:
+##### Resumen del PAPA para el Estrato 4:
 
 ```{r, echo = FALSE}
 summary(estrato4$Q08_PAPA)
 ```
 
-###### Resumen del PAPA para el Estrato 5:
+##### Resumen del PAPA para el Estrato 5:
 
 ```{r, echo = FALSE}
 summary(estrato5$Q08_PAPA)
@@ -1195,31 +1195,31 @@ Como dice la pregunta, se plantea el supuesto de que aquellos estudiantes que te
 table(encuesta$Q10_Estrato, encuesta$numero_recursos_propios, dnn = c("Estrato","Número de recursos propios"))
 ```
 
-###### Resumen de número de recursos tecnológicos propios para el Estrato 1:
+##### Resumen de número de recursos tecnológicos propios para el Estrato 1:
 
 ```{r, echo = FALSE}
 summary(estrato1$numero_recursos_propios)
 ```
 
-###### Resume de número de recursos tecnológicos propios para el Estrato 2:
+##### Resume de número de recursos tecnológicos propios para el Estrato 2:
 
 ```{r, echo = FALSE}
 summary(estrato2$numero_recursos_propios)
 ```
 
-###### Resumen de número de recursos tecnológicos propios para el Estrato 3:
+##### Resumen de número de recursos tecnológicos propios para el Estrato 3:
 
 ```{r, echo = FALSE}
 summary(estrato3$numero_recursos_propios)
 ```
 
-###### Resumen de número de recursos tecnológicos propios para el Estrato 4:
+##### Resumen de número de recursos tecnológicos propios para el Estrato 4:
 
 ```{r, echo = FALSE}
 summary(estrato4$numero_recursos_propios)
 ```
 
-###### Resumen de número de recursos tecnológicos propios para el Estrato 5:
+##### Resumen de número de recursos tecnológicos propios para el Estrato 5:
 
 ```{r, echo = FALSE}
 summary(estrato5$numero_recursos_propios)
@@ -1273,13 +1273,13 @@ intervalos_avance <- cut(encuesta$V51_Avance,c(10,20,30,40,50,60,70,80),include.
 table(encuesta$Q24_area, intervalos_avance, dnn = c("Selección área sombreada","Intervalos de avance en la carrera"))
 ```
 
-###### Resumen del avance en la carrera para los que respondieron correctamente la pregunta del área sombreada:
+##### Resumen del avance en la carrera para los que respondieron correctamente la pregunta del área sombreada:
 
 ```{r, echo = FALSE}
 summary(resp_correcta_as$V51_Avance)
 ```
 
-###### Resumen del avance en la carrera para los que respondieron incorrectamente la pregunta del área sombreada:
+##### Resumen del avance en la carrera para los que respondieron incorrectamente la pregunta del área sombreada:
 
 ```{r, echo = FALSE}
 summary(resp_incorrecta_as$V51_Avance)
@@ -1292,13 +1292,13 @@ intervalos_avance <- cut(encuesta$V51_Avance,c(10,20,30,40,50,60,70,80),include.
 table(encuesta$opciones_divisor, intervalos_avance, dnn = c("Número de opciones","Intervalos de avance en la carrera"))
 ```
 
-###### Resumen del avance en la carrera para los que respondieron correctamente la pregunta de los divisores:
+##### Resumen del avance en la carrera para los que respondieron correctamente la pregunta de los divisores:
 
 ```{r, echo = FALSE}
 summary(resp_correcta_div$V51_Avance)
 ```
 
-###### Resumen del avance en la carrera para los que respondieron incorrectamente la pregunta de los divisores:
+##### Resumen del avance en la carrera para los que respondieron incorrectamente la pregunta de los divisores:
 
 ```{r, echo = FALSE}
 summary(resp_incorrecta_div$V51_Avance)
@@ -1334,13 +1334,13 @@ intervalos_PAPAhom <- cut(enc_hombres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lo
 table(round(enc_hombres$Edad,0), intervalos_PAPAhom, dnn = c("Edad Hombres (Años)","Intervalos del PAPA"))
 ```
 
-###### Resumen de la edad de los estudiantes de género masculino:
+##### Resumen de la edad de los estudiantes de género masculino:
 
 ```{r, echo = FALSE}
 summary(enc_hombres$Edad)
 ```
 
-###### Resumen del PAPA de los estudiantes de género masculino:
+##### Resumen del PAPA de los estudiantes de género masculino:
 
 ```{r, echo = FALSE}
 summary(enc_hombres$Q08_PAPA)
@@ -1356,13 +1356,13 @@ intervalos_PAPAmuj <- cut(enc_mujeres$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lo
 table(round(enc_mujeres$Edad,0), intervalos_PAPAmuj, dnn = c("Edad Mujeres (Años)","Intervalos del PAPA"))
 ```
 
-###### Resumen de la edad de las estudiantes de género femenino:
+##### Resumen de la edad de las estudiantes de género femenino:
 
 ```{r, echo = FALSE}
 summary(enc_mujeres$Edad)
 ```
 
-###### Resumen del PAPA de las estudiantes de género femenino:
+##### Resumen del PAPA de las estudiantes de género femenino:
 
 ```{r, echo = FALSE}
 summary(enc_mujeres$Q08_PAPA)
@@ -1386,21 +1386,75 @@ Por otro lado, en las gráficas se ve que el rango de edad para los PAPAs más a
 
 ### Sexta pregunta
 
-***¿Aquellos estudiantes con PAPA alto y que obtuvieron un buen puntaje en sus pruebas saber confiaron más en sus compañeros y estimaron que un alto porcentaje del curso respondería correctamente las preguntas de álgebra y geometría?***
+***¿Qué relación existe entre la carrera de cada uno de los estudiantes, su PAPA y su puntaje en el ICFES?***
 
-Pensamos que tal vez las personas que más se destacan en promedio y puntaje en sus pruebas saber, tienen en alta estima al resto del curso, y consideran que el grupo tuvo un buen desempeño en las preguntas de álgebra y geometría.
+Aunque no tenemos ninguna seguridad, vamos a plantear inicialmente que los estudiantes de la carrera de ingeniería de sistemas tendrán en general un PAPA más alto, al igual que un puntaje en sus pruebas Saber también más alto. El resto de carreras no se tienen en cuenta para analizar por la poca cantidad de estudiantes pertenecientes a dichas carreras.
 
-#### Resumen numérico
+#### Resumen numérico: Estudiantes de Ingeniería de Sistemas e Informática
 
+```{r, echo = FALSE}
+enc_sistemas <- encuesta %>% 
+  filter(Q03_Carrera == "Ingeniería de sistemas e informática")
 
+enc_sistemas$Q05_Saber11[!is.na(enc_sistemas$Q05_Saber11) & is.na(enc_sistemas$Q08_PAPA)] <- NA
+enc_sistemas$Q08_PAPA[!is.na(enc_sistemas$Q08_PAPA) & is.na(enc_sistemas$Q05_Saber11)] <- NA
+intervalos_PAPAis <- cut(enc_sistemas$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+intervalos_SABERis <- cut(enc_sistemas$Q05_Saber11,c(0,250,300,350,400,500),include.lowest=TRUE)
+table(intervalos_SABERis, intervalos_PAPAis, dnn = c("Intervalos Puntaje SABER 11","Intervalos del PAPA"))
+```
 
-#### Gráfica exploratoria
+##### Resumen del PAPA de los estudiantes de ingeniería de sistemas:
 
+```{r, echo = FALSE}
+summary(enc_sistemas$Q08_PAPA)
+```
 
+##### Resumen del Puntaje en las pruebas SABER 11 para los estudiantes de ingeniería de sistemas:
+
+```{r, echo = FALSE}
+summary(enc_sistemas$Q05_Saber11)
+```
+
+#### Resumen numérico: Estudiantes de Estadística
+
+```{r, echo = FALSE}
+enc_estadistica <- encuesta %>% 
+  filter(Q03_Carrera == "Estadística")
+
+enc_estadistica$Q05_Saber11[!is.na(enc_estadistica$Q05_Saber11) & is.na(enc_estadistica$Q08_PAPA)] <- NA
+enc_estadistica$Q08_PAPA[!is.na(enc_estadistica$Q08_PAPA) & is.na(enc_estadistica$Q05_Saber11)] <- NA
+intervalos_PAPAes <- cut(enc_estadistica$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),include.lowest=TRUE)
+intervalos_SABERes <- cut(enc_estadistica$Q05_Saber11,c(0,250,300,350,400,500),include.lowest=TRUE)
+table(intervalos_SABERes, intervalos_PAPAes, dnn = c("Intervalos Puntaje SABER 11","Intervalos del PAPA"))
+```
+
+##### Resumen del PAPA de los estudiantes de estadística:
+
+```{r, echo = FALSE}
+summary(enc_estadistica$Q08_PAPA)
+```
+
+##### Resumen del Puntaje en las pruebas SABER 11 para los estudiantes de estadística del curso:
+
+```{r, echo = FALSE}
+summary(enc_estadistica$Q05_Saber11)
+```
+
+#### Gráficas exploratorias
+
+```{r, echo = FALSE}
+plot(intervalos_PAPAis, enc_sistemas$Q05_Saber11, main = "PAPA vs Puntaje SABER 11 (Sistemas)", xlab = "Intervalo del PAPA", ylab = "Puntaje SABER 11", ylim = c(0,500))
+grid(NA,22)
+
+plot(intervalos_PAPAes, enc_estadistica$Q05_Saber11, main = "PAPA vs Puntaje SABER 11 (Estadística)", xlab = "Intervalo del PAPA", ylab = "Puntaje SABER 11", ylim = c(0,500))
+grid(NA,22)
+```
 
 #### Análisis
 
+En los resúmenes numéricos se observa que en promedio no se presentan diferencias significativas entre el PAPA de los estudiantes de ingeniería de sistemas y el PAPA de los de estadística. Además, por el lado de las pruebas SABER 11, se ve que los estudiantes de ingeniería de sistemas tuvieron en promedio mejores puntajes que los de estadística. Sin embargo, el mayor puntaje en las pruebas SABER 11 corresponde a un estudiante de esadística, aunque este es un caso atípico y por eso no representa a la muestra general.
 
+Al pasar a analizar las gráficas, resulta interesante ver cierta tendencia en los estudiantes de estadística, tendencia que consiste en que, a mayor PAPA, mayor puntaje obtenido en las pruebas SABER 11; sin embargo, esta tendencia no se logra apreciar con los estudiantes de ingeniería de sistemas, por lo que no se puede asegurar que el puntaje en las pruebas SABER 11 esté relaciona con el PAPA. En las gráficas también se puede verificar lo que se observó en los resúmenes numéricos: que los estudiantes de sistemas tuvieron mejor puntaje en sus pruebas SABER 11.
 
 ### Séptima pregunta
 
@@ -1408,11 +1462,9 @@ Pensamos que tal vez las personas que más se destacan en promedio y puntaje en 
 
 Se podría esperar que una persona que vive en el Área Metropolitana del Valle de Aburrá y que tenga buenos ingresos económicos tiene más posibilidades de mejorar su promedio académico, ya que se encuentra más cerca de la Universidad y tiene más posibilidades de asesorías privadas o cursos para mejorar su promedio, mientras que alguien fuera del Valle de Aburrá con pocos ingresos le es mucho más difícil adquirir estos privilegios.
 
-
 #### Resumen numérico personas que si residen en el Area Metropolitana del Valle de Aburra
 
-
-Se realizara una tabla donde se evidencia el numero de personas que están residiendo en el área metropolitana y que pertenecen a los estratos 1, 2, 3, 4, y 5.
+Se realiza una tabla donde se evidencia el numero de personas que están residiendo en el área metropolitana y que pertenecen a los estratos 1, 2, 3, 4, y 5.
 
 ```{r}
 enc_aream <- encuesta %>% 
@@ -1437,35 +1489,35 @@ estratodentro5 <- enc_aream %>%
 table(enc_aream$Q10_Estrato, intervalos_PAPAareametro,dnn = c("Estrato","Intervalos del PAPA"))
 ```
 
-#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato uno
+##### **Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato uno**
 
 En este caso no es necesario realizar un resumen numérico, ya que como se observa en la tabla anterior, no hay personas que viven dentro del Valle de Aburrá y que su residencia esté catalogada como de estrato uno.
 
-#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato dos
+##### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato dos
 
 ```{r, echo = FALSE}
 summary(estratodentro2$Q08_PAPA)
 ```
 
-#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato tres
+##### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato tres
 
 ```{r, echo = FALSE}
 summary(estratodentro3$Q08_PAPA)
 ```
 
-#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato cuatro
+##### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato cuatro
 
 ```{r, echo = FALSE}
 summary(estratodentro4$Q08_PAPA)
 ```
 
-#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato cinco
+##### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato cinco
 
 ```{r, echo = FALSE}
 summary(estratodentro5$Q08_PAPA)
 ```
 
-#### Resumen numérico personas que no residen en el Área Metropolitana del Valle de Aburra
+##### Resumen numérico personas que no residen en el Área Metropolitana del Valle de Aburra
 
 ```{r}
 enc_noaream <- encuesta %>% 
@@ -1490,34 +1542,34 @@ estratofuera5 <- enc_noaream %>%
 table(enc_noaream$Q10_Estrato, intervalos_PAPAnoareametro,dnn = c("Estrato","Intervalos del PAPA"))
 ```
 
-#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato uno
+##### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato uno
 
 ```{r}
 summary(estratofuera1$Q08_PAPA)
 ```
 
-#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato dos
+##### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato dos
 
 ```{r}
 summary(estratofuera2$Q08_PAPA)
 ```
 
-#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato tres
+##### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato tres
 
 ```{r}
 summary(estratofuera3$Q08_PAPA)
 ```
 
-#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato cuatro
+##### **Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato cuatro**
 
 En este caso no es necesario realizar un resumen numérico, ya que como se observa en la tabla anterior, no hay personas que viven por fuera del Valle de Aburrá y que su residencia esté catalogada como de estrato cuatro
 
 
-#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato cinco
+##### **Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato cinco**
 
 En este caso no es necesario realizar un resumen numérico, ya que como se observa en la tabla anterior, no hay personas que viven por fuera del Valle de Aburrá y que su residencia esté catalogada como de estrato cinco.
 
-#### Gráfica exploratoria
+#### Gráficas exploratorias
 
 
 ```{r, , echo = FALSE, fig.height=4, fig.width=4}
@@ -1529,10 +1581,11 @@ plot(enc_aream$Q10_Estrato, enc_aream$Q08_PAPA,
 
 plot(enc_noaream$Q10_Estrato, enc_noaream$Q08_PAPA,
      main = "Estrato v. P.A.P.A - No vivir en AMVA",
-     xlab = "Estrato socioeconomico",
+     xlab = "Estrato Socioeconomico",
      ylab = "PAPA",
      ylim = c(3,5))
 ```
+
 #### Análisis
 
 Los datos de las variables PAPA, estrato y residencia o no en AMVA fueron debidamente analizados y filtrados para poder realizar los anteriores diagramas de cajas y bigotes. El primer diagrama nos responde a la pregunta siete planteada al comienzo, la cual nos cuestionaba si pertenecer a un estrato alto y residir en el AMVA tenía relación directa con tener un PAPA alto, para lo cual no hay evidencia suficiente para decir que estas personas de estrato alto (cuatro y cinco) y residen en el AMVA tienen mejor PAPA que los de menor estrato, pues como vemos, la caja del estrato cinco corta al las otras y además, se debe tener en cuenta que los datos de personas de estrato cinco que viven en el AMVA son muy pocos comparados con sus pares de menor estrato, por lo cual no se puede realizar un análisis totalmente adecuado dada la insuficiencia de información en este caso.
