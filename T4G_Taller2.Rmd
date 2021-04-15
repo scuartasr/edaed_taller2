@@ -1515,21 +1515,6 @@ plot(enc_noaream$Q10_Estrato, enc_noaream$Q08_PAPA,
 
 
 
-```{r}
-plot(encuesta$Q10_Estrato, encuesta$Q08_PAPA,
-    main = "Estrato socioeconomico VS PAPA", 
-    xlab = "Estrato socioeconomico", 
-    ylab = "PAPA")
-```
-
-```{r}
-plot(encuesta$Q09_EnAreaMetropolitana, encuesta$Q08_PAPA,
-    main = "Area Metropolitana VS PAPA", 
-    xlab = "Estar en el area metropolitana", 
-    ylab = "PAPA")
-```
-
-
 #### Resumen numérico
 
 
