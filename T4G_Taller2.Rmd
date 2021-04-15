@@ -1750,6 +1750,12 @@ De acuerdo a la configuración del RStudio, la encuesta no se leía en la codifi
 
 ### Segunda recomendación
 
+Para esta encuesta se tomó como el tiempo usado aquel que había entre la hora en que la encuesta fue abierta y el tiempo de entrada. Sin embargo, esto puede presentar una distorsión del tiempo real empleado para resolver esta encuesta, pues no necesariamente se cumple que los estudiantes del curso abrirían la encuesta justo en el momento en que esta fue liberada (de esto hecho se podría etiquetar como simple ya que, en el mejor de los casos, habría una diferencia de algunos milisegundos, ¡y eso con el mejor internet de Colombia!).
+
+En ese sentido, se podría apelar a una herramienta que tienen muchos sistemas encuestas virtuales que, además de tomar la hora de entrega, registra la hora de inicio de la encuesta y, con esto, se pueden realizar las transformaciones adecuadas en un software como R con el objetivo de conseguir el tiempo de solución real.
+
+### Segunda recomendación
+
 Bla bla bla x3
 
 ## Bibliografía
