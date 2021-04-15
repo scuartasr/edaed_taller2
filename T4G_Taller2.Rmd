@@ -176,7 +176,7 @@ encuesta %>%
 
 En este, claramente no tiene sentido obtener un puntaje de 580, máxime en el año 2009 (en el cual la persona que dice tener tal puntaje presentó el examen) cuando el puntaje máximo correspondía a 400 puntos), y como no existe ningún valor coherente posible para imputar de forma directa este valor, entonces se opta por descartarlo de la base de datos y convertirlo en un *NA*. 
 
-En el caso de los ceros, se presentan dos casos diferentes: en el primero (con código de respuesta 2505) se tiene que la persona presentó el examen de Estado en el año 1999, en el cual el puntaje mínimo era de cien puntos, por lo que se le imputará un *NA* a este cero; sin embargo, para el cero asociado a la respuesta número 2487, como esta persona rindió el test en el 2019, cuando sí era posible obtener un puntaje nulo, entonces el valor se mantendrá.
+En el caso de los ceros, se presentan dos casos diferentes: en el primero (con código de respuesta 2505) se tiene que la persona presentó el examen de Estado en el año 1999, en el cual el puntaje mínimo era de cien puntos, por lo que se le imputará un *NA* a este cero; sin embargo, para el cero asociado a la respuesta número 2487, como esta persona rindió el test en el 2019, cuando sí era posible obtener un puntaje nulo, entonces el valor se mantendrá [1].
 
 ```{r, include = FALSE}
 # Imputaciones
@@ -853,12 +853,12 @@ Cabe resaltar que la siguiente pregunta sobre si no se tenian datos en el celula
 
 ##### **Recursos informáticos: portátil propio**
 ```{r, echo = FALSE}
-summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.propio)
+summary(encuesta$Q14_RecursosInformaticos..Portátil.propio)
 ```
 
 ##### **Recursos informáticos: portátil no propio**
 ```{r, echo = FALSE}
-summary(encuesta$Q14_RecursosInformaticos..PortÃ.til.no.propio)
+summary(encuesta$Q14_RecursosInformaticos..Portátil.no.propio)
 ```
 
 
@@ -1409,10 +1409,10 @@ Pensamos que tal vez las personas que más se destacan en promedio y puntaje en 
 Se podría esperar que una persona que vive en el Área Metropolitana del Valle de Aburrá y que tenga buenos ingresos económicos tiene más posibilidades de mejorar su promedio académico, ya que se encuentra más cerca de la Universidad y tiene más posibilidades de asesorías privadas o cursos para mejorar su promedio, mientras que alguien fuera del Valle de Aburrá con pocos ingresos le es mucho más difícil adquirir estos privilegios.
 
 
-#### Resumen numérico, personas que si residen en el Area Metropolitana del Valle de Aburra
+#### Resumen numérico personas que si residen en el Area Metropolitana del Valle de Aburra
 
 
-Se realizara una tabla donde se evidencia el numero de personas que estan residiendo en el area metropolitana y que pertenecen a los estratos 1, 2, 3, 4, y 5.
+Se realizara una tabla donde se evidencia el numero de personas que están residiendo en el área metropolitana y que pertenecen a los estratos 1, 2, 3, 4, y 5.
 
 ```{r}
 enc_aream <- encuesta %>% 
@@ -1424,37 +1424,48 @@ intervalos_PAPAareametro <- cut(enc_aream$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),includ
 
 ```{r}
 estratodentro1 <- enc_aream %>%
-  filter(Q09_EnAreaMetropolitana == "1")
-estratodentro <- enc_aream %>%
-  filter(Q09_EnAreaMetropolitana == "1")
-estratodentro <- enc_aream %>%
-  filter(Q09_EnAreaMetropolitana == "1")
-estratodentro <- enc_aream %>%
-  filter(Q09_EnAreaMetropolitana == "1")
-estratodentro <- enc_aream %>%
-  filter(Q09_EnAreaMetropolitana == "1")
+  filter(Q10_Estrato == "1")
+estratodentro2 <- enc_aream %>%
+  filter(Q10_Estrato == "2")
+estratodentro3 <- enc_aream %>%
+  filter(Q10_Estrato == "3")
+estratodentro4 <- enc_aream %>%
+  filter(Q10_Estrato == "4")
+estratodentro5 <- enc_aream %>%
+  filter(Q10_Estrato == "5")
 
 table(enc_aream$Q10_Estrato, intervalos_PAPAareametro,dnn = c("Estrato","Intervalos del PAPA"))
 ```
-Resumen numerico arrojado
+
+#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato uno
+
+En este caso no es necesario realizar un resumen numérico, ya que como se observa en la tabla anterior, no hay personas que viven dentro del Valle de Aburrá y que su residencia esté catalogada como de estrato uno.
+
+#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato dos
 
 ```{r, echo = FALSE}
-summary(estratodentro$Q08_PAPA)
-```
-```{r}
-summary(estratodentro$Q08_PAPA)
-```
-```{r}
-summary(estratodentro$Q08_PAPA)
-```
-```{r}
-summary(estratodentro$Q08_PAPA)
-```
-```{r}
-summary(estratodentro$Q08_PAPA)
+summary(estratodentro2$Q08_PAPA)
 ```
 
-#### Resumen numerico, personas que no residen en el Area Metropolitana del Valle de Aburra
+#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato tres
+
+```{r, echo = FALSE}
+summary(estratodentro3$Q08_PAPA)
+```
+
+#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato cuatro
+
+```{r, echo = FALSE}
+summary(estratodentro4$Q08_PAPA)
+```
+
+#### Resumen numérico de las personas que viven en el Valle de Aburrá y son de estrato cinco
+
+```{r, echo = FALSE}
+summary(estratodentro5$Q08_PAPA)
+```
+
+#### Resumen numérico personas que no residen en el Área Metropolitana del Valle de Aburra
 
 ```{r}
 enc_noaream <- encuesta %>% 
@@ -1465,67 +1476,72 @@ intervalos_PAPAnoareametro <- cut(enc_noaream$Q08_PAPA,c(3.0,3.5,4.0,4.5,5.0),in
 ```
 
 ```{r}
-estratofuera <- enc_noaream %>%
-  filter(Q09_EnAreaMetropolitana == "0")
-estratofuera <- enc_noaream %>%
-  filter(Q09_EnAreaMetropolitana == "0")
-estratofuera <- enc_noaream %>%
-  filter(Q09_EnAreaMetropolitana == "0")
-estratofuera <- enc_noaream %>%
-  filter(Q09_EnAreaMetropolitana == "0")
-estratofuera <- enc_noaream %>%
-  filter(Q09_EnAreaMetropolitana == "0")
+estratofuera1 <- enc_noaream %>%
+  filter(Q10_Estrato == "1")
+estratofuera2 <- enc_noaream %>%
+  filter(Q10_Estrato == "2")
+estratofuera3 <- enc_noaream %>%
+  filter(Q10_Estrato == "3")
+estratofuera4 <- enc_noaream %>%
+  filter(Q10_Estrato == "4")
+estratofuera5 <- enc_noaream %>%
+  filter(Q10_Estrato == "5")
 
 table(enc_noaream$Q10_Estrato, intervalos_PAPAnoareametro,dnn = c("Estrato","Intervalos del PAPA"))
 ```
-```{r}
-summary(estratofuera$Q08_PAPA)
-```
-```{r}
-summary(estratofuera$Q08_PAPA)
-```
+
+#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato uno
 
 ```{r}
-summary(estratofuera$Q08_PAPA)
+summary(estratofuera1$Q08_PAPA)
 ```
+
+#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato dos
 
 ```{r}
-summary(estratofuera$Q08_PAPA)
+summary(estratofuera2$Q08_PAPA)
 ```
+
+#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato tres
 
 ```{r}
-summary(estratofuera$Q08_PAPA)
+summary(estratofuera3$Q08_PAPA)
 ```
 
-```{r, , echo = FALSE, fig.height=5, fig.width=5}
-plot(enc_aream$Q10_Estrato, enc_aream$Q08_PAPA,
-     main = "Estrato VS P.A.P.A - Vivir en Area Metropolitana",
-     xlab = "Estrato Socioeconomico",
-     ylab = "PAPA")
+#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato cuatro
 
-plot(enc_noaream$Q10_Estrato, enc_noaream$Q08_PAPA,
-     main = "Estrato VS P.A.P.A - No vivir en Area Metropolitana",
-     xlab = "Estrato socioeconomico",
-     ylab = "PAPA")
-```
+En este caso no es necesario realizar un resumen numérico, ya que como se observa en la tabla anterior, no hay personas que viven por fuera del Valle de Aburrá y que su residencia esté catalogada como de estrato cuatro
 
 
+#### Resumen numérico de las personas que no viven en el Valle de Aburrá y son de estrato cinco
 
-
-
-
-
-
-#### Resumen numérico
-
-
+En este caso no es necesario realizar un resumen numérico, ya que como se observa en la tabla anterior, no hay personas que viven por fuera del Valle de Aburrá y que su residencia esté catalogada como de estrato cinco.
 
 #### Gráfica exploratoria
 
 
+```{r, , echo = FALSE, fig.height=4, fig.width=4}
+plot(enc_aream$Q10_Estrato, enc_aream$Q08_PAPA,
+     main = "Estrato vs P.A.P.A - Vivir en AMVA",
+     xlab = "Estrato Socioeconomico",
+     ylab = "PAPA",
+     ylim = c(3, 5))
 
+plot(enc_noaream$Q10_Estrato, enc_noaream$Q08_PAPA,
+     main = "Estrato v. P.A.P.A - No vivir en AMVA",
+     xlab = "Estrato socioeconomico",
+     ylab = "PAPA",
+     ylim = c(3,5))
+```
 #### Análisis
 
+Los datos de las variables PAPA, estrato y residencia o no en AMVA fueron debidamente analizados y filtrados para poder realizar los anteriores diagramas de cajas y bigotes. El primer diagrama nos responde a la pregunta siete planteada al comienzo, la cual nos cuestionaba si pertenecer a un estrato alto y residir en el AMVA tenía relación directa con tener un PAPA alto, para lo cual no hay evidencia suficiente para decir que estas personas de estrato alto (cuatro y cinco) y residen en el AMVA tienen mejor PAPA que los de menor estrato, pues como vemos, la caja del estrato cinco corta al las otras y además, se debe tener en cuenta que los datos de personas de estrato cinco que viven en el AMVA son muy pocos comparados con sus pares de menor estrato, por lo cual no se puede realizar un análisis totalmente adecuado dada la insuficiencia de información en este caso.
+
+Planteando esta pregunta en otro contexto, que sería pertenecer a estrato bajo (estratos uno y dos) y no residir en el AMVA, se ve que no hay diferencias en promedio con sus pares de estrato medio-bajo (estrato alto); pero aquí vale la pena destacar que no es posible realizar una comparación con los estratos altos por fuera del AMVA, ya que no se muestrearon datos para este caso. Sin embargo, se puede resaltar que la mediana se aproxima al primer cuartil para el estrato uno.
+
+Finalmente, revisando las cajas que corresponden a los estratos altos (cuatro y cinco) de los estudiantes de EDAED que viven en el AMVA, con los de estratos bajos (uno, dos y tres) que no, se observa que las cajas se traslapan entre sí y, en consecuencia, no habría diferencias en promedio en el PAPA de los estudiantes que viven en el AMVA y son de estrato alto con los estudiantes de EDAED que no residen en tal subregión y que son de estrato bajo. Solo se presenta una excepción en el caso del estrato cinco en AMVA con el estrato uno por fuera del AMVA, pero nuevamente, se considera que los estudiantes que viven en el AMVA y son de estrato cinco no son los suficientes como para poder hacer una comparación adecuada.
+
+Por lo demás, se puede mencionar que en la mayoría de los casos hay una dispersión considerable de los datos considerando el tamaño de sus respectivas cajas, salvo en el caso de los estudiantes de estrato cuatro y cinco del AMVA.
 
 
 ### Octava pregunta
@@ -1881,6 +1897,4 @@ En ese sentido, se podría apelar a una herramienta que tienen muchos sistemas d
 
 ## Bibliografía
 
-  - Cosas del icfes: https://laquecorresponda.com.co
-  - Más cibergrafías que hayan usado...
- 
+[1] U. Centro de InvestigaciÃ³n y Desarrollo de Software CIDS, "Página del Grupo de Admisiones, Registro y Control Académico de la Universidad del Magdalena", Admisiones.unimagdalena.edu.co, 2021. [En línea]. Disponible en: https://admisiones.unimagdalena.edu.co/inscripcionPRE/conversionICFES.jsp?rnd425615. [Accedido el]: 15- Apr- 2021].
