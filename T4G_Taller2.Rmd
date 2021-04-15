@@ -1566,15 +1566,15 @@ Y en este caso, no tiene sentido presentar un resumen numérico para esta submue
 
 #### Gráfica exploratoria
 
-Para este caso, y para diferenciarlo del análisis bivariado semejante realizado previamente (en el que se contrastaban el número de conspiraciones previas y el PAPA), se va a plantear un par de diagramas de dispersión para las variables *número de conspiraciones falsas creídas* y *PAPA*, siendo una para las personas del género femenino y la otra para aquellos que hacen parte del género masculino en el curso de EDAED. En el caso de la persona no binaria, al no ser una submuestra de un tamaño lo suficientemente grande como para poder contrastarlo efectivamente con las personas del género femenino y masculino.
+Para este ejercicio se debe considerar que para el caso de la persona no binaria, al no ser una submuestra de un tamaño lo suficientemente grande como para poder contrastarlo efectivamente con las personas del género femenino y masculino.
 
-```{r, , echo = FALSE, fig.height=5, fig.width=5}
+```{r, echo = FALSE, fig.height=6, fig.width=6}
 plot(enc_mujeres$numero_conspiraciones, enc_mujeres$Q08_PAPA,
-     main = "Conspiraciones falsas v. PAPA - género femen.",
+     main = "Conspiraciones falsas v. PAPA - género femenino",
      xlab = "Número de conspiraciones falsas",
      ylab = "PAPA")
 plot(enc_hombres$numero_conspiraciones, enc_hombres$Q08_PAPA,
-     main = "Conspiraciones falsas v. PAPA - género mascul.",
+     main = "Conspiraciones falsas v. PAPA - género masculino",
      xlab = "Número de conspiraciones falsas",
      ylab = "PAPA")
 ```
@@ -1587,35 +1587,150 @@ plot(enc_hombres$numero_conspiraciones, enc_hombres$Q08_PAPA,
 
 ### Décima pregunta
 
-***Pregunta Final***
+***¿Hay diferencias entre el tiempo que se pudieron haber tomado los estudiantes para resolver las preguntas de álgebra considerando su género?***
 
-asieh
+En este caso, se va a considerar que no se puede establecer diferencias entre hombres y mujeres respecto a la cantidad de preguntas que respondieron correctamente de álgebra en la tercera parte de la encuesta en conformidad con su género.
 
-#### Resumen numérico
+#### Resumen numérico: personas del género femenino
 
-
-
-#### Gráfica exploratoria
-
-
-#### Análisis
-
-
-
-
-### Tienen mejor PAPA aquellos estudiantes que son de estrato socioeconomico alto y que residen en el AMVA en comparacion con aquellos que son de estrato socioeconomico bajo y habitan por fuera de este?
+Inicialmente se presenta una tabla que resumen la información asociada a este caso. Se puede observar que la variable 'tiempo empleado' está siendo agrupada en grupos de cinco minutos cada uno con el objetivo de presentar de manera suscinta tal table, pues esta variable es continua.
 
 ```{r}
-
+# Variable de control para la pregunta 26
+encuesta <- encuesta %>% 
+  mutate(maths = Q26_Divisor..f.es.divisor.de.g.2. + 
+           Q26_Divisor..f.es.divisor.de.gh. +
+           Q26_Divisor..f.es.divisor.de.h.g)
 ```
 
 
+```{r, include = FALSE}
+enc_mujeres <- encuesta %>% 
+  filter(Q01_Genero == "Femenino")
+
+intervalos_tiempomuj <- cut(enc_mujeres$tiempo_usado,c(0,5,10,15,20,25,30),include.lowest=TRUE)
+```
+
+```{r, echo = FALSE}
+maths0m <- enc_mujeres %>%
+  filter(maths == "0")
+maths1m <- enc_mujeres %>%
+  filter(maths == "1")
+maths2m <- enc_mujeres %>%
+  filter(maths == "2")
+maths3m <- enc_mujeres %>%
+  filter(maths == "3")
+
+table(enc_mujeres$maths, intervalos_tiempomuj,dnn = c("# Respuestas correctas",
+                                                      "Intervalos de tiempo empleado [min]"))
+```
+
+A partir de esta tabla, se puede presentar un resumen numérico separado para cada caso de número de respuestas correctas.
+
+##### Resumen numérico del tiempo empleado para las mujeres con una respuesta correcta
+
+```{r, echo = FALSE}
+summary(maths1m$tiempo_usado)
+```
+
+##### Resumen numérico del tiempo empleado para las mujeres con dos respuestas correcta
+
+```{r, echo = FALSE}
+summary(maths2m$tiempo_usado)
+```
+
+##### Resumen numérico del tiempo empleado para las mujeres con tres respuestas correcta
+
+```{r, echo = FALSE}
+summary(maths3m$tiempo_usado)
+```
 
 
-<<<<<<< Updated upstream
+#### Resumen numérico: personas del género masculino
+
+Ahora se realiza el mismo ejercicio para el caso de los hombres:
+
+```{r, include = FALSE}
+enc_hombres <- encuesta %>% 
+  filter(Q01_Genero == "Masculino")
+
+intervalos_tiempohom <- cut(enc_hombres$tiempo_usado,c(0,5,10,15,20,25,30),include.lowest=TRUE)
+```
+
+```{r, echo = FALSE}
+maths0h <- enc_hombres %>%
+  filter(maths == "0")
+maths1h <- enc_hombres %>%
+  filter(maths == "1")
+maths2h <- enc_hombres %>%
+  filter(maths == "2")
+maths3h <- enc_hombres %>%
+  filter(maths == "3")
+
+table(enc_hombres$maths, intervalos_tiempohom,dnn = c("# Respuestas correctas",
+                                                      "Intervalos de tiempo empleado [min]"))
+```
+
+##### Resumen numérico del tiempo empleado para los hombres con una respuesta correcta
+
+```{r, echo = FALSE}
+summary(maths1h$tiempo_usado)
+```
+
+##### Resumen numérico del tiempo empleado para los hombres con dos respuestas correcta
+
+```{r, echo = FALSE}
+summary(maths2h$tiempo_usado)
+```
+
+##### Resumen numérico del tiempo empleado para los hombres con tres respuestas correcta
+
+```{r, echo = FALSE}
+summary(maths3h$tiempo_usado)
+```
+
+#### Resumen numérico del tiempo empleado para las personas no binarias
+
+```{r, echo = FALSE}
+enc_otrog <- encuesta %>% 
+  filter(Q01_Genero == "Otro")
+
+intervalos_tiempog <- cut(enc_otrog$tiempo_usado,c(0,5,10,15,20,25,30),include.lowest=TRUE)
+
+table(enc_otrog$maths, intervalos_tiempog,dnn = c("# Respuestas correctas",
+                                                      "Intervalos de tiempo empleado [min]"))
+```
+
+```{r, echo = FALSE}
+mathsx <- enc_otrog %>%
+  filter(maths == "2")
+summary(mathsx$tiempo_usado)
+```
+
+Como se puede observar, todos los valores arrojados por el resumen anterior son el mismo, atendiendo el hecho de que existe únicamente una persona que se identifica como no binaria.
+
+#### Gráfica exploratoria
+
+Semejante al caso de la pregunta anterior, no se va a tomar en cuenta a la persona que se identifica como no binaria en tanto es una submuestra cuyo tamaño no se compara con el de los hombres y las mujeres. Con esto, se puede obtener el siguiente diagrama de dispersión:
+
+```{r, echo = FALSE, fig.height=6, fig.width=6}
+plot(as.factor(enc_mujeres$maths), enc_mujeres$tiempo_usado,
+     main = "Tiempo empleado vs. rtas. correctas - gen. femenino",
+     xlab = "Número de respuestas tomadas como correctas",
+     ylab = "Tiempo empleado [min]",
+     ylim = c(0, 30))
+plot(as.factor(enc_hombres$maths), enc_hombres$tiempo_usado,
+     main = "Tiempo empleado vs.rtas. correctas - gen. masculino",
+     xlab = "Número de respuestas tomadas como correctas",
+     ylab = "Tiempo empleado [min]",
+     ylim = c(0, 30))
+```
+
 #### Análisis
 
+Con ayuda de los boxplots, se puede establacer primero para cada género lo siguiente: en el caso de las mujeres, salta a la vista que hay evidencia para decir que las mujeres que solo obtuvieron una respuesta correcta se demoraron en promedio más tiempo que las que consiguieron dos respuestas correctas; además, no se puede decir que hayan diferencias en el tiempo promedio usado para resolver la encuesta en los otros casos, como en el caso de una y tres respuestas correctas (si bien se observa que la mediana para el caso de una respuesta correcta es mayor que en el caso de tres respuestas correctas). Por otro lado, en el caso de los hombres, se tiene que no se puede decir que el tiempo en promedio usado por los estudiantes de EDAED de este género haya sido diferente en función del número de respuestas correctas en las preguntas de álgebra, aunque se puede destacar que la mediana de tiempo más alto se haya en el caso de los hombres que obtuvieron tres respuestas correctas. 
 
+Adicionalmente, al hacer un análisis simultáneo de ambas gráficas, se observa que no hay diferencias en promedio con respecto a los géneros al observar los rangos intercuartídicos marcados para cada una de las cajas de ambos boxplot, aunque es curioso señalar que la mediana de las mujeres que respondieron una o tres respuestas correcta es más alta que la de sus pares masculinos. Con esto, se puede decir la hipótesis que había sido planteada inicialmente encuentra evidencias para ser tomada como verdadera.
 
 ## Conclusiones generales
 
